@@ -72,7 +72,7 @@ public class Myapp {
 	public static String testtrial,indtype,materialapp,fluidname,fluidvalue,classification,crossection,thresold,tfactore,splate,thikness,industryname,lotnumber,startpress;
 	
 	//New ADD
-	public static String materialtype,accbpt="100",accstep="50",accstability="50",stabilitytype,endpress,testsequence,chambertype,crossovertgl;
+	public static String materialtype,accbpt="100",accstep="50",accstability="50",stabilitytype,testsequence,chambertype,crossovertgl;
 	
 	/*Internet connection*/
 	public static String lastinternet,pdftestname;

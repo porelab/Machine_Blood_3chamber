@@ -66,7 +66,7 @@ public class TestinfopopupContoller implements Initializable {
 		lbltfactore.setText(""+Myapp.tfactore);
 		lblfluid.setText(Myapp.fluidname+" : "+Myapp.fluidvalue+" mN/m");
 		lblbptacc.setText(Myapp.accbpt+" %");
-		lbltestpressure.setText(Myapp.endpress+" psi");
+		//lbltestpressure.setText(Myapp.endpress+" psi");
 		
 		btnclose.setOnAction(new EventHandler<ActionEvent>() {
 			
