@@ -19,6 +19,7 @@ import java.util.TimerTask;
 import javax.imageio.ImageIO;
 
 import com.google.common.util.concurrent.ExecutionError;
+import com.itextpdf.text.log.SysoCounter;
 
 import application.DataStore;
 import application.Main;
@@ -413,6 +414,7 @@ public class NLivetestController implements Initializable {
 
 		// loadVideo();
 
+		System.out.println("MY NEw DATA"+Myconstant.map);
 		Myapp.PrintAll();
 		isSkiptest = new SimpleBooleanProperty(false);
 		btnfail.setDisable(false);

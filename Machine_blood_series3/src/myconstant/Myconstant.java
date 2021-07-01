@@ -16,6 +16,10 @@ public class Myconstant
 	public static List<String> cknames;
 	
 	
+	
+	
+	
+	
 	public static Map<String,Object> map=new HashMap<>();
 	
 	public static DatareadN dr;

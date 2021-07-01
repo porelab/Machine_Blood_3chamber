@@ -5,7 +5,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXSlider;
@@ -96,7 +98,9 @@ public class QuicktestController1 implements Initializable {
 
 	List<CheckBox> allcks = new ArrayList<CheckBox>();
 
-	static ToggleGroup tgb1, tgb2;
+	static ToggleGroup tgb1, tgb2, tgbch1, tgbch2, tgbch3;
+
+	static String ch1selectedrad = "", ch2selectedrad = "", ch3selectedrad = "";
 
 	@FXML
 	Button starttest, btncancel;
@@ -104,9 +108,97 @@ public class QuicktestController1 implements Initializable {
 	@FXML
 	AnchorPane ancaddsamplearea;
 
+	@FXML
+	private Rectangle ch1rec, ch2rec, ch3rec;
+
+	@FXML
+	private CheckBox chamer1, chamer2, chamer3;
+
+	@FXML
+	private RadioButton rdch2roll;
+
+	@FXML
+	private RadioButton rdch2garment;
+
+	@FXML
+	private RadioButton rdch3roll;
+
+	@FXML
+	private RadioButton rdch3garment;
+
+	@FXML
+	private ComboBox<String> cmbsampleid3, cmbsampleid2;
+
+	@FXML
+	private TextField txtlotno2;
+
+	@FXML
+	private TextField txtlotno3;
+
+	@FXML
+	private Rectangle recloc1;
+
+	@FXML
+	private TextField txtarea;
+
+	@FXML
+	private Rectangle recloc2;
+
+	@FXML
+	private TextField txtarea2;
+
+	@FXML
+	private Rectangle recloc3;
+
+	@FXML
+	private TextField txtarea3;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+
+		chamer1.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				if (chamer1.isSelected()) {
+					ch1rec.setVisible(false);
+
+				} else {
+					ch1rec.setVisible(true);
+				}
+			}
+		});
+
+		chamer2.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				if (chamer2.isSelected()) {
+					ch2rec.setVisible(false);
+				} else {
+					ch2rec.setVisible(true);
+				}
+
+			}
+		});
+
+		chamer3.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				if (chamer3.isSelected()) {
+					ch3rec.setVisible(false);
+				} else {
+					ch3rec.setVisible(true);
+				}
+
+			}
+		});
+
 		stepsizeslider.valueProperty().addListener(new ChangeListener<Number>() {
 
 			@Override
@@ -120,7 +212,10 @@ public class QuicktestController1 implements Initializable {
 
 		});
 
-		setTestMode();
+		setRdch1garment();
+		setRdch2garment();
+		setRdch3garment();
+		// setTestMode();
 		setSampleType();
 
 		allcks.add(ck1);
@@ -230,6 +325,115 @@ public class QuicktestController1 implements Initializable {
 
 	}
 
+	void setRdch1garment() {
+
+		tgbch1 = new ToggleGroup();
+
+		rdmanual.setToggleGroup(tgbch1);
+		rdmanual.setUserData("1");
+		rdautometed.setToggleGroup(tgbch1);
+		rdautometed.setUserData("2");
+
+		ch1selectedrad = "1";
+
+
+		txtarea.setVisible(false);
+		recloc1.setVisible(false);
+
+		tgbch1.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+				if (arg2 == null)
+					arg1.setSelected(true);
+				ch1selectedrad = arg2.getUserData().toString();
+
+				if (ch1selectedrad.equals("1")) {
+
+					txtarea.setVisible(false);
+					recloc1.setVisible(false);
+
+				} else {
+					txtarea.setVisible(true);
+					recloc1.setVisible(true);
+				}
+			}
+		});
+
+	}
+
+	void setRdch2garment() {
+
+		tgbch2 = new ToggleGroup();
+
+		rdch2roll.setToggleGroup(tgbch2);
+		rdch2roll.setUserData("1");
+		rdch2garment.setToggleGroup(tgbch2);
+		rdch2roll.setUserData("2");
+
+		ch2selectedrad = "1";
+
+		txtarea2.setVisible(false);
+		recloc2.setVisible(false);
+
+		tgbch2.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+				if (arg2 == null)
+					arg1.setSelected(true);
+				ch2selectedrad = arg2.getUserData().toString();
+
+				if (ch2selectedrad.equals("1")) {
+
+					txtarea2.setVisible(false);
+					recloc2.setVisible(false);
+
+				} else {
+					txtarea2.setVisible(true);
+					recloc2.setVisible(true);
+				}
+			}
+		});
+
+	}
+
+	void setRdch3garment() {
+
+		tgbch3 = new ToggleGroup();
+
+		rdch3roll.setToggleGroup(tgbch3);
+		rdch3roll.setUserData("1");
+		rdch3garment.setToggleGroup(tgbch3);
+		rdch3roll.setUserData("2");
+
+		ch3selectedrad = "1";
+
+		txtarea3.setVisible(false);
+		recloc3.setVisible(false);
+
+		tgbch3.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+				if (arg2 == null)
+					arg1.setSelected(true);
+				ch3selectedrad = arg2.getUserData().toString();
+
+				if (ch3selectedrad.equals("1")) {
+
+					txtarea3.setVisible(false);
+					recloc3.setVisible(false);
+
+				} else {
+					txtarea3.setVisible(true);
+					recloc3.setVisible(true);
+				}
+			}
+		});
+
+	}
+
 	void setSampleType() {
 
 		tgb2 = new ToggleGroup();
@@ -295,36 +499,95 @@ public class QuicktestController1 implements Initializable {
 		String sampleid = cmbsampleid.getValue();
 		String lotno = txtlotno.getText();
 		String sampletype = tgb2.getSelectedToggle().getUserData().toString();
-		String testmode = tgb1.getSelectedToggle().getUserData().toString();
+//		String testmode = tgb1.getSelectedToggle().getUserData().toString();
+		
 
-		boolean flag = true;
+		String ch1garment = tgbch1.getSelectedToggle().getUserData().toString();
+		String ch2garment = tgbch2.getSelectedToggle().getUserData().toString();
+		String ch3garment = tgbch3.getSelectedToggle().getUserData().toString();
 
-		if (sampleid != null ? sampleid.isEmpty() || lotno.isEmpty() : true) {
-			flag = false;
-			lblerror.setText("Please add sampleid and lotno");
-		} else if (sampletype.equals("2")) {
-			if (cks.size() == 0) {
-				flag = false;
-				lblerror.setText("you have selected full material, please select variants");
-			}
-		}
+		String sampleid1 = cmbsampleid.getValue();
+		String sampleid2 = cmbsampleid2.getValue();
+		String sampleid3 = cmbsampleid3.getValue();
+		
+		
+		String lotno1 = txtlotno.getText();
+		String lotno2 = txtlotno2.getText();
+		String lotno3 = txtlotno3.getText();
+		
+		boolean flag1 = true;
+		boolean flag2 = true;
+		boolean flag3 = true;
 
-		if (flag == true) {
-			lblerror.setText("");
-
-			if (filesave(sampleid, testmode, sampletype, lotno, cks, ckname)) {
-				lblerror.setText("saved");
-				Openscreen.open("/userinput/Nlivetest.fxml");
-				MyDialoug.closeDialoug();
-
+		if (chamer1.isSelected()) {
+			if (sampleid1.isEmpty() || lotno1.isEmpty()) {
+				flag1 = false;
+				lblerror.setText("Please add sampleid and lotno");
 			} else {
 
-				lblerror.setText("not saved");
+				Map<String,Object> ch1data=new HashMap<>();
+				ch1data.put("sampleid", cmbsampleid.getValue());
+				ch1data.put("type", ch1garment);
+				ch1data.put("samplearea", txtarea.getText());
+				ch1data.put("lotno", txtlotno.getText());
+				
+				Myconstant.map.put("ch1", ch1data);
+				flag1 = true;
 			}
-			// MyDialoug.closeDialoug();
-//			Openscreen.open("/userinput/Nlivetest.fxml");
-
 		}
+		
+		if (chamer2.isSelected()) {
+			if (sampleid2.isEmpty() || lotno2.isEmpty()) {
+				flag2 = false;
+				lblerror.setText("Please add sampleid and lotno");
+			} else {
+
+				Map<String,Object> ch2data=new HashMap<>();
+				ch2data.put("sampleid", cmbsampleid2.getValue());
+				ch2data.put("type", ch2garment);
+				ch2data.put("samplearea", txtarea2.getText());
+				ch2data.put("lotno", txtlotno2.getText());
+				
+				Myconstant.map.put("ch2", ch2data);
+				flag2 = true;
+			}
+		}
+		
+		if (chamer3.isSelected()) {
+			if (sampleid3.isEmpty() || lotno3.isEmpty()) {
+				flag3 = false;
+				lblerror.setText("Please add sampleid and lotno");
+			} else {
+
+				Map<String,Object> ch3data=new HashMap<>();
+				ch3data.put("sampleid", cmbsampleid3.getValue());
+				ch3data.put("type", ch3garment);
+				ch3data.put("samplearea", txtarea3.getText());
+				ch3data.put("lotno", txtlotno3.getText());
+				
+				Myconstant.map.put("ch3", ch3data);
+				flag3 = true;
+			}
+		}
+		
+
+		if (flag1 && flag2 && flag3) {
+			Openscreen.open("/userinput/Nlivetest.fxml");
+			MyDialoug.closeDialoug();
+		}
+		/*
+		 * if (flag == true) { lblerror.setText("");
+		 * 
+		 * if (filesave(sampleid, testmode, sampletype, lotno, cks, ckname)) {
+		 * lblerror.setText("saved"); Openscreen.open("/userinput/Nlivetest.fxml");
+		 * MyDialoug.closeDialoug();
+		 * 
+		 * } else {
+		 * 
+		 * lblerror.setText("not saved"); }
+		 */
+		// MyDialoug.closeDialoug();
+//			Openscreen.open("/userinput/Nlivetest.fxml");
 
 	}
 
