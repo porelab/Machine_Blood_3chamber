@@ -15,11 +15,7 @@ public class Myconstant
 	public static String sampleid,testmode,stepsize,sampletype,lotno,supportplate;
 	public static List<String> cknames;
 	
-	
-	
-	
-	
-	
+
 	public static Map<String,Object> map=new HashMap<>();
 	
 	public static DatareadN dr;

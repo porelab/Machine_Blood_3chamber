@@ -214,7 +214,7 @@ public class NLivetestController implements Initializable {
 	String sampleid = "testing";
 	String teststd;
 	
-	int chamber;
+	int chamber=3;
 
 	void setTestStd() {
 		teststd = Myconstant.getStd();
@@ -236,7 +236,7 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	void stopTest1() {
+	void stopTest2() {
 
 		sendStopCmd();
 		recorddata.clear();
@@ -282,6 +282,9 @@ public class NLivetestController implements Initializable {
 						100);
 				recorddata.add(readpre);
 				recordtime.add(readtime);
+				
+				completeTest();
+				
 				generateList();
 
 			} else {
@@ -420,17 +423,18 @@ public class NLivetestController implements Initializable {
 
 	void setPredefined() {
 
+		System.out.println("Set predefined data");
 		pressurepoints.add(0.253816);
 		pressurepoints.add(0.507632);
 		pressurepoints.add(1.01526);
 		pressurepoints.add(2.03053);
 		pressurepoints.add(2.90075);
 
-		pressureCounts.add(1000);
-		pressureCounts.add(1000);
-		pressureCounts.add(1000);
-		pressureCounts.add(1000);
-		pressureCounts.add(1000);
+		pressureCounts.add(1415);
+		pressureCounts.add(1819);
+		pressureCounts.add(2748);
+		pressureCounts.add(4495);
+		pressureCounts.add(5963);
 		
 		bpoints.add("1.75");
 		bpoints.add("3.5");
@@ -458,6 +462,7 @@ public class NLivetestController implements Initializable {
 
 		// loadVideo();
 		setPredefined();
+		setTestStd();
 		// Myapp.PrintAll();
 		isSkiptest = new SimpleBooleanProperty(false);
 		btnfail.setDisable(false);
@@ -668,7 +673,7 @@ public class NLivetestController implements Initializable {
 				//
 				// }
 
-				Mycommand.setDelay(waittime, 0);
+				Mycommand.setDelay(1000, 0);
 				try {
 
 					Thread.sleep(minde);
@@ -707,7 +712,7 @@ public class NLivetestController implements Initializable {
 
 	void startCondition() {
 	
-
+			System.out.println("Chamber  "+chamber);
 		if (chamber == 1) {
 			openValve1();
 			closeValve2();
@@ -749,7 +754,7 @@ public class NLivetestController implements Initializable {
 
 				try {
 
-					Thread.sleep(900);
+					Thread.sleep(1200);
 				} catch (Exception e) {
 
 				}
@@ -817,7 +822,7 @@ public class NLivetestController implements Initializable {
 				Mycommand.valveOff('2', 0);
 				try {
 
-					Thread.sleep(900);
+					Thread.sleep(1000);
 				} catch (Exception e) {
 
 				}
@@ -839,12 +844,17 @@ public class NLivetestController implements Initializable {
 
 				try {
 
-					Thread.sleep(900);
+					Thread.sleep(1000);
 				} catch (Exception e) {
 
 				}
 				Mycommand.valveOn('6', 0);
+				try {
 
+					Thread.sleep(400);
+				} catch (Exception e) {
+
+				}
 			}
 		}).start();
 
@@ -853,24 +863,24 @@ public class NLivetestController implements Initializable {
 	void closeValve3() {
 
 		System.err.println("Valve closing 3,6");
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-
+		
+				
 				Mycommand.valveOff('3', 0);
 				try {
 
-					Thread.sleep(900);
+					Thread.sleep(1000);
 				} catch (Exception e) {
 
 				}
 				Mycommand.valveOff('6', 0);
+				try {
 
-			}
-		}).start();
+					Thread.sleep(400);
+				} catch (Exception e) {
 
+				}
+			
+	
 	}
 
 	double getTime() {
@@ -1103,8 +1113,9 @@ public class NLivetestController implements Initializable {
 
 					@Override
 					public void run() {
-						showBubblePopup();
+						//showBubblePopup();
 
+						bubbleClicknew();
 					}
 				});
 			}
@@ -1229,7 +1240,7 @@ public class NLivetestController implements Initializable {
 						len++;
 					}
 					prev = (char) data;
-					// System.out.print(prev);
+					//System.out.print(prev);
 
 					// System.out.print(new String(buffer,0,len));
 				}
@@ -1265,13 +1276,15 @@ public class NLivetestController implements Initializable {
 
 						// System.out.println("Pr : " + pr);
 						DataStore.livepressure.set(pr);
-						if (testtype == 0) {
+						if (testtype !=5) {
 							// setBubblePoints(pr);
-						}
-
-						if (testtype == 1) {
 							showBubble(pr);
 						}
+
+						
+						
+						
+						
 					}
 
 					readData.clear();
@@ -1302,39 +1315,24 @@ public class NLivetestController implements Initializable {
 	void showBubble(double pr) {
 
 		// System.out.println("Mode 2");
-
+		//System.out.println("pressue  : "+pr);
 		readpre = pr;
 		readtime = getTime();
 
 		bans.add("" + pr);
 		tlist.add("" + readtime);
-		if (iswaiting) {
-
-			if (getTimeforwait() >= 30) {
-				iswaiting = false;
-				System.out.println("now opening valve");
+		
+			if (getTimeforwait() >= 10) {
+			
+				System.out.println("now switching");
+				System.out.println("set Dac to "+pressureCounts.get(pressureindex));
+				Mycommand.setDACValue('2', pressureCounts.get(pressureindex), 100);
+				pressureindex++;
+				changetime = System.currentTimeMillis();
 				// openValve24();
 			}
 
-		} else {
-			try {
-				if (pr >= pressurepoints.get(pressureindex)) {
-
-					System.out.println("Current  : " + pr
-							+ " : Check Pressure : "
-							+ pressurepoints.get(pressureindex));
-
-					iswaiting = true;
-					pressureindex++;
-					changetime = System.currentTimeMillis();
-					// closeValve24();
-
-				}
-			} catch (Exception e) {
-				isCompletetest = true;
-			}
-
-		}
+		
 
 		Platform.runLater(new Runnable() {
 
@@ -1349,10 +1347,10 @@ public class NLivetestController implements Initializable {
 		int per = 10;
 		double diff = (double) curpress * per / 100;
 
-		System.out.println("High : " + curpress);
-		System.out.println("Current  : " + pr);
+		//System.out.println("High : " + curpress);
+	//	System.out.println("Current  : " + pr);
 
-		System.out.println("Diff : " + (curpress - diff));
+		//System.out.println("Diff : " + (curpress - diff));
 		if (pr < (curpress - diff)) {
 			isCompletetest = true;
 		}
@@ -1373,8 +1371,9 @@ public class NLivetestController implements Initializable {
 
 	void completeTest() {
 		testtype = 5;
-		sendStopCmd();
 		createCsvTableBubble();
+		sendStopCmd();
+		
 
 	}
 
@@ -1540,10 +1539,10 @@ public class NLivetestController implements Initializable {
 
 	// send stop protocol to MCU
 	void sendStopCmd() {
-
-		Mycommand.stopADC(0);
-		Mycommand.valveOff('2', 500);
-		Mycommand.valveOn('3', 900);
+		Mycommand.setDACValue('2', 0, 0);
+		Mycommand.stopADC(500);
+		endCondition();
+		
 
 	}
 

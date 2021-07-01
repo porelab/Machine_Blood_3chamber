@@ -45,10 +45,10 @@ public class WetpopupController implements Initializable {
 	/*Wet test Popup*/
 		
 		System.out.println("Data  :"+MyDialoug.inputdata);
-		String msg=MyDialoug.inputdata.get("test").toString();
+		//String msg=MyDialoug.inputdata.get("test").toString();
 		
 		
-		lbl.setText("Start test for "+msg+" sample");
+		lbl.setText("Start test for  sample");
 	
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 

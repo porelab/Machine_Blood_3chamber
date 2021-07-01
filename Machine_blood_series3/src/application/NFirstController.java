@@ -1,14 +1,9 @@
 package application;
 
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
-import java.util.concurrent.CountDownLatch;
 
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialog.DialogTransition;
-import com.jfoenix.controls.JFXDialogLayout;
-
-import extrafont.Myfont;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -32,20 +27,25 @@ import toast.MyDialoug;
 import toast.Openscreen;
 import toast.Toast;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialog.DialogTransition;
+import com.jfoenix.controls.JFXDialogLayout;
+
+import extrafont.Myfont;
+import gnu.io.CommPortIdentifier;
+
 public class NFirstController implements Initializable {
 
 	MyDialoug mydia;
 
 	@FXML
-	Label lblpg1offset, lblpg2offset, lblconnection,std;
+	Label lblpg1offset, lblpg2offset, lblconnection, std;
 
 	@FXML
 	StackPane maincontent;
-	
-	
+
 	@FXML
 	Button btnswitch;
-	
 
 	SimpleBooleanProperty ispopup = new SimpleBooleanProperty(false);
 
@@ -55,7 +55,7 @@ public class NFirstController implements Initializable {
 
 	@FXML
 	Button livetest, report, btncloud, btnsetting, txtuname, qtest, btnscada,
-			btnrefresh, btnhelp, btnclose, btnport,btnzoom,btnrestart;
+			btnrefresh, btnhelp, btnclose, btnport, btnzoom, btnrestart;
 
 	@FXML
 	Rectangle recmain;
@@ -103,7 +103,7 @@ public class NFirstController implements Initializable {
 								200, 200);
 
 					} else {
-						connectHardware();
+						connectHardware(DataStore.getCom());
 
 						if (DataStore.connect_hardware.get()) {
 							DataStore.hardReset();
@@ -126,7 +126,7 @@ public class NFirstController implements Initializable {
 								200, 200);
 
 					} else {
-						connectHardware();
+						connectHardware(DataStore.getCom());
 
 						if (DataStore.connect_hardware.get()) {
 							DataStore.hardReset();
@@ -168,9 +168,13 @@ public class NFirstController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		setStd();
 		DataStore.isconfigure.set(true);
+
+		DataStore.isconfigure.set(true);
+		DataStore.sc = new SerialCommunicator();
+
 		addShortCut();
 		if (DataStore.connect_hardware.get()) {
 
@@ -201,7 +205,7 @@ public class NFirstController implements Initializable {
 			}
 		});
 
-		connectHardware();
+		connectHardware(DataStore.getCom());
 
 		txtuname.setText("Welcome, " + Myapp.username);
 		System.out.println("usename--:" + Myapp.username);
@@ -214,47 +218,37 @@ public class NFirstController implements Initializable {
 		setBtnClicks();
 
 		DataStore.isconfigure.set(true);
-		
+
 		if (DataStore.connect_hardware.get()) {
-			
+
 			DataStore.hardReset();
 
 		}
 
 	}
-	
-	void setStd()
-	{
-		String st=Myconstant.getStd();
-		if(st.equals("1"))
-		{
+
+	void setStd() {
+		String st = Myconstant.getStd();
+		if (st.equals("1")) {
 			std.setText("( ASTM F1670 )");
 			btnswitch.setText("switch to ISO 16603");
-		}
-		else
-		{
+		} else {
 			std.setText("( ISO 16603 )");
 			btnswitch.setText("switch to ASTM F1670");
 		}
-		
+
 	}
 
-	void switchClick()
-	{
-		if(Myconstant.getStd().equals("1"))
-		{
+	void switchClick() {
+		if (Myconstant.getStd().equals("1")) {
 			Myconstant.setStd("2");
 			setStd();
-		}
-		else
-		{
+		} else {
 			Myconstant.setStd("1");
 			setStd();
 		}
-		
-		
+
 	}
-	
 
 	void setBtnClicks() {
 
@@ -265,14 +259,13 @@ public class NFirstController implements Initializable {
 				// TODO Auto-generated method stub
 				mydia = new MyDialoug(Main.mainstage,
 						"/application/Portlistpopup.fxml");
-				String data=mydia.showDialougWithValue(null);
-			
+				String data = mydia.showDialougWithValue(null);
 
 			}
 		});
 
 		btnswitch.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -280,41 +273,41 @@ public class NFirstController implements Initializable {
 			}
 		});
 		btnrestart.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				mydia = new MyDialoug(Main.mainstage, "/application/restartapplication.fxml");
+				mydia = new MyDialoug(Main.mainstage,
+						"/application/restartapplication.fxml");
 				mydia.showDialoug();
 			}
 		});
-		
+
 		btnrefresh.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
 				if (DataStore.connect_hardware.get()) {
-				
+
 				} else {
-					
+
 				}
 
 			}
 		});
 
-	
 		btnsetting.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				System.out.println("Open Setting-------------->>>>");
-				
+
 				Openscreen.open("/ConfigurationPart/Nconfigurepage.fxml");
 
 			}
 		});
-		
+
 		btnzoom.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -354,10 +347,9 @@ public class NFirstController implements Initializable {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-					//	MainancController.mainanc1.getChildren().setAll(LoadAnchor.createtestfxml);
-						
-						
-					Openscreen.open("/userinput/Nselectproject1.fxml");
+						// MainancController.mainanc1.getChildren().setAll(LoadAnchor.createtestfxml);
+
+						Openscreen.open("/userinput/Nselectproject1.fxml");
 
 					}
 				});
@@ -371,8 +363,8 @@ public class NFirstController implements Initializable {
 			public void handle(ActionEvent arg0) {
 
 				Openscreen.open("/report/first.fxml");
-				//MainancController.mainanc1.getChildren().setAll(LoadAnchor.reportfxml);
-				
+				// MainancController.mainanc1.getChildren().setAll(LoadAnchor.reportfxml);
+
 			}
 		});
 
@@ -385,8 +377,6 @@ public class NFirstController implements Initializable {
 				// TODO Auto-generated method stub
 			}
 		});
-
-	
 
 		btnclose.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -409,20 +399,61 @@ public class NFirstController implements Initializable {
 		});
 
 	}
-	
-	public void connectHardware()
-	{
+
+	public boolean connectHardware(String st) {
 		
-		
-		
+		boolean bol = false;
+
+		// sendDataToWeb();
+		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
+
+		int count = 0;
+
+		while (pList.hasMoreElements()) {
+
+		CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
+		System.out.print("Port " + cpi.getName() + " " + cpi.getPortType());
+		if (cpi.getName().equals(st)) {
+		DataStore.connect_hardware.set(true);
+		try {
+
+		DataStore.sc.connect(st);
+		bol = true;
+		Myapp.hb.set(false);
+
+		} catch (Exception e) {
+
+		e.printStackTrace();
+		}
+
+		break;
+		}
+
+		System.out.println("PORT :" + cpi.getName());
+		count++;
+		}
+
+		if (bol == false) {
+		// Toast.makeText(Main.mainstage,
+		// "Hardware not connected please plugout and plugin", 200, 200,
+		// 3000);
+		} else {
+		// Toast.makeText(Main.mainstage, "Successfully Connected", 200,
+		// 200, 3000);
+
+		}
+
+		return bol;
+
 	}
 
 	public void quicktest() {
 		Database db = new Database();
-try {
-//		if (db.isExist("select * from lastprojects where lid='" + Myapp.email
-//				+ "' ")) {
-//			System.out.println("1 Last project.");
+		try {
+			// if (db.isExist("select * from lastprojects where lid='" +
+			// Myapp.email
+			// + "' ")) {
+			// System.out.println("1 Last project.");
 			// AnchorPane popanc=new AnchorPane();
 
 			// popanc.setStyle("-fx-background-color: rgba(100, 300, 100, 0.5); -fx-background-radius: 10;");
@@ -430,11 +461,13 @@ try {
 			// mydia=new MyDialoug(Main.mainstage,
 			// "/userinput/popupresult.fxml");
 
-//			mydia = new MyDialoug(Main.mainstage, "/application/popfxml.fxml");
-	mydia = new MyDialoug(Main.mainstage, "/application/Quicktest1.fxml");
+			// mydia = new MyDialoug(Main.mainstage,
+			// "/application/popfxml.fxml");
+			mydia = new MyDialoug(Main.mainstage,
+					"/application/Quicktest1.fxml");
 
-	mydia.showDialoug();
-	
+			mydia.showDialoug();
+
 			/*
 			 * FXMLLoader fxmlLoader = new
 			 * FXMLLoader(getClass().getResource("/application/popfxml.fxml"));
@@ -450,12 +483,12 @@ try {
 			// dll.setBody(popanc);
 
 			// df.show();
-//			System.out.println("No Last project.");
-//			Toast.makeText(Main.mainstage, "You Don't have any previous test",
-//					2000, 300, 300);
-//		}
-}
-		catch (Exception e) {
+			// System.out.println("No Last project.");
+			// Toast.makeText(Main.mainstage,
+			// "You Don't have any previous test",
+			// 2000, 300, 300);
+			// }
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
@@ -494,7 +527,6 @@ try {
 		Openscreen.open("/application/editeprofile.fxml");
 	}
 
-	
 	void sendData(writeFormat w, int slp) {
 		System.out.println("Sending Data......");
 		w.showData();
@@ -514,8 +546,6 @@ try {
 		Thread t = new Thread(new SerialWriter(DataStore.out, w));
 		t.start();
 	}
-
-	
 
 	void setMainBtns() {
 

@@ -12,6 +12,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import application.SerialCommunicator.SerialReader;
+
+import communicationProtocol.Mycommand;
+
 import toast.Toast;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -29,12 +34,12 @@ import javafx.stage.Stage;
 public class DataStore 
 {
 	
-
 	public static 	CommPort commPort;
 	public static SimpleBooleanProperty isconfigure=new SimpleBooleanProperty(false);
 	public static SerialPort serialPort;
 
 	public static InputStream in;
+	public static SerialReader sr;
 	  public static  void setLoadListener()
 	    {
 	    	DataStore.isconfigure.addListener(new ChangeListener<Boolean>() {
@@ -136,7 +141,7 @@ public class DataStore
 
 		
 		// for live graph...
-	public static int pressure_min=0;
+	public static int pressure_min=0,pressure_max=0;
 		
 	    
 		
@@ -155,6 +160,7 @@ public class DataStore
 	
 	// for user input screen...
 	public static String path_csv="";
+	public static SerialCommunicator sc;
 	
 	
 	// for live graph...
@@ -215,6 +221,7 @@ public class DataStore
 		
 		System.out.println(" Calling refresh start");
 		refresh=1;
+		sc=null;
 		
 
 		listOfHeads = new HashSet<Character>();// Contains all Heads eg. to read Pressure P, to read Temperature T  
@@ -348,8 +355,39 @@ public class DataStore
 				
 				@Override
 				public void run() {
-		
-			
+					// TODO Auto-generated method stub
+
+					
+					DataStore.serialPort.setDTR(true);
+					try{Thread.sleep(200);}
+					catch(Exception e)
+					{
+						e.printStackTrace();
+					}
+					DataStore.serialPort.setDTR(false);
+					
+					List<String> data=getAdmin_screen1();
+					String temp="";
+					for(int i=0;i<14;i++)
+					{
+						
+						if(i<8)
+						{
+						temp=temp+data.get(i);
+						}
+						else
+						{
+							temp=temp+"0";
+						}
+					}
+					
+					
+
+					
+					Mycommand.valveOff('3', 500);
+					Mycommand.setLacthing(temp, 1000);
+					
+					//Mycommand.valveOn('3', 900);
 					
 					
 				
@@ -805,7 +843,18 @@ public class DataStore
 	}
 	
 	/*Get IP Address*/
+	public static String getipaddress()
+	{
+		String ip="";
+		Database db=new Database();		
+		List<List<String>> ll=db.getData("select ip from connection");
+		ip =(ll.get(0).get(0));
 
+		return ip;
+	}
+	
+
+	
 	
 
 	
