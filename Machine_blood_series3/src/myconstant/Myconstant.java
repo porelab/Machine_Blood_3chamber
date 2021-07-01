@@ -1,7 +1,9 @@
 package myconstant;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import application.Database;
 import data_read_write.CsvWriter;
@@ -13,6 +15,9 @@ public class Myconstant
 	public static String sampleid,testmode,stepsize,sampletype,lotno,supportplate;
 	public static List<String> cknames;
 	
+	
+	public static Map<String,Object> map=new HashMap<>();
+	
 	public static DatareadN dr;
 	public static File f;
 	
@@ -22,6 +27,33 @@ public class Myconstant
 		dr=new DatareadN();
 		dr.fileRead(f);
 
+		
+		
+	Map<String,Object> ch1data=new HashMap<>();
+	ch1data.put("sampleid", "sample1");
+	ch1data.put("type", "garment");
+	ch1data.put("samplearea", "area1");
+	ch1data.put("lotno", "lot1");
+	
+	map.put("ch1", ch1data);
+	
+	
+	Map<String,Object> ch2data=new HashMap<>();
+	ch2data.put("sampleid", "sample2");
+	ch2data.put("type", "garment");
+	ch2data.put("samplearea", "area2");
+	ch2data.put("lotno", "lot2");
+	
+	map.put("ch2", ch2data);
+	
+	Map<String,Object> ch3data=new HashMap<>();
+	ch3data.put("sampleid", "sample3");
+	ch3data.put("type", "roll");
+	ch3data.put("samplearea", "");
+	ch3data.put("lotno", "lot3");
+	
+	map.put("ch3", ch3data);
+		
 	}
 	
 	public static void inIt()
