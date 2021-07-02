@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="768.0" prefWidth="1368.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.40">
+   <children>
+      <ImageView fx:id="imgheader" fitHeight="103.0" fitWidth="1114.0" layoutX="-47.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@resultn.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="268.0" layoutY="21.0" styleClass="font-montserrat-semiBold" text="Manual Controller" textFill="WHITE" AnchorPane.leftAnchor="268.0" AnchorPane.topAnchor="21.0">
+         <font>
+            <Font name="Calibri" size="28.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnback" layoutX="1237.0" layoutY="18.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="54.0" styleClass="cmbtrasperant" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <graphic>
+            <ImageView fx:id="imgback1" fitHeight="57.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
