@@ -122,37 +122,10 @@ public class NConfigurePageController implements Initializable {
     private TextField isop5;
 
     @FXML
-    private TextField isop6;
-
-    @FXML
-    private TextField isot1;
-
-    @FXML
-    private TextField isot2;
-
-    @FXML
-    private TextField isot3;
-
-    @FXML
-    private TextField isot4;
-
-    @FXML
-    private TextField isot5;
-
-    @FXML
-    private TextField isot6;
-
-    @FXML
     private TextField astmp2;
 
     @FXML
-    private TextField astmt1;
-
-    @FXML
-    private TextField astmt2;
-
-    @FXML
-    private TextField astmp1;
+    private TextField astmp1,txttime;
 	
 	
    MyDialoug mydia;
