@@ -100,6 +100,60 @@ public class NConfigurePageController implements Initializable {
 	@FXML
 	Button btnsaveconnection;
 	
+	@FXML
+    private TextField txttestchamber;
+
+    @FXML
+    private TextField txtfaildrop;
+
+    @FXML
+    private TextField isop1;
+
+    @FXML
+    private TextField isop2;
+
+    @FXML
+    private TextField isop3;
+
+    @FXML
+    private TextField isop4;
+
+    @FXML
+    private TextField isop5;
+
+    @FXML
+    private TextField isop6;
+
+    @FXML
+    private TextField isot1;
+
+    @FXML
+    private TextField isot2;
+
+    @FXML
+    private TextField isot3;
+
+    @FXML
+    private TextField isot4;
+
+    @FXML
+    private TextField isot5;
+
+    @FXML
+    private TextField isot6;
+
+    @FXML
+    private TextField astmp2;
+
+    @FXML
+    private TextField astmt1;
+
+    @FXML
+    private TextField astmt2;
+
+    @FXML
+    private TextField astmp1;
+	
 	
    MyDialoug mydia;
     
@@ -270,7 +324,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						DataStore.thmoderat=txtthmoderate.getText();
 						DataStore.thcontinous=txtthcontinous.getText();
 						
-						
+						 
 						
 						String sql = "update configdata set chambertype='"+Myapp.chambertype+"',curvefittgb='"+curvefit+"' where type='"+"pro"+"'"; 
 						String sql1 = "update admin_screen1 set pc='"+crospres+"',fc='"+crosflov+"'"; 
