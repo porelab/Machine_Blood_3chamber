@@ -903,7 +903,7 @@ public class manualcontroller implements Initializable {
 			List<Integer> ss = getValueList((int) d);
 			wrD = new writeFormat();
 			wrD.addChar('P');
-			wrD.addChar('R');
+			wrD.addChar('R'); 
 			wrD.addData1(ss);
 			wrD.addLast();
 			sendData(wrD);

@@ -308,21 +308,21 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab disable="true" text="Test Configuration">
+            <Tab text="Test Configuration">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
                      <children>
-                        <Label layoutX="39.0" layoutY="56.0" styleClass="col-gray70" text="Select Chamber" textFill="#bcbcbc" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
+                        <Label layoutX="39.0" layoutY="56.0" styleClass="col-gray70" text="Select Chamber" textFill="#bcbcbc" visible="false" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="manual" layoutX="291.0" layoutY="59.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Manual">
+                        <RadioButton fx:id="manual" layoutX="291.0" layoutY="59.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Manual" visible="false">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="autometed" layoutX="408.0" layoutY="59.0" mnemonicParsing="false" styleClass="col-gray70" text="Automated">
+                        <RadioButton fx:id="autometed" layoutX="408.0" layoutY="59.0" mnemonicParsing="false" styleClass="col-gray70" text="Automated" visible="false">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -332,25 +332,25 @@
                               <Font size="20.0" />
                            </font>
                         </RadioButton>
-                        <Line endX="570.0" layoutX="140.0" layoutY="107.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="106.0" />
-                        <Label layoutX="39.0" layoutY="129.0" styleClass="col-gray70" text="Low Pressure Gauge" textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="129.0">
+                        <Line endX="570.0" layoutX="140.0" layoutY="107.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="106.0" />
+                        <Label layoutX="39.0" layoutY="129.0" styleClass="col-gray70" text="Low Pressure Gauge" textFill="WHITE" visible="false" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="129.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Line endX="570.0" layoutX="140.0" layoutY="183.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="182.0" />
-                        <Label layoutX="304.0" layoutY="130.0" styleClass="col-gray70" text="Disable" textFill="WHITE" AnchorPane.leftAnchor="304.0">
+                        <Line endX="570.0" layoutX="140.0" layoutY="183.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="182.0" />
+                        <Label layoutX="304.0" layoutY="130.0" styleClass="col-gray70" text="Disable" textFill="WHITE" visible="false" AnchorPane.leftAnchor="304.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="451.0" layoutY="130.0" styleClass="col-gray70" text="Enable" textFill="WHITE" AnchorPane.leftAnchor="451.0">
+                        <Label layoutX="451.0" layoutY="130.0" styleClass="col-gray70" text="Enable" textFill="WHITE" visible="false" AnchorPane.leftAnchor="451.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="395.0" layoutY="131.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" AnchorPane.topAnchor="131.0" />
-                        <JFXToggleButton fx:id="valvecpre" alignment="BASELINE_CENTER" layoutX="386.0" layoutY="117.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
+                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="395.0" layoutY="131.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" AnchorPane.topAnchor="131.0" />
+                        <JFXToggleButton fx:id="valvecpre" alignment="BASELINE_CENTER" layoutX="386.0" layoutY="117.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
                         <Label layoutX="38.0" layoutY="203.0" styleClass="col-gray70" text="Low Flov Meter" textFill="WHITE" visible="false">
                            <font>
                               <Font size="25.0" />
@@ -368,20 +368,20 @@
                         </Label>
                         <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="394.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
                         <JFXToggleButton fx:id="valvecflow" alignment="BASELINE_CENTER" layoutX="385.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
-                        <Label layoutX="789.0" layoutY="57.0" text="Set Thresold Value" textFill="#0e3c87">
+                        <Label layoutX="789.0" layoutY="57.0" text="Set Thresold Value" textFill="#0e3c87" visible="false">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Line endX="170.0" layoutX="889.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Line layoutX="615.0" layoutY="207.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="614.0" AnchorPane.topAnchor="206.0" />
-                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="First Bubble" textFill="WHITE" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
+                        <Line endX="170.0" layoutX="889.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                        <Line layoutX="615.0" layoutY="207.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.leftAnchor="614.0" AnchorPane.topAnchor="206.0" />
+                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="First Bubble" textFill="WHITE" visible="false" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthfirst" layoutX="974.0" layoutY="128.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                        <TextField fx:id="txtthfirst" layoutX="974.0" layoutY="128.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -390,14 +390,14 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="891.0" layoutY="185.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.topAnchor="184.0" />
-                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Moderate" textFill="WHITE" AnchorPane.leftAnchor="790.0">
+                        <Line endX="170.0" layoutX="891.0" layoutY="185.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.topAnchor="184.0" />
+                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Moderate" textFill="WHITE" visible="false" AnchorPane.leftAnchor="790.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="212.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthmoderate" layoutX="974.0" layoutY="212.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="212.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                        <TextField fx:id="txtthmoderate" layoutX="974.0" layoutY="212.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -406,14 +406,14 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="888.0" layoutY="269.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Continous" textFill="WHITE">
+                        <Line endX="170.0" layoutX="888.0" layoutY="269.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Continous" textFill="WHITE" visible="false">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="976.0" layoutY="289.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthcontinous" layoutX="976.0" layoutY="289.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="976.0" layoutY="289.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
+                        <TextField fx:id="txtthcontinous" layoutX="976.0" layoutY="289.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -422,8 +422,8 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="891.0" layoutY="347.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Button fx:id="testconfig" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
+                        <Line endX="170.0" layoutX="891.0" layoutY="347.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                        <Button fx:id="testconfig" layoutX="572.0" layoutY="550.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="572.0" AnchorPane.topAnchor="550.0">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -431,24 +431,249 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label layoutX="41.0" layoutY="203.0" styleClass="col-gray70" text="Curve Fit" textFill="WHITE">
+                        <Label layoutX="41.0" layoutY="203.0" styleClass="col-gray70" text="Curve Fit" textFill="WHITE" visible="false">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Line endX="570.0" layoutX="142.0" layoutY="257.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Label layoutX="344.0" layoutY="203.0" styleClass="col-gray70" text="Off" textFill="WHITE">
+                        <Line endX="570.0" layoutX="142.0" layoutY="257.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
+                        <Label layoutX="344.0" layoutY="203.0" styleClass="col-gray70" text="Off" textFill="WHITE" visible="false">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="453.0" layoutY="204.0" styleClass="col-gray70" text="On" textFill="WHITE">
+                        <Label layoutX="453.0" layoutY="204.0" styleClass="col-gray70" text="On" textFill="WHITE" visible="false">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="397.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                        <JFXToggleButton fx:id="curvefittgb" alignment="BASELINE_CENTER" layoutX="388.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
+                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="397.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                        <JFXToggleButton fx:id="curvefittgb" alignment="BASELINE_CENTER" layoutX="388.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                        <Label layoutX="81.0" layoutY="142.0" styleClass="col-gray70" text="Test Chambers" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="294.0" layoutY="142.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg11" layoutX="294.0" layoutY="142.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Label layoutX="242.0" layoutY="60.0" text="Test Setting" textFill="#0e3c87">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="83.0" layoutY="219.0" styleClass="col-gray70" text="Fail Safe Drop %" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="296.0" layoutY="216.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg111" layoutX="296.0" layoutY="216.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Label layoutX="598.0" layoutY="34.0" text="ISO 16603" textFill="#0e3c87">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="932.0" layoutY="31.0" text="ASTM 1617" textFill="#0e3c87">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="571.0" layoutY="80.0" styleClass="col-gray70" text="Pressure" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="715.0" layoutY="82.0" styleClass="col-gray70" text="Time" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="550.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" AnchorPane.leftAnchor="550.0" />
+                        <TextField fx:id="ppg112" layoutX="553.0" layoutY="125.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="553.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="553.0" layoutY="199.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" AnchorPane.leftAnchor="553.0" />
+                        <TextField fx:id="ppg1122" layoutX="553.0" layoutY="199.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="553.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="553.0" layoutY="268.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" AnchorPane.leftAnchor="553.0" />
+                        <TextField fx:id="ppg1123" layoutX="553.0" layoutY="268.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="553.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="553.0" layoutY="342.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" AnchorPane.leftAnchor="553.0" />
+                        <TextField fx:id="ppg11221" layoutX="553.0" layoutY="342.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="553.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="553.0" layoutY="403.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" AnchorPane.leftAnchor="553.0" />
+                        <TextField fx:id="ppg11231" layoutX="553.0" layoutY="403.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="553.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="553.0" layoutY="477.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg112211" layoutX="553.0" layoutY="477.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="553.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="683.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg1121" layoutX="683.0" layoutY="128.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="684.0" layoutY="202.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg11222" layoutX="684.0" layoutY="202.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="684.0" layoutY="271.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg11232" layoutX="684.0" layoutY="271.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="685.0" layoutY="345.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg112212" layoutX="685.0" layoutY="345.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="687.0" layoutY="406.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg112311" layoutX="687.0" layoutY="406.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="688.0" layoutY="480.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg1122111" layoutX="688.0" layoutY="480.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="915.0" layoutY="200.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg11223" layoutX="915.0" layoutY="200.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="915.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="1049.0" layoutY="129.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg11211" layoutX="1049.0" layoutY="129.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="1050.0" layoutY="203.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" />
+                        <TextField fx:id="ppg112221" layoutX="1050.0" layoutY="203.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="42.0" layoutX="915.0" layoutY="130.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="100.0" AnchorPane.leftAnchor="915.0" />
+                        <TextField fx:id="ppg112231" layoutX="915.0" layoutY="130.0" maxHeight="40.0" minHeight="20.0" prefHeight="40.0" prefWidth="98.0" AnchorPane.leftAnchor="915.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Label layoutX="930.0" layoutY="78.0" styleClass="col-gray70" text="Pressure" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="1074.0" layoutY="80.0" styleClass="col-gray70" text="Time" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
@@ -544,34 +769,34 @@
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="55.0" layoutY="286.0" styleClass="col-gray70" text="Diameter" textFill="WHITE" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="286.0">
+                        <Label layoutX="55.0" layoutY="286.0" styleClass="col-gray70" text="Diameter" textFill="WHITE" visible="false" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="286.0">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="155.0" layoutY="277.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="277.0" />
-                        <ComboBox fx:id="cmblenghth" layoutX="155.0" layoutY="277.0" prefHeight="48.0" prefWidth="200.0" promptText="Length" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="277.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="155.0" layoutY="277.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="200.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="277.0" />
+                        <ComboBox fx:id="cmblenghth" layoutX="155.0" layoutY="277.0" prefHeight="48.0" prefWidth="200.0" promptText="Length" visible="false" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="277.0">
                            <styleClass>
                               <String fx:value="cmbtrasperant" />
                               <String fx:value="combo-box1" />
                            </styleClass>
                         </ComboBox>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="153.0" layoutY="389.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
-                        <ComboBox fx:id="cmbroundoff" layoutX="153.0" layoutY="389.0" prefHeight="48.0" prefWidth="200.0" promptText="Roundoff">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="156.0" layoutY="315.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
+                        <ComboBox fx:id="cmbroundoff" layoutX="156.0" layoutY="315.0" prefHeight="48.0" prefWidth="200.0" promptText="Roundoff">
                            <styleClass>
                               <String fx:value="cmbtrasperant" />
                               <String fx:value="combo-box1" />
                            </styleClass>
                         </ComboBox>
-                        <Label layoutX="44.0" layoutY="350.0" text="Set Data Precision" textFill="#0e3c87">
+                        <Label layoutX="47.0" layoutY="276.0" text="Set Data Precision" textFill="#0e3c87">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
                         <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="182.0" />
                         <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="262.0" />
-                        <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="340.0" />
-                        <Line endX="210.0" layoutX="10.0" layoutY="10.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0" />
+                        <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="340.0" />
+                        <Line endX="210.0" layoutX="154.0" layoutY="377.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="376.0" />
                      </children></AnchorPane>
                </content>
             </Tab>
