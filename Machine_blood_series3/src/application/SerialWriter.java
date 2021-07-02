@@ -39,7 +39,7 @@ public class SerialWriter implements Runnable {
 				
 
 			}
-			System.out.println("\n Now sending  : "+ wrt.showDataGet()+" after  :"+(System.currentTimeMillis()-time));
+		//	System.out.println("\n Now sending  : "+ wrt.showDataGet()+" after  :"+(System.currentTimeMillis()-time));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

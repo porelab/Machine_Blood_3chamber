@@ -1,4 +1,4 @@
-
+ 
 package userinput;
 
 import java.io.IOException;
@@ -42,6 +42,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -92,6 +93,11 @@ public class manualcontroller implements Initializable {
 	TextField pr, fc;
 
 	@FXML
+	TextArea datashown;
+	
+	String newPg="0",newPr="0";
+	
+	@FXML
 	ImageView v1, v2, v3, v4, v5new, 
 			 imgv5, onoffimg;
 
@@ -131,6 +137,19 @@ public class manualcontroller implements Initializable {
 		return (double) tmp / factor;
 	}
 
+	
+	void setData()
+	{
+		
+		double d=Double.parseDouble(newPr);
+
+		double d1=Double.parseDouble(pg1.get());
+		
+		String dd="Pressure Gague : "+Myapp.getRound(d1, 2)+"\nPressure Gague Count : "+pg1count.get()+"\nPressure Regulator Count : "+(int)d;
+		datashown.setText(dd);	
+	}
+	
+	
 	void connectHardware() {
 		if (DataStore.connect_hardware.get()) {
 			valveonoff.setDisable(false);
@@ -145,6 +164,8 @@ public class manualcontroller implements Initializable {
 				DataStore.serialPort.addEventListener(in);
 				DataStore.serialPort.notifyOnDataAvailable(true);
 
+				System.out.println("hardware connected");
+				
 			} catch (TooManyListenersException e) {
 
 				MyDialoug.showError(102);
@@ -181,6 +202,7 @@ public class manualcontroller implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		
+		System.out.println("Start manual");
 		
 		setkeyboardmode();
 
@@ -222,8 +244,9 @@ public class manualcontroller implements Initializable {
 
 			}
 		});
+		DataStore.getconfigdata();
 
-		//connectHardware();
+		connectHardware();
 
 		// addDataToTable();
 		Image image1 = new Image(this.getClass().getResourceAsStream(
@@ -247,8 +270,7 @@ public class manualcontroller implements Initializable {
 		v4.setImage(image);
 		v5new.setImage(image);
 
-		DataStore.getconfigdata();
-
+	
 		valve1s = valve1;
 		valve2s = valve2;
 		valve3s = valve3;
@@ -337,7 +359,7 @@ public class manualcontroller implements Initializable {
 				});
 			}
 		});
-		DataStore.spg1.addListener(new ChangeListener() {
+		pg1.addListener(new ChangeListener() {
 
 			@Override
 			public void changed(ObservableValue observable, Object oldValue,
@@ -349,8 +371,8 @@ public class manualcontroller implements Initializable {
 					public void run() 
 					{
 						// TODO Auto-generated method stub
-						labp1.setText("" + round(DataStore.spg1.get(), 2));
-						lblpg1o.setText("" + round(DataStore.spg1.get(), 2));
+						labp1.setText("" + round(Double.parseDouble(pg1.get()), 2));
+					//	lblpg1o.setText("" + round(DataStore.spg1.get(), 2));
 
 					}
 				});
@@ -439,7 +461,7 @@ public class manualcontroller implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 
-				connectHardware(DataStore.getCom());
+				connectHardware();
 
 			}
 		});
@@ -455,8 +477,9 @@ public class manualcontroller implements Initializable {
 					v1.setImage(image);
 
 
+					openValve1();
 					
-					Mycommand.valveOn('6', 0);
+				//	Mycommand.valveOn('6', 0);
 					
 				
 
@@ -466,7 +489,8 @@ public class manualcontroller implements Initializable {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
 					v1.setImage(image);
-					Mycommand.valveOff('6', 0);
+					closeValve1();
+				//	Mycommand.valveOff('6', 0);
 				}
 
 			}
@@ -483,15 +507,14 @@ public class manualcontroller implements Initializable {
 
 					v2.setImage(image);
 
-					
-					Mycommand.valveOn('3', 0);
+					openValve2();
 				
 				} else {
 
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
 					v2.setImage(image);
-					Mycommand.valveOff('3', 0);
+					closeValve2();
 				}
 
 			}
@@ -508,8 +531,8 @@ public class manualcontroller implements Initializable {
 					v3.setImage(image);
 
 					
-
-					Mycommand.valveOn('4', 0);
+					openValve3();
+					//Mycommand.valveOn('4', 0);
 				} else {
 					Image image = new Image(this.getClass()
 							.getResourceAsStream("/userinput/valve OFF.png"));
@@ -517,8 +540,8 @@ public class manualcontroller implements Initializable {
 
 					
 
-
-					Mycommand.valveOff('4', 0);
+					closeValve3();
+					//Mycommand.valveOff('4', 0);
 				}
 
 			}
@@ -582,6 +605,7 @@ public class manualcontroller implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 
+				System.out.println("start stop calling");
 				if (valveonoff.isSelected()) {
 
 					rectmain.setVisible(false);
@@ -592,12 +616,10 @@ public class manualcontroller implements Initializable {
 
 					valveonoff.setGraphic(new ImageView(image));
 
-					wrD = new writeFormat();
-					wrD.addChar('S');
-					wrD.addChar('M');
-					wrD.addBlank(3);
-					wrD.addLast();
-					sendData(wrD);
+					System.out.println("Start enable bits");
+					Mycommand.sendAdcEnableBits("001", 10);
+					Mycommand.startADC(1000);
+				
 
 				} else {
 					rectmain.setVisible(true);
@@ -611,13 +633,7 @@ public class manualcontroller implements Initializable {
 
 					imgv5.setVisible(false);
 
-					wrD = new writeFormat();
-					wrD.addChar('X');
-					wrD.addChar('M');
-					wrD.addBlank(3);
-					// wrD.stopTN();
-					wrD.addLast();
-					sendData(wrD);
+					Mycommand.stopADC(500);
 
 				}
 
@@ -795,7 +811,7 @@ public class manualcontroller implements Initializable {
 
 		gauge6.setMaxValue(Integer.parseInt(DataStore.getPg1()));
 		lblpg1max.setText("PG1" + "\n" + Integer.parseInt(DataStore.getPg1())
-				+ " ("+DataStore.getUnitepg2()+")");
+				+ " ("+DataStore.getUnitepg1()+")");
 		gauge6.setPrefSize(ap5.getPrefWidth(), ap5.getPrefHeight());
 		gauge6.valueProperty().bind(DataStore.spg1);
 		// pg2value.textProperty().bind(DataStore.sspg2);
@@ -901,14 +917,11 @@ public class manualcontroller implements Initializable {
 					/ Integer.parseInt(DataStore.getPr());
 			System.out.println("Sending  : " + (int) d);
 			List<Integer> ss = getValueList((int) d);
-			wrD = new writeFormat();
-			wrD.addChar('P');
-			wrD.addChar('R'); 
-			wrD.addData1(ss);
-			wrD.addLast();
-			sendData(wrD);
+			Mycommand.setDACValue('2', (int) d, 500);
 
-			labp1.setText("" + d1);
+			//labp1.setText("" + d1);
+			newPr=""+d;
+			setData();
 			gauge1.setValue(d1);
 
 		} catch (Exception e) {
@@ -951,57 +964,57 @@ public class manualcontroller implements Initializable {
 		// start.setDisable(true);
 	}
 
-	public boolean connectHardware(String st) {
-
-		boolean bol = false;
-
-		// sendDataToWeb();
-		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
-
-		int count = 0;
-
-		while (pList.hasMoreElements()) {
-
-			CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
-			System.out.print("Port " + cpi.getName() + " " + cpi.getPortType());
-			if (cpi.getName().equals(st)) {
-				DataStore.connect_hardware.set(true);
-				try {
-
-					DataStore.sc.connect(st);
-					bol = true;
-					Myapp.hb.set(false);
-					writeFormat wrD = new writeFormat();
-					wrD.stopTN();
-					wrD.addLast();
-
-					sendData(wrD);
-
-				} catch (Exception e) {
-
-					e.printStackTrace();
-				}
-
-				break;
-			}
-
-			System.out.println("PORT :" + cpi.getName());
-			count++;
-		}
-
-		DataStore.connect_hardware.set(bol);
-		if (bol == false) {
-			// Toast.makeText(Main.mainstage,
-			// "Hardware not connected please plugout and plugin", 200, 200,
-			// 3000);
-		} else {
-			// Toast.makeText(Main.mainstage, "Successfully Connected", 200,
-			// 200, 3000);
-
-		}
-
-		return bol;
-	}
+//	public boolean connectHardware(String st) {
+//
+//		boolean bol = false;
+//
+//		// sendDataToWeb();
+//		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
+//
+//		int count = 0;
+//
+//		while (pList.hasMoreElements()) {
+//
+//			CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
+//			System.out.print("Port " + cpi.getName() + " " + cpi.getPortType());
+//			if (cpi.getName().equals(st)) {
+//				DataStore.connect_hardware.set(true);
+//				try {
+//
+//					DataStore.sc.connect(st);
+//					bol = true;
+//					Myapp.hb.set(false);
+//					writeFormat wrD = new writeFormat();
+//					wrD.stopTN();
+//					wrD.addLast();
+//
+//					sendData(wrD);
+//
+//				} catch (Exception e) {
+//
+//					e.printStackTrace();
+//				}
+//
+//				break;
+//			}
+//
+//			System.out.println("PORT :" + cpi.getName());
+//			count++;
+//		}
+//
+//		DataStore.connect_hardware.set(bol);
+//		if (bol == false) {
+//			// Toast.makeText(Main.mainstage,
+//			// "Hardware not connected please plugout and plugin", 200, 200,
+//			// 3000);
+//		} else {
+//			// Toast.makeText(Main.mainstage, "Successfully Connected", 200,
+//			// 200, 3000);
+//
+//		}
+//
+//		return bol;
+//	}
 
 	public static List<Integer> getValueList(int val) {
 		String pad = "000000";
@@ -1017,6 +1030,30 @@ public class manualcontroller implements Initializable {
 		ls.add(n2);
 
 		return ls;
+	}
+
+	List<Integer> getAdcData(List<Integer> data) {
+		List<Integer> d = new ArrayList<Integer>();
+
+		// System.out.println("READ .... ");
+		for (int i = 4; i < 49; i = i + 3) {
+			d.add(getIntFromBit(data.get(i), data.get(i + 1), data.get(i + 2)));
+
+		}
+		// System.out.println("READ DONE ..." + d.size());
+		// System.out.println("Adc Data :" + d);
+		return d;
+	}
+	int getIntFromBit(int a1, int a2, int a3) {
+		// System.out.println(a1 + " : " + a2 + ": " + a3);
+		int a = 0;
+
+		a = a1 << 16;
+		a2 = a2 << 8;
+		a = a | a2;
+		a = a | a3;
+
+		return a;
 	}
 
 	public class SerialReader implements SerialPortEventListener {
@@ -1048,148 +1085,49 @@ public class manualcontroller implements Initializable {
 						len++;
 					}
 					prev = (char) data;
-					System.out.print(prev);
+					//System.out.print(prev);
 
 					// System.out.print(new String(buffer,0,len));
 				}
 
 				for (int i = 1; i < readData.size(); i++) {
-				
-					if (readData.get(i) == 83 && readData.get(i + 1) == (int) 'C')
-					{
-						// .. for fm1
 
-						int a1, a2, a3;
-						a1 = readData.get(i + 2);
-						a2 = readData.get(i + 3);
-						a3 = readData.get(i + 4);
-						System.out.println("\nFlow Meter 1 - >  bits  : " + a1
-								+ " : " + a2 + " : " + a3);
+					if (readData.get(i) == 'F'
+							&& readData.get(i + 1) == (int) 'M'
+							&& readData.get(i + 2) == (int) 'A') {
+						double pr = 0, fl = 0;
+						List<Integer> reading = getAdcData(readData);
 
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
+						int maxpre = Integer.parseInt(DataStore.getPg1());
+						pr = (double) reading.get(2) * maxpre / 65535;
 
-						// System.out.println("Flow Meter 1 :  ... :"+DataStore.getFm1());
-						b=(double) a * Integer.parseInt(DataStore.getFm1()) / 65535;
-					
-						
-						System.out.println("Flow Meter 1 :  ... :" + b);
-						DataStore.sfm1.set(b);
-		
-						fm1count.set("" + a);
+						// if (DataStore.getUnitepg1().equals("bar")) {
+						// pr = DataStore.barToPsi(pr);
+						// } else if (DataStore.getUnitepg1().equals("torr")) {
+						// pr = DataStore.torrToPsi(pr);
+						// }
 
-							
-						if (a > 62200) {
-							// SkadaController.valve1s.selectedProperty().bind(DataStore.sv1);
-							System.out.println("Max flow reach to fm1");
-						}
-						// .... for fm2
+						// System.out.println("Pr original : " + pr);
+						// if (DataStore.isabsolutepg1()) {
+						// pr = pr - 14.6;
+						// if (pr < 0) {
+						// pr = 0;
+						// }
+						// }
 
-						a = 0;
-						a1 = readData.get(i + 5);
-						a2 = readData.get(i + 6);
-						a3 = readData.get(i + 7);
+						// System.out.println("Pr after update: " + pr);
 
-						System.out.println("\nFlow Meter 2 - >  bits  : " + a1
-								+ " : " + a2 + " : " + a3);
+						// System.out.println("" + reading);
 
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-
-						b = (double) a * Integer.parseInt(DataStore.getFm2())
-								/ 65535;
-						
-					
-						
-						System.out.println("Flow Meter 2 :  ... :" + b);
-						DataStore.sfm2.set(b);
-					
-						fm2count.set("" + a);
-
-					
-
-						// .... for pg1
-
-						a = 0;
-						a1 = readData.get(i + 8);
-						a2 = readData.get(i + 9);
-						a3 = readData.get(i + 10);
-						System.out.println("\nPressure G1  -> Bit : " + a1
-								+ " : " + a2 + " : " + a3);
-
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-
-						b = (double) a * Integer.parseInt(DataStore.getPg1())
-								/ 65535;
-						
-					
-						/*if(DataStore.isabsolutepg1())
-						{
-							b=b-14.6;
-							if(b<0)
-							{
-								b=0;
-							}
-						}
-						*/
-				
-						System.out.println("Pressure Gauge 1 :  ... :" + b);
-						DataStore.spg1.set(b);
-					    pg1count.set("" + a);
-
-								
-						if (a > 62200) {
-							// SkadaController.valve3s.selectedProperty().bind(DataStore.sv3);
-							System.out.println("Max pressure reach to PG1");
-						}
-
-						// .... for pg2
-
-						a = 0;
-						a1 = readData.get(i + 11);
-						a2 = readData.get(i + 12);
-						a3 = readData.get(i + 13);
-						System.out.println("\nPressure G2  -> Bit : " + a1
-								+ " : " + a2 + " : " + a3);
-
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						b = (double) a * Integer.parseInt(DataStore.getPg2())
-								/ 65535;
-						
-					
-						
-						/*if(DataStore.isabsolutepg2())
-						{
-							b=b-14.6;
-							if(b<0)
-							{
-								b=0;
-							}
-						}
-						*/
-						System.out
-								.println("Pressure Gauge 2 :  original   reading  : "
-										+ a + "... :" + b);
+						 //System.out.println("Pr : " + pr);
+						//DataStore.livepressure.set(pr);
+						DataStore.spg1.set(pr);
+						pg1.set(pr+"");
+						pg1count.set(reading.get(2)+"");
+						setData();
 						
 						
 						
-						DataStore.spg2.set(b);
-
-						pg2count.set("" + a);
-
-							
-						i = i + 16;
-
 					}
 
 					readData.clear();
@@ -1198,19 +1136,220 @@ public class manualcontroller implements Initializable {
 				}
 
 			} catch (IOException e) {
-
 				DataStore.serialPort.removeEventListener();
 				MyDialoug.showErrorHome(103);
 
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						DataStore.serialPort.removeEventListener();
+						MyDialoug.showErrorHome(103);
+		
+					}
+				});
 				System.out.println("Live screen error :" + e.getMessage());
-				e.printStackTrace();
+
 			}
 
 		}
 
 	}
+
 	
-	
+//	public class SerialReader implements SerialPortEventListener {
+//
+//		InputStream in;
+//		int ind = 0;
+//		List<Integer> readData = new ArrayList<Integer>();
+//
+//		public SerialReader(InputStream in) {
+//			this.in = in;
+//			DataStore.getconfigdata();
+//		}
+//
+//		public void serialEvent(SerialPortEvent arg0) {
+//			int data;
+//			try {
+//				int len = 0;
+//				char prev = '\0';
+//				// System.out.println("Reading Started:");
+//
+//				while ((data = in.read()) > -1) {
+//
+//					if (data == '\n' && prev == 'E') {
+//						break;
+//					}
+//					if (len > 0 || (data == '\r' && prev == '\n')) {
+//						readData.add(data);
+//
+//						len++;
+//					}
+//					prev = (char) data;
+//					System.out.print(prev);
+//
+//					// System.out.print(new String(buffer,0,len));
+//				}
+//
+//				for (int i = 1; i < readData.size(); i++) {
+//				
+//					if (readData.get(i) == 83 && readData.get(i + 1) == (int) 'C')
+//					{
+//						// .. for fm1
+//
+//						int a1, a2, a3;
+//						a1 = readData.get(i + 2);
+//						a2 = readData.get(i + 3);
+//						a3 = readData.get(i + 4);
+//						System.out.println("\nFlow Meter 1 - >  bits  : " + a1
+//								+ " : " + a2 + " : " + a3);
+//
+//						a = a1 << 16;
+//						a2 = a2 << 8;
+//						a = a | a2;
+//						a = a | a3;
+//
+//						// System.out.println("Flow Meter 1 :  ... :"+DataStore.getFm1());
+//						b=(double) a * Integer.parseInt(DataStore.getFm1()) / 65535;
+//					
+//						
+//						System.out.println("Flow Meter 1 :  ... :" + b);
+//						DataStore.sfm1.set(b);
+//		
+//						fm1count.set("" + a);
+//
+//							
+//						if (a > 62200) {
+//							// SkadaController.valve1s.selectedProperty().bind(DataStore.sv1);
+//							System.out.println("Max flow reach to fm1");
+//						}
+//						// .... for fm2
+//
+//						a = 0;
+//						a1 = readData.get(i + 5);
+//						a2 = readData.get(i + 6);
+//						a3 = readData.get(i + 7);
+//
+//						System.out.println("\nFlow Meter 2 - >  bits  : " + a1
+//								+ " : " + a2 + " : " + a3);
+//
+//						a = a1 << 16;
+//						a2 = a2 << 8;
+//						a = a | a2;
+//						a = a | a3;
+//
+//						b = (double) a * Integer.parseInt(DataStore.getFm2())
+//								/ 65535;
+//						
+//					
+//						
+//						System.out.println("Flow Meter 2 :  ... :" + b);
+//						DataStore.sfm2.set(b);
+//					
+//						fm2count.set("" + a);
+//
+//					
+//
+//						// .... for pg1
+//
+//						a = 0;
+//						a1 = readData.get(i + 8);
+//						a2 = readData.get(i + 9);
+//						a3 = readData.get(i + 10);
+//						System.out.println("\nPressure G1  -> Bit : " + a1
+//								+ " : " + a2 + " : " + a3);
+//
+//						a = a1 << 16;
+//						a2 = a2 << 8;
+//						a = a | a2;
+//						a = a | a3;
+//
+//						b = (double) a * 5
+//								/ 65535;
+//						
+//					
+//						/*if(DataStore.isabsolutepg1())
+//						{
+//							b=b-14.6;
+//							if(b<0)
+//							{
+//								b=0;
+//							}
+//						}
+//						*/
+//				
+//						System.out.println("Pressure Gauge 1 :  ... :" + b);
+//						DataStore.spg1.set(b);
+//					    pg1count.set("" + a);
+//
+//								
+//						if (a > 62200) {
+//							// SkadaController.valve3s.selectedProperty().bind(DataStore.sv3);
+//							System.out.println("Max pressure reach to PG1");
+//						}
+//
+//						// .... for pg2
+//
+//						a = 0;
+//						a1 = readData.get(i + 11);
+//						a2 = readData.get(i + 12);
+//						a3 = readData.get(i + 13);
+//						System.out.println("\nPressure G2  -> Bit : " + a1
+//								+ " : " + a2 + " : " + a3);
+//
+//						a = a1 << 16;
+//						a2 = a2 << 8;
+//						a = a | a2;
+//						a = a | a3;
+//						b = (double) a * Integer.parseInt(DataStore.getPg2())
+//								/ 65535;
+//						
+//					
+//						
+//						/*if(DataStore.isabsolutepg2())
+//						{
+//							b=b-14.6;
+//							if(b<0)
+//							{
+//								b=0;
+//							}
+//						}
+//						*/
+//						System.out
+//								.println("Pressure Gauge 2 :  original   reading  : "
+//										+ a + "... :" + b);
+//						
+//						
+//						
+//						DataStore.spg2.set(b);
+//
+//						pg2count.set("" + a);
+//
+//							
+//						i = i + 16;
+//
+//					}
+//
+//					readData.clear();
+//					break;
+//
+//				}
+//
+//			} catch (IOException e) {
+//
+//				DataStore.serialPort.removeEventListener();
+//				MyDialoug.showErrorHome(103);
+//
+//				System.out.println("Live screen error :" + e.getMessage());
+//				e.printStackTrace();
+//			}
+//
+//		}
+//
+//	}
+//	
+//	
 	/* Keyboard Mode Checking */
 	void setkeyboardmode() {
 
@@ -1283,7 +1422,127 @@ public class manualcontroller implements Initializable {
 
 	}
 	
+	void openValve1() {
+		System.err.println("Valve opening 1,4");
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Mycommand.valveOn('1', 0);
+
+				try {
+
+					Thread.sleep(1200);
+				} catch (Exception e) {
+
+				}
+				Mycommand.valveOn('4', 0);
+
+			}
+		}).start();
+
+	}
+
+	void closeValve1() {
+
+		System.err.println("Valve closing 1,4");
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+
+				Mycommand.valveOff('1', 0);
+				try {
+
+					Thread.sleep(900);
+				} catch (Exception e) {
+
+				}
+				Mycommand.valveOff('4', 0);
+
+			}
+		}).start();
+
+	}
+
+	void openValve2() {
+		System.err.println("Valve opening 2,5");
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Mycommand.valveOn('2', 0);
+
+				try {
+
+					Thread.sleep(900);
+				} catch (Exception e) {
+
+				}
+				Mycommand.valveOn('5', 0);
+
+			}
+		}).start();
+
+	}
+
+	void closeValve2() {
+
+		System.err.println("Valve closing 2,5");
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+
+				Mycommand.valveOff('2', 0);
+				try {
+
+					Thread.sleep(1000);
+				} catch (Exception e) {
+
+				}
+				Mycommand.valveOff('5', 0);
+
+			}
+		}).start();
+
+	}
+
+	void openValve3() {
+		System.err.println("Valve opening 3,6");
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Mycommand.valveOn('6', 0);
+				Mycommand.valveOn('3', 500);
+
+				
+				
+				
+			}
+		}).start();
+
+	}
+
+	void closeValve3() {
+
+		System.err.println("Valve closing 3,6");
+		
+		        Mycommand.valveOff('6', 0);
+				Mycommand.valveOff('3', 500);
+				
+			
 	
+			
+	
+	}
+
 	/* Open Keyboard Scren stage. */
 	public static void setVitual(TextField tf, TextField nextTf, String lbl,
 			String nextlbl) {

@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?> 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" stylesheets="@../application/new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinput.manualcontroller">
+<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" stylesheets="@../application/new_application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userinput.manualcontroller">
    <children>
       <AnchorPane layoutX="-2.0" layoutY="42.0" prefHeight="635.0" prefWidth="1366.0" styleClass="bgwhite" stylesheets="@../application/new_application.css" AnchorPane.topAnchor="10.0">
          <children>
@@ -227,6 +232,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <TextArea fx:id="datashown" editable="false" layoutX="41.0" layoutY="399.0" prefHeight="97.0" prefWidth="240.0" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></TextArea>
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
