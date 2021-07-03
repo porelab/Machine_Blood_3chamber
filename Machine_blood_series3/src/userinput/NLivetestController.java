@@ -227,6 +227,7 @@ public class NLivetestController implements Initializable {
 	Map<String, Object> testdata;
 	
 	int Delaytime;
+	int dropper;
 
 	void setTestStd() {
 
@@ -254,6 +255,8 @@ public class NLivetestController implements Initializable {
 			ch3status.setText("in process");
 		}
 		Delaytime=20;
+		dropper=20;
+		setMode();
 		setPredefined();
 	}
 
@@ -326,28 +329,24 @@ public class NLivetestController implements Initializable {
 	}
 
 	void recordPressure() {
-		if (testtype == 0) {
-			if (!recorddata.contains(readpre)) {
+	
 
 				Toast.makeText(Main.mainstage, "Record Successfully", 500, 100,
 						100);
 				recorddata.add(readpre);
 				recordtime.add(readtime);
 
+				for(int i=pressureindex-1!=0?pressureindex-1:0;i<bresults.size();i++)
+				{
+				bresults.remove(i);
+				bresults.add(i, "Fail");
+				}
+				
 				completeTest();
 
-				generateList();
+				//generateList();
 
-			} else {
-				Toast.makeText(Main.mainstage, "Already exist", 500, 100, 100);
-			}
-		} else if (testtype == 1) {
-			recorddata.add(readpre);
-			recordtime.add(readtime);
-			isCompletetest = true;
-			updateResult();
-			generateListforRecords();
-		}
+		
 
 	}
 
@@ -688,6 +687,7 @@ public class NLivetestController implements Initializable {
 		pressureindex = 0;
 		bans.clear();
 		tlist.clear();
+		recordtime.clear();;
 
 		skip = 0;
 		yAxis.setLabel("Pressure (" + DataStore.getUnitepressure() + ")");
@@ -726,7 +726,7 @@ public class NLivetestController implements Initializable {
 				//
 				// }
 
-				Mycommand.setDelay(1000, 0);
+				Mycommand.setDelay(waittime, 0);
 				try {
 
 					Thread.sleep(minde);
@@ -1426,14 +1426,13 @@ public class NLivetestController implements Initializable {
 			@Override
 			public void run() {
 
-				if(bans.size()>3)
 				series2.getData().add(new XYChart.Data(readtime, pr));
 			
 			}
 		});
 
-		int per = 10;
-		double diff = (double) curpress * per / 100;
+
+		double diff = (double) curpress * dropper / 100;
 
 		System.out.println("High last : " + curpress);
 		 System.out.println("Current  : " + pr);
@@ -1455,7 +1454,6 @@ public class NLivetestController implements Initializable {
 //			});
 		}
 
-		if(bans.size()>3)
 		curpress = pr;
 	}
 
@@ -1517,9 +1515,9 @@ public class NLivetestController implements Initializable {
 						+ ".csv");
 
 				if (recorddata.size() == 0) {
-					result = "pass";
+					result = "Pass";
 				} else {
-					result = "fail";
+					result = "Fail";
 				}
 
 				cs.firstLine("blood");

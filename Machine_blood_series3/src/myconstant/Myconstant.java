@@ -34,34 +34,33 @@ public class Myconstant {
 	}
 
 	public static void setDummyData() {
-		map.clear();
-		Map<String, Object> ch1data = new HashMap<>();
-		ch1data.put("sampleid", "sample1");
-		ch1data.put("type", "garment");
-		ch1data.put("samplearea", "area1");
-		ch1data.put("lotno", "lot1");
-		ch1data.put("chamber", 1);
+//		map.clear();
+//		Map<String, Object> ch1data = new HashMap<>();
+//		ch1data.put("sampleid", "sample1");
+//		ch1data.put("type", "garment");
+//		ch1data.put("samplearea", "area1");
+//		ch1data.put("lotno", "lot1");
+//		ch1data.put("chamber", 1);
+//		
+//
+//		map.put("ch1", ch1data);
+//
+//		Map<String, Object> ch2data = new HashMap<>();
+//		ch2data.put("sampleid", "sample2");
+//		ch2data.put("type", "garment");
+//		ch2data.put("samplearea", "area2");
+//		ch2data.put("lotno", "lot2");
+//		ch2data.put("chamber", 2);
+//		map.put("ch2", ch2data);
+//
+//		Map<String, Object> ch3data = new HashMap<>();
+//		ch3data.put("sampleid", "sample3");
+//		ch3data.put("type", "roll");
+//		ch3data.put("samplearea", "");
+//		ch3data.put("lotno", "lot3");
+//		ch3data.put("chamber", 3);
+//		map.put("ch3", ch3data);
 		
-
-		map.put("ch1", ch1data);
-
-		Map<String, Object> ch2data = new HashMap<>();
-		ch2data.put("sampleid", "sample2");
-		ch2data.put("type", "garment");
-		ch2data.put("samplearea", "area2");
-		ch2data.put("lotno", "lot2");
-		ch2data.put("chamber", 2);
-		map.put("ch2", ch2data);
-
-		Map<String, Object> ch3data = new HashMap<>();
-		ch3data.put("sampleid", "sample3");
-		ch3data.put("type", "roll");
-		ch3data.put("samplearea", "");
-		ch3data.put("lotno", "lot3");
-		ch3data.put("chamber", 3);
-		
-
-		map.put("ch3", ch3data);
 		chambers.addAll(map.keySet());
 		currentPosition = 0;
 	}

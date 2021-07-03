@@ -69,7 +69,7 @@
          </image>
       </ImageView>
         
-      <Button fx:id="btnabr" layoutX="1224.0" layoutY="19.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0">
+      <Button fx:id="btnabr" layoutX="1163.0" layoutY="19.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -81,7 +81,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="startautotest" layoutX="1152.0" layoutY="20.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0" AnchorPane.leftAnchor="1152.0" AnchorPane.topAnchor="20.0">
+      <Button fx:id="startautotest" layoutX="1152.0" layoutY="20.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0" visible="false" AnchorPane.leftAnchor="1152.0" AnchorPane.topAnchor="20.0">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
