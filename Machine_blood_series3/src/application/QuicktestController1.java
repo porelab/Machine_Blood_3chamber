@@ -572,6 +572,7 @@ public class QuicktestController1 implements Initializable {
 		
 
 		if (flag1 && flag2 && flag3) {
+			Myconstant.setDummyData();
 			Openscreen.open("/userinput/Nlivetest.fxml");
 			MyDialoug.closeDialoug();
 		}

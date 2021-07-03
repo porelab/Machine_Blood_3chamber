@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,14 +22,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.LineChart.SortingPolicy;
 import javafx.scene.chart.NumberAxis;
@@ -39,7 +38,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -54,17 +52,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.transform.Transform;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Popup;
-
-import javax.imageio.ImageIO;
-
 import myconstant.Myconstant;
 import toast.MyDialoug;
+import toast.Openscreen;
 import toast.Toast;
-import Notification.Notification.Notifier;
 import application.DataStore;
 import application.Main;
 import application.Myapp;
@@ -91,7 +83,6 @@ public class NLivetestController implements Initializable {
 	@FXML
 	StackPane videoanc;
 
-	List<Double> pressurepoints = new ArrayList<Double>();
 	List<String> bpoints = new ArrayList<String>();
 	List<String> bresults = new ArrayList<String>();
 	List<String> btime = new ArrayList<String>();
@@ -213,16 +204,76 @@ public class NLivetestController implements Initializable {
 	int waittime = 0;
 	String sampleid = "testing";
 	String teststd;
+
+	int chamber = 3;
+
+	@FXML
+	private Label ch1name;
+
+	@FXML
+	private Label ch2name;
+
+	@FXML
+	private Label ch3name;
+
+	@FXML
+	private Label ch1status;
+
+	@FXML
+	private Label ch2status;
+
+	@FXML
+	private Label ch3status;
+	Map<String, Object> testdata;
 	
-	int chamber=3;
+	int Delaytime;
 
 	void setTestStd() {
-		teststd = Myconstant.getStd();
-		// 1 = astm , 2 = iso
 
-		chamber=1;
-		sampleid="testing";
-		
+		ArrayList<String> keys = new ArrayList<>(Myconstant.map.keySet());
+		System.out.println("Keys : " + keys);
+
+		teststd = Myconstant.getStd();
+		testdata = Myconstant.getCurrentChamberMap();
+		// 1 = astm , 2 = iso
+		System.out.println("Test data :" + testdata);
+		chamber = Integer.parseInt(testdata.get("chamber").toString());
+		sampleid = testdata.get("sampleid").toString();
+
+		Myconstant.currentChamberMap = testdata;
+		lblfilename.setText(sampleid);
+
+		if (chamber == 1) {
+			ch1name.setText(sampleid);
+			ch1status.setText("in process");
+		} else if (chamber == 2) {
+			ch2name.setText(sampleid);
+			ch2status.setText("in process");
+		} else {
+			ch3name.setText(sampleid);
+			ch3status.setText("in process");
+		}
+		Delaytime=20;
+		setPredefined();
+	}
+
+	void setOnce() {
+		if (!Myconstant.map.containsKey("ch1")) {
+			ch1name.setText("--");
+			ch1status.setText("--");
+
+		}
+		if (!Myconstant.map.containsKey("ch2")) {
+			ch2name.setText("--");
+			ch2status.setText("--");
+
+		}
+		if (!Myconstant.map.containsKey("ch3")) {
+			ch3name.setText("--");
+			ch3status.setText("--");
+
+		}
+
 	}
 
 	void setMode() {
@@ -282,9 +333,9 @@ public class NLivetestController implements Initializable {
 						100);
 				recorddata.add(readpre);
 				recordtime.add(readtime);
-				
+
 				completeTest();
-				
+
 				generateList();
 
 			} else {
@@ -424,18 +475,18 @@ public class NLivetestController implements Initializable {
 	void setPredefined() {
 
 		System.out.println("Set predefined data");
-		pressurepoints.add(0.253816);
-		pressurepoints.add(0.507632);
-		pressurepoints.add(1.01526);
-		pressurepoints.add(2.03053);
-		pressurepoints.add(2.90075);
+		
+		pressureCounts.clear();
+		bpoints.clear();
+		bresults.clear();
+		btime.clear();
 
 		pressureCounts.add(1415);
 		pressureCounts.add(1819);
 		pressureCounts.add(2748);
 		pressureCounts.add(4495);
 		pressureCounts.add(5963);
-		
+
 		bpoints.add("1.75");
 		bpoints.add("3.5");
 		bpoints.add("7");
@@ -448,11 +499,11 @@ public class NLivetestController implements Initializable {
 		bresults.add("Pass");
 		bresults.add("Pass");
 
-		btime.add("5");
-		btime.add("5");
-		btime.add("5");
-		btime.add("5");
-		btime.add("5");
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
 
 	}
 
@@ -463,6 +514,7 @@ public class NLivetestController implements Initializable {
 		// loadVideo();
 		setPredefined();
 		setTestStd();
+		setOnce();
 		// Myapp.PrintAll();
 		isSkiptest = new SimpleBooleanProperty(false);
 		btnfail.setDisable(false);
@@ -483,8 +535,7 @@ public class NLivetestController implements Initializable {
 		recordtime = new ArrayList<Double>();
 		isBubbleStart = new SimpleBooleanProperty(false);
 		isDryStart = new SimpleBooleanProperty(false);
-		lblfilename.setText(sampleid);
-
+	
 		setMode();
 		lbltesttype.setText("Hydrostatic Pressure Test");
 		lbltesttype.setText("AATCC 127");
@@ -501,6 +552,7 @@ public class NLivetestController implements Initializable {
 					Boolean arg1, Boolean arg2) {
 
 				if (arg2 == true) {
+					bans.clear();
 					completeTest();
 					isSkiptest.set(false);
 				}
@@ -629,11 +681,11 @@ public class NLivetestController implements Initializable {
 		btnfail.setDisable(false);
 		status.setText("Hydrostatic test is running..");
 		lblcurranttest.setText("Pressure vs Time");
-
+		isCompletetest=false;
 		flowserireswet.getData().clear();
-
+		recorddata.clear();
 		starttestdry.setDisable(true);
-
+		pressureindex = 0;
 		bans.clear();
 		tlist.clear();
 
@@ -645,6 +697,7 @@ public class NLivetestController implements Initializable {
 
 		starttest.setDisable(true);
 
+		testtype = 0;
 		countbp = 0;
 		// starttest.setVisible(false);
 
@@ -687,7 +740,7 @@ public class NLivetestController implements Initializable {
 				} catch (Exception e) {
 
 				}
-				
+
 				startCondition();
 				try {
 
@@ -711,8 +764,8 @@ public class NLivetestController implements Initializable {
 	// get differencial time
 
 	void startCondition() {
-	
-			System.out.println("Chamber  "+chamber);
+
+		System.out.println("Chamber  " + chamber);
 		if (chamber == 1) {
 			openValve1();
 			closeValve2();
@@ -730,8 +783,12 @@ public class NLivetestController implements Initializable {
 	}
 
 	void endCondition() {
-		
 
+		try {
+			Thread.sleep(1000);
+		} catch (Exception ew) {
+
+		}
 		if (chamber == 1) {
 			closeValve1();
 
@@ -745,142 +802,168 @@ public class NLivetestController implements Initializable {
 
 	void openValve1() {
 		System.err.println("Valve opening 1,4");
-		new Thread(new Runnable() {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				Mycommand.valveOn('1', 0);
+		// TODO Auto-generated method stub
+		try {
 
-				try {
+			Thread.sleep(1200);
+		} catch (Exception e) {
 
-					Thread.sleep(1200);
-				} catch (Exception e) {
+		}
+		Mycommand.valveOn('1', 0);
 
-				}
-				Mycommand.valveOn('4', 0);
+		try {
 
-			}
-		}).start();
+			Thread.sleep(1200);
+		} catch (Exception e) {
+
+		}
+		Mycommand.valveOn('4', 0);
+
+		try {
+
+			Thread.sleep(1200);
+		} catch (Exception e) {
+
+		}
 
 	}
 
 	void closeValve1() {
 
 		System.err.println("Valve closing 1,4");
-		new Thread(new Runnable() {
+		try {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
+			Thread.sleep(900);
+		} catch (Exception e) {
 
-				Mycommand.valveOff('1', 0);
-				try {
+		}
+		Mycommand.valveOff('1', 0);
+		try {
 
-					Thread.sleep(900);
-				} catch (Exception e) {
+			Thread.sleep(900);
+		} catch (Exception e) {
 
-				}
-				Mycommand.valveOff('4', 0);
+		}
+		Mycommand.valveOff('4', 0);
 
-			}
-		}).start();
+		try {
+
+			Thread.sleep(1200);
+		} catch (Exception e) {
+
+		}
 
 	}
 
 	void openValve2() {
 		System.err.println("Valve opening 2,5");
-		new Thread(new Runnable() {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				Mycommand.valveOn('2', 0);
+		// TODO Auto-generated method stub
+		try {
 
-				try {
+			Thread.sleep(900);
+		} catch (Exception e) {
 
-					Thread.sleep(900);
-				} catch (Exception e) {
+		}
+		Mycommand.valveOn('2', 0);
 
-				}
-				Mycommand.valveOn('5', 0);
+		try {
 
-			}
-		}).start();
+			Thread.sleep(900);
+		} catch (Exception e) {
+
+		}
+		Mycommand.valveOn('5', 0);
+
+		try {
+
+			Thread.sleep(1200);
+		} catch (Exception e) {
+
+		}
 
 	}
 
 	void closeValve2() {
 
 		System.err.println("Valve closing 2,5");
-		new Thread(new Runnable() {
+		try {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
+			Thread.sleep(1000);
+		} catch (Exception e) {
 
-				Mycommand.valveOff('2', 0);
-				try {
+		}
+		Mycommand.valveOff('2', 0);
+		try {
 
-					Thread.sleep(1000);
-				} catch (Exception e) {
+			Thread.sleep(1000);
+		} catch (Exception e) {
 
-				}
-				Mycommand.valveOff('5', 0);
+		}
+		Mycommand.valveOff('5', 0);
 
-			}
-		}).start();
+		try {
+
+			Thread.sleep(1200);
+		} catch (Exception e) {
+
+		}
 
 	}
 
 	void openValve3() {
 		System.err.println("Valve opening 3,6");
-		new Thread(new Runnable() {
+		try {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				Mycommand.valveOn('3', 0);
+			Thread.sleep(1000);
+		} catch (Exception e) {
 
-				try {
+		}
+		Mycommand.valveOn('6', 0);
+		try {
 
-					Thread.sleep(1000);
-				} catch (Exception e) {
+			Thread.sleep(1000);
+		} catch (Exception e) {
 
-				}
-				Mycommand.valveOn('6', 0);
-				try {
+		}
+		Mycommand.valveOn('3', 0);
+		try {
 
-					Thread.sleep(400);
-				} catch (Exception e) {
+			Thread.sleep(1000);
+		} catch (Exception e) {
 
-				}
-			}
-		}).start();
+		}
 
 	}
 
 	void closeValve3() {
 
 		System.err.println("Valve closing 3,6");
-		
-				
-				Mycommand.valveOff('3', 0);
-				try {
+		try {
 
-					Thread.sleep(1000);
-				} catch (Exception e) {
+			Thread.sleep(1000);
+		} catch (Exception e) {
 
-				}
-				Mycommand.valveOff('6', 0);
-				try {
+		}
+		Mycommand.valveOff('6', 0);
 
-					Thread.sleep(400);
-				} catch (Exception e) {
+		try {
 
-				}
-			
-	
+			Thread.sleep(1000);
+		} catch (Exception e) {
+
+		}
+
+		Mycommand.valveOff('3', 0);
+
+		try {
+
+			Thread.sleep(1000);
+		} catch (Exception e) {
+
+		}
+
 	}
 
 	double getTime() {
@@ -1113,9 +1196,9 @@ public class NLivetestController implements Initializable {
 
 					@Override
 					public void run() {
-						//showBubblePopup();
+						showBubblePopup();
 
-						bubbleClicknew();
+						// bubbleClicknew();
 					}
 				});
 			}
@@ -1240,7 +1323,7 @@ public class NLivetestController implements Initializable {
 						len++;
 					}
 					prev = (char) data;
-					//System.out.print(prev);
+					// System.out.print(prev);
 
 					// System.out.print(new String(buffer,0,len));
 				}
@@ -1276,15 +1359,11 @@ public class NLivetestController implements Initializable {
 
 						// System.out.println("Pr : " + pr);
 						DataStore.livepressure.set(pr);
-						if (testtype !=5) {
+						if (testtype != 5) {
 							// setBubblePoints(pr);
 							showBubble(pr);
 						}
 
-						
-						
-						
-						
 					}
 
 					readData.clear();
@@ -1315,65 +1394,89 @@ public class NLivetestController implements Initializable {
 	void showBubble(double pr) {
 
 		// System.out.println("Mode 2");
-		//System.out.println("pressue  : "+pr);
+		// System.out.println("pressue  : "+pr);
 		readpre = pr;
 		readtime = getTime();
 
 		bans.add("" + pr);
 		tlist.add("" + readtime);
-		
-			if (getTimeforwait() >= 10) {
-			
-				System.out.println("now switching");
-				System.out.println("set Dac to "+pressureCounts.get(pressureindex));
-				Mycommand.setDACValue('2', pressureCounts.get(pressureindex), 100);
-				pressureindex++;
-				changetime = System.currentTimeMillis();
-				// openValve24();
-			}
 
 		
+		System.out.println("Pressure index : "+pressureindex);
+		
+		System.out.println("Record size : "+bans.size());
+		if (getTimeforwait() >= Delaytime) {
+
+			if (pressureindex == 5) {
+				completeTest();
+			} else {
+				System.out.println("now switching");
+				//System.out.println("set Dac to "
+				//		+ pressureCounts.get(pressureindex));
+				Mycommand.setDACValue('2', pressureCounts.get(pressureindex),
+						100);
+				pressureindex++;
+				changetime = System.currentTimeMillis();
+			}
+			// openValve24();
+		}
 
 		Platform.runLater(new Runnable() {
 
 			@Override
 			public void run() {
 
+				if(bans.size()>3)
 				series2.getData().add(new XYChart.Data(readtime, pr));
-
+			
 			}
 		});
 
 		int per = 10;
 		double diff = (double) curpress * per / 100;
 
-		//System.out.println("High : " + curpress);
-	//	System.out.println("Current  : " + pr);
+		System.out.println("High last : " + curpress);
+		 System.out.println("Current  : " + pr);
 
-		//System.out.println("Diff : " + (curpress - diff));
-		if (pr < (curpress - diff)) {
+		 System.out.println("Diff : " + (curpress - diff));
+		if (pr < (curpress - diff) && bans.size()>3) {
+			System.out.println("Drop");
 			isCompletetest = true;
 		}
 
 		if (isCompletetest) {
 			completeTest();
-			Platform.runLater(new Runnable() {
-
-				@Override
-				public void run() {
-					starttest.setDisable(false);
-				}
-			});
+//			Platform.runLater(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					starttest.setDisable(false);
+//				}
+//			});
 		}
 
+		if(bans.size()>3)
 		curpress = pr;
 	}
 
 	void completeTest() {
 		testtype = 5;
-		createCsvTableBubble();
-		sendStopCmd();
 		
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				sendStopCmd();
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				createCsvTableBubble();
+			}
+		}).start();
+	
+	
 
 	}
 
@@ -1414,37 +1517,19 @@ public class NLivetestController implements Initializable {
 						+ ".csv");
 
 				if (recorddata.size() == 0) {
-					if (curpress > 2) {
-						result = "pass";
-					} else {
-						result = "fail";
-					}
+					result = "pass";
 				} else {
-
-					if (recorddata.size() > 2) {
-						if (recorddata.get(2) >= 2) {
-							result = "pass";
-						} else {
-							result = "fail";
-						}
-					} else {
-						if (curpress > 2) {
-							result = "pass";
-						} else {
-							result = "fail";
-						}
-					}
-
+					result = "fail";
 				}
 
-				cs.firstLine("hydrostatic");
-				cs.newLine("testname", "hydrostatic");
+				cs.firstLine("blood");
+				cs.newLine("testname", "blood");
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
-				// cs.newLine("sample", Myapp.sampleid);
-				cs.newLine("fluidname", Myapp.fluidname);
-				cs.newLine("fluidvalue", Myapp.fluidvalue);
-				cs.newLine("mode", "" + Myapp.thresold);
+				cs.newLine("sample", sampleid);
+				//cs.newLine("fluidname", Myapp.fluidname);
+				//cs.newLine("fluidvalue", Myapp.fluidvalue);
+				//cs.newLine("mode", "" + Myapp.thresold);
 				cs.newLineDouble("recordy", recorddata);
 				cs.newLineDouble("recordx", recordtime);
 
@@ -1469,19 +1554,26 @@ public class NLivetestController implements Initializable {
 				cs.newLine("durationsecond", s + "");
 				cs.newLine("testtime", timeFormat.format(date));
 				cs.newLine("testdate", dateFormat.format(date));
-				cs.newLine("customerid", Myapp.uid);
+				//cs.newLine("customerid", Myapp.uid);
 
-				cs.newLine("indistry", Myapp.indtype);
-				cs.newLine("application", Myapp.materialapp);
-				cs.newLine("splate", Myapp.splate);
+				//cs.newLine("indistry", Myapp.indtype);
+				//cs.newLine("application", Myapp.materialapp);
+				//cs.newLine("splate", Myapp.splate);
 
 				cs.newLine("ans", bans);
 				cs.newLine("t", tlist);
 
+				
+				
+				
+				if(!bpoints.contains("0"))
+				{
 				btime.add(0, "5");
 				bpoints.add(0, "0");
 				bresults.add(0, "Pass");
-
+				}
+				
+				
 				cs.newLine("btime", btime);
 				cs.newLine("bpoints", bpoints);
 				cs.newLine("bresult", bresults);
@@ -1495,7 +1587,26 @@ public class NLivetestController implements Initializable {
 					public void run() {
 						// TODO Auto-generated method stub
 
-						showResultPopup();
+						if (chamber == 1) {
+							ch1status.setText(result);
+						} else if (chamber == 2) {
+							ch2status.setText(result);
+						} else {
+							ch3status.setText(result);
+						}
+
+						if (Myconstant.hasMoreChamber()) {
+							curpress = 0;
+							setTestStd();
+							showBubblePopup();
+						} else {
+							Toast.makeText(Main.mainstage, "Test Completed",
+									1000, 200, 200);
+							MyDialoug.closeDialoug();
+							Openscreen.open("/application/first.fxml");
+
+						}
+						// showResultPopup();
 					}
 				});
 				isCompletetest = false;
@@ -1503,16 +1614,63 @@ public class NLivetestController implements Initializable {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						if (chamber == 1) {
+							ch1status.setText("cancle");
+						} else if (chamber == 2) {
+							ch2status.setText("cancle");
+						} else {
+							ch3status.setText("cancle");
+						}
+
+						if (Myconstant.hasMoreChamber()) {
+							curpress = 0;
+							setTestStd();
+							showBubblePopup();
+						} else {
+							Toast.makeText(Main.mainstage, "Test Completed",
+									1000, 200, 200);
+							MyDialoug.closeDialoug();
+							Openscreen.open("/application/first.fxml");
+
+						}
+						// showResultPopup();
+					}
+				});
 			}
 		} else {
 			Platform.runLater(new Runnable() {
 
 				@Override
 				public void run() {
-					status.setText("Please Re-test this sample");
-					btnfail.setDisable(true);
-					Toast.makeText(Main.mainstage, "No Data found for test",
-							1000, 100, 100);
+					// TODO Auto-generated method stub
+
+					if (chamber == 1) {
+						ch1status.setText("cancle");
+					} else if (chamber == 2) {
+						ch2status.setText("cancle");
+					} else {
+						ch3status.setText("cancle");
+					}
+
+					if (Myconstant.hasMoreChamber()) {
+						curpress = 0;
+						setTestStd();
+						showBubblePopup();
+					} else {
+						Toast.makeText(Main.mainstage, "Test Completed",
+								1000, 200, 200);
+						MyDialoug.closeDialoug();
+						Openscreen.open("/application/first.fxml");
+
+					}
+					// showResultPopup();
 				}
 			});
 
@@ -1532,6 +1690,7 @@ public class NLivetestController implements Initializable {
 
 	// show start test popup
 	void showBubblePopup() {
+
 		mydia = new MyDialoug(Main.mainstage, "/userinput/Wetpopup.fxml");
 
 		mydia.showDialoug();
@@ -1539,71 +1698,11 @@ public class NLivetestController implements Initializable {
 
 	// send stop protocol to MCU
 	void sendStopCmd() {
-		Mycommand.setDACValue('2', 0, 0);
-		Mycommand.stopADC(500);
-		endCondition();
+		testtype = 5;
 		
-
-	}
-
-	// set points on mouse over event
-	private void setDataPointPopup(XYChart<Number, Number> sc) {
-		final Popup popup = new Popup();
-		popup.setHeight(20);
-		popup.setWidth(60);
-
-		for (int i = 0; i < sc.getData().size(); i++) {
-			final int dataSeriesIndex = i;
-			final XYChart.Series<Number, Number> series = sc.getData().get(i);
-			for (final Data<Number, Number> data : series.getData()) {
-				final Node node = data.getNode();
-				node.addEventHandler(MouseEvent.MOUSE_ENTERED_TARGET,
-						new EventHandler<MouseEvent>() {
-
-							private static final int X_OFFSET = 15;
-							private static final int Y_OFFSET = -5;
-							Label label = new Label();
-
-							@Override
-							public void handle(final MouseEvent event) {
-								// System.out.println("MOuse Event");
-								final String colorString = "#cfecf0";
-								label.setFont(new Font(20));
-								popup.getContent().setAll(label);
-								label.setStyle("-fx-background-color: "
-										+ colorString + "; -fx-border-color: "
-										+ colorString + ";");
-								label.setText("x=" + data.getXValue() + ", y="
-										+ data.getYValue());
-								popup.show(data.getNode().getScene()
-										.getWindow(), event.getScreenX()
-										+ X_OFFSET, event.getScreenY()
-										+ Y_OFFSET);
-								event.consume();
-							}
-
-							public EventHandler<MouseEvent> init() {
-								label.getStyleClass().add("chart-popup-label");
-								return this;
-							}
-
-						}.init());
-
-				node.addEventHandler(MouseEvent.MOUSE_EXITED_TARGET,
-						new EventHandler<MouseEvent>() {
-
-							@Override
-							public void handle(final MouseEvent event) {
-								popup.hide();
-								event.consume();
-							}
-						});
-
-				// this handler selects the corresponding table item when a data
-				// item in the chart was clicked.
-
-			}
-		}
+		Mycommand.setDACValue('2', 0, 0);
+		Mycommand.stopADC(1000);
+		endCondition();
 
 	}
 

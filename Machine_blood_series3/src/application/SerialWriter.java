@@ -25,7 +25,7 @@ public class SerialWriter implements Runnable {
 
 			long time=System.currentTimeMillis();
 			
-			System.out.println("\n Preparing  : "+ wrt.showDataGet());
+			//System.out.println("\n Preparing  : "+ wrt.showDataGet());
 			Thread.sleep(sleep);
 			try {
 			for (Integer dout : wrt.wData) {
