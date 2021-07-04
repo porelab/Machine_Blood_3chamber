@@ -703,7 +703,7 @@
             <Tab text="Admin Screen1">
              	 <fx:include source="../admin_setting/admin_screen1.fxml" />
             </Tab>
-            <Tab text="Connection Setting">
+            <Tab disable="true" text="Connection Setting">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
                      <children>

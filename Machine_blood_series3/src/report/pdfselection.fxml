@@ -78,7 +78,7 @@
          </font>
       </Label>
       <ImageView fx:id="pic" fitHeight="64.0" fitWidth="116.0" layoutX="362.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
-      <CheckBox fx:id="flowvspre" layoutX="222.0" layoutY="327.0" mnemonicParsing="false" selected="true" text="Flow vs Pressure" />
+      <CheckBox fx:id="flowvspre" layoutX="222.0" layoutY="327.0" mnemonicParsing="false" selected="true" text="Pressure vs Time" />
       <CheckBox fx:id="chkrow" layoutX="79.0" layoutY="373.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Row Data">
          <font>
             <Font name="System Bold" size="17.0" />
@@ -114,12 +114,12 @@
             </ImageView>
          </graphic>
       </Button>
-      <RadioButton fx:id="radiohydrostatic" layoutX="81.0" layoutY="442.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Hydrostatic">
+      <RadioButton fx:id="radiohydrostatic" layoutX="81.0" layoutY="442.0" mnemonicParsing="false" styleClass="col-gray70" text="Hydrostatic" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="radiobloodpeni" layoutX="272.0" layoutY="442.0" mnemonicParsing="false" styleClass="col-gray70" text="Blood Penetration">
+      <RadioButton fx:id="radiobloodpeni" layoutX="81.0" layoutY="451.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Synthetic Blood Penetration">
          <font>
             <Font size="20.0" />
          </font>

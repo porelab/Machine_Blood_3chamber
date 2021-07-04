@@ -627,7 +627,7 @@ public class NLivetestController implements Initializable {
 
 	void bubbleClicknew() {
 		btnfail.setDisable(false);
-		status.setText("Hydrostatic test is running..");
+		status.setText("test in progress..");
 		lblcurranttest.setText("Pressure vs Time");
 
 		flowserireswet.getData().clear();
@@ -657,7 +657,7 @@ public class NLivetestController implements Initializable {
 		// conditionpressure));
 		changetime = System.currentTimeMillis();
 
-		Toast.makeText(Main.mainstage, "Test is being started!", 2400, 200, 200);
+		Toast.makeText(Main.mainstage, "Test Initialize!", 2400, 200, 200);
 		new Thread(new Runnable() {
 
 			@Override
