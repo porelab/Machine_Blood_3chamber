@@ -3,6 +3,7 @@ package userinput;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import myconstant.Myconstant;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class WetpopupController implements Initializable {
 	AnchorPane root;
 
 	@FXML
-	private Button btnyes,btnskip;
+	private Button btnyes;
 
 	@FXML
 	private Button btncancel;
@@ -44,18 +45,21 @@ public class WetpopupController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	/*Wet test Popup*/
 		
-		System.out.println("Data  :"+MyDialoug.inputdata);
+	
 		//String msg=MyDialoug.inputdata.get("test").toString();
 		
 		
-		lbl.setText("Start test for  sample");
+		lbl.setText("Start test for "+Myconstant.currentChamberMap.get("sampleid")+" sample");
 	
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0)
 			{
-				MyDialoug.data="exit";				
+				//MyDialoug.data="exit";	
+				 Toast.makeText(Main.mainstage, "Test Aborting...", 1000, 200, 200);
+				 MyDialoug.closeDialoug();
+					Openscreen.open("/application/first.fxml");
 				MyDialoug.closeDialoug();	
 			}
 		});
@@ -65,20 +69,15 @@ public class WetpopupController implements Initializable {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				MyDialoug.data="start";
+				NLivetestController.isBubbleStart.set(false);
+
+				NLivetestController.isBubbleStart.set(true);
 				MyDialoug.closeDialoug();
 			}
 		});
 
 		
-		btnskip.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent arg0) {
-				MyDialoug.data="skip";
-				MyDialoug.closeDialoug();
-			}
-		});
+	
 	}
 
 	void setLabelFont() {

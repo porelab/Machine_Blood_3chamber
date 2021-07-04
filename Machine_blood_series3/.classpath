@@ -113,5 +113,6 @@
 	<classpathentry kind="lib" path="lib/tilesfx-1.6.5.jar"/>
 	<classpathentry kind="lib" path="lib/WebService_byMeet.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="src" path="/Machine_Porometer_4.3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

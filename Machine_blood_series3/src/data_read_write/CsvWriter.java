@@ -48,7 +48,8 @@ public class CsvWriter
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error in new Single data");
+			e.printStackTrace();
+			System.out.println("Error in new Single data : "+st);
 		}
 	}
 	
@@ -75,6 +76,7 @@ public class CsvWriter
 		}
 		catch(Exception e)
 		{
+			
 			System.out.println("Error: "+e.getMessage());
 		}
 	}
@@ -89,7 +91,9 @@ public class CsvWriter
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error in new Single data");
+			e.printStackTrace();
+			System.out.println("Error in new Single data : "+st);
+			//System.out.println("Error in new Single data");
 		}
 	}
 	
@@ -128,7 +132,9 @@ public class CsvWriter
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error in new multiple data");
+			e.printStackTrace();
+			System.out.println("Error in new Single data : "+title);
+		//	System.out.println("Error in new multiple data");
 		}
 		
 		
@@ -158,7 +164,9 @@ public class CsvWriter
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error in new multiple data");
+			e.printStackTrace();
+			System.out.println("Error in new Single data : "+title);
+			//System.out.println("Error in new multiple data");
 		}
 		
 		

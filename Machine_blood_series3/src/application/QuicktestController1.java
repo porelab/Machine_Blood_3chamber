@@ -532,7 +532,7 @@ public class QuicktestController1 implements Initializable {
 				ch1data.put("type", ch1garment);
 				ch1data.put("samplearea", txtarea.getText());
 				ch1data.put("lotno", txtlotno.getText());
-				
+				ch1data.put("chamber", 1);
 				Myconstant.map.put("ch1", ch1data);
 				flag1 = true;
 			}
@@ -549,7 +549,7 @@ public class QuicktestController1 implements Initializable {
 				ch2data.put("type", ch2garment);
 				ch2data.put("samplearea", txtarea2.getText());
 				ch2data.put("lotno", txtlotno2.getText());
-				
+				ch2data.put("chamber", 2);
 				Myconstant.map.put("ch2", ch2data);
 				flag2 = true;
 			}
@@ -566,7 +566,7 @@ public class QuicktestController1 implements Initializable {
 				ch3data.put("type", ch3garment);
 				ch3data.put("samplearea", txtarea3.getText());
 				ch3data.put("lotno", txtlotno3.getText());
-				
+				ch3data.put("chamber", 3);
 				Myconstant.map.put("ch3", ch3data);
 				flag3 = true;
 			}
@@ -574,6 +574,7 @@ public class QuicktestController1 implements Initializable {
 		
 
 		if (flag1 && flag2 && flag3) {
+			Myconstant.setDummyData();
 			Openscreen.open("/userinput/Nlivetest.fxml");
 			MyDialoug.closeDialoug();
 		}

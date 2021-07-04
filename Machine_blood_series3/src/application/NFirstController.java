@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
 
@@ -27,6 +28,7 @@ import toast.MyDialoug;
 import toast.Openscreen;
 import toast.Toast;
 
+import com.google.api.services.storage.Storage.BucketAccessControls.List;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialog.DialogTransition;
 import com.jfoenix.controls.JFXDialogLayout;
@@ -147,7 +149,10 @@ public class NFirstController implements Initializable {
 
 					Openscreen.open("/ConfigurationPart/Nconfigurepage.fxml");
 				} else if (quickshortcut.match(ke)) {
-					quicktest();
+
+					Myconstant.setDummyData();
+					
+			        quicktest();
 				} else if (startshortcut.match(ke)) {
 
 					Toast.makeText(Main.mainstage, "Opening Test..", 1000, 200,
@@ -401,7 +406,7 @@ public class NFirstController implements Initializable {
 	}
 
 	public boolean connectHardware(String st) {
-		
+
 		boolean bol = false;
 
 		// sendDataToWeb();
@@ -411,35 +416,35 @@ public class NFirstController implements Initializable {
 
 		while (pList.hasMoreElements()) {
 
-		CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
-		System.out.print("Port " + cpi.getName() + " " + cpi.getPortType());
-		if (cpi.getName().equals(st)) {
-		DataStore.connect_hardware.set(true);
-		try {
+			CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
+			System.out.print("Port " + cpi.getName() + " " + cpi.getPortType());
+			if (cpi.getName().equals(st)) {
+				DataStore.connect_hardware.set(true);
+				try {
 
-		DataStore.sc.connect(st);
-		bol = true;
-		Myapp.hb.set(false);
+					DataStore.sc.connect(st);
+					bol = true;
+					Myapp.hb.set(false);
 
-		} catch (Exception e) {
+				} catch (Exception e) {
 
-		e.printStackTrace();
-		}
+					e.printStackTrace();
+				}
 
-		break;
-		}
+				break;
+			}
 
-		System.out.println("PORT :" + cpi.getName());
-		count++;
+			System.out.println("PORT :" + cpi.getName());
+			count++;
 		}
 
 		if (bol == false) {
-		// Toast.makeText(Main.mainstage,
-		// "Hardware not connected please plugout and plugin", 200, 200,
-		// 3000);
+			// Toast.makeText(Main.mainstage,
+			// "Hardware not connected please plugout and plugin", 200, 200,
+			// 3000);
 		} else {
-		// Toast.makeText(Main.mainstage, "Successfully Connected", 200,
-		// 200, 3000);
+			// Toast.makeText(Main.mainstage, "Successfully Connected", 200,
+			// 200, 3000);
 
 		}
 

@@ -203,7 +203,7 @@ public class ChartPlot {
 
 			} catch (Exception e) {
 
-				e.printStackTrace();
+				//e.printStackTrace();
 				
 			}
 			// series2------
