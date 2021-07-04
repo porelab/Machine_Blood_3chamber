@@ -417,6 +417,7 @@ public class QuicktestController1 implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
 				if (arg2 == null)
+					
 					arg1.setSelected(true);
 				ch3selectedrad = arg2.getUserData().toString();
 
