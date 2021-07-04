@@ -422,6 +422,7 @@ public class QuicktestController1 implements Initializable {
 				ch3selectedrad = arg2.getUserData().toString();
 
 				if (ch3selectedrad.equals("1")) {
+					
 
 					txtarea3.setVisible(false);
 					recloc3.setVisible(false);
