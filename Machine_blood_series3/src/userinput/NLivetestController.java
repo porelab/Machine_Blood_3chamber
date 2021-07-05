@@ -257,7 +257,40 @@ public class NLivetestController implements Initializable {
 		Delaytime=20;
 		dropper=20;
 		setMode();
-		setPredefined();
+		
+		
+		
+	System.out.println("Set predefined data");
+		
+		pressureCounts.clear();
+		bpoints.clear();
+		bresults.clear();
+		btime.clear();
+
+		pressureCounts.add(1415);
+		pressureCounts.add(1819);
+		pressureCounts.add(2748);
+		pressureCounts.add(4495);
+		pressureCounts.add(5963);
+
+		bpoints.add("1.75");
+		bpoints.add("3.5");
+		bpoints.add("7");
+		bpoints.add("14");
+		bpoints.add("20");
+
+		bresults.add("Pass");
+		bresults.add("Pass");
+		bresults.add("Pass");
+		bresults.add("Pass");
+		bresults.add("Pass");
+
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+		btime.add(""+Delaytime);
+
 	}
 
 	void setOnce() {
@@ -471,47 +504,11 @@ public class NLivetestController implements Initializable {
 
 	// setting all functionality and sequence.
 
-	void setPredefined() {
-
-		System.out.println("Set predefined data");
-		
-		pressureCounts.clear();
-		bpoints.clear();
-		bresults.clear();
-		btime.clear();
-
-		pressureCounts.add(1415);
-		pressureCounts.add(1819);
-		pressureCounts.add(2748);
-		pressureCounts.add(4495);
-		pressureCounts.add(5963);
-
-		bpoints.add("1.75");
-		bpoints.add("3.5");
-		bpoints.add("7");
-		bpoints.add("14");
-		bpoints.add("20");
-
-		bresults.add("Pass");
-		bresults.add("Pass");
-		bresults.add("Pass");
-		bresults.add("Pass");
-		bresults.add("Pass");
-
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-
-	}
-
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
-		// loadVideo();
-		setPredefined();
 		setTestStd();
 		setOnce();
 		// Myapp.PrintAll();
@@ -678,7 +675,7 @@ public class NLivetestController implements Initializable {
 
 	void bubbleClicknew() {
 		btnfail.setDisable(false);
-		status.setText("test in progress..");
+		status.setText("Hydrostatic test is running..");
 		lblcurranttest.setText("Pressure vs Time");
 		isCompletetest=false;
 		flowserireswet.getData().clear();
@@ -710,7 +707,7 @@ public class NLivetestController implements Initializable {
 		// conditionpressure));
 		changetime = System.currentTimeMillis();
 
-		Toast.makeText(Main.mainstage, "Test Initialize!", 2400, 200, 200);
+		Toast.makeText(Main.mainstage, "Test is being started!", 2400, 200, 200);
 		new Thread(new Runnable() {
 
 			@Override
