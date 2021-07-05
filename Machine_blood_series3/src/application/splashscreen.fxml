@@ -15,7 +15,7 @@
             <Image url="@backsplash.png" />
          </image>
       </ImageView>
-      <Label layoutX="10.0" layoutY="201.0" prefHeight="99.0" prefWidth="426.0" text="(c) Copyright M19 Lab contributors 2019.  All rights reserved. M19 Lab.We test the performance of your product Our advanced lab technology and hands on support help clients make product breakthrough." textFill="#f2f2f2c9" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="268.0" />
+      <Label layoutX="10.0" layoutY="201.0" prefHeight="99.0" prefWidth="426.0" text="(c) Copyright M19 Lab contributors 2021.  All rights reserved. M19 Lab.We test the performance of your product Our advanced lab technology and hands on support help clients make product breakthrough." textFill="#f2f2f2c9" wrapText="true" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="268.0" />
       <ImageView fitHeight="34.0" fitWidth="72.0" layoutX="521.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@gif2.gif" />
@@ -33,7 +33,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="165.0" layoutY="109.0" text="Blood Panitration Tester" textFill="WHITE">
+      <Label layoutX="143.0" layoutY="109.0" text="Synthetic Blood Penetration Tester" textFill="WHITE">
          <font>
             <Font name="Calibri" size="20.0" />
          </font>
