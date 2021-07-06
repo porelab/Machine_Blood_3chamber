@@ -703,7 +703,7 @@
             <Tab text="Admin Screen1">
              	 <fx:include source="../admin_setting/admin_screen1.fxml" />
             </Tab>
-            <Tab disable="true" text="Connection Setting">
+            <Tab disable="true">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
                      <children>
@@ -795,5 +795,6 @@
             <Font name="Calibri" size="36.0" />
          </font>
       </Label>
+      <Rectangle fill="WHITE" height="37.0" layoutX="989.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
    </children>
 </AnchorPane>
