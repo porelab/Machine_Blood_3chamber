@@ -844,7 +844,7 @@ public class Multiplepororeport {
 		
 		
 		
-	//	addCompareTable();
+		addCompareTable();
 		
 		//document.newPage();
 	
@@ -894,8 +894,8 @@ public class Multiplepororeport {
 		for (int j = 0; j < allfiles.size(); j++) {
 
 			bp1s = bp1.get(j) + bp1s;
-			bp2s = bp2.get(j)  + bp2s;
-			bp3s = bp3.get(j)  + bp3s;
+		//	bp2s = bp2.get(j)  + bp2s;
+		//	bp3s = bp3.get(j)  + bp3s;
 			
 			}
 
@@ -954,7 +954,7 @@ public class Multiplepororeport {
 		r1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		
-		PdfPCell r1r = new PdfPCell(new Paragraph(""+bp3s,
+		PdfPCell r1r = new PdfPCell(new Paragraph(""+bp1s,
 				sampleinfoans));
 		r1r.setBorder(1);
 		r1r.setBorder(r1r.RIGHT);
