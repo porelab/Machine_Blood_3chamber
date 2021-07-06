@@ -1,5 +1,5 @@
 blood
-testname,blood
+testname,blood2
 result,Fail
 bpressure,0.6732280460822462
 sample,Mu
@@ -14,4 +14,3 @@ t,13.0,16.0,18.0,20.0,23.0,25.0,28.0,30.0,32.0,35.0,37.0,39.0,42.0,44.0,46.0
 btime,5,20,20,20,20,20
 bpoints,0,1.75,3.5,7,14,20
 bresult,Pass,Pass,Fail,Fail,Fail,Fail
-lastpressure,5
