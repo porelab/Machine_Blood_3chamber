@@ -844,7 +844,7 @@ public class Multiplepororeport {
 		
 		
 		
-		addCompareTable();
+	//	addCompareTable();
 		
 		//document.newPage();
 	

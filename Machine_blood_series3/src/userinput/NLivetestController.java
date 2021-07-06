@@ -1572,6 +1572,7 @@ public class NLivetestController implements Initializable {
 				cs.newLine("btime", btime);
 				cs.newLine("bpoints", bpoints);
 				cs.newLine("bresult", bresults);
+				cs.newLine("lastpressure",""+curpress);
 
 				savefile = new File(cs.filename);
 				cs.closefile();

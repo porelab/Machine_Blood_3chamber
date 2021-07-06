@@ -691,7 +691,7 @@ public class Singlepororeport {
 		t3.setPaddingLeft(10);
 		t3.setPaddingTop(1);
 		t3.setBorder(1);
-		t3.setBorder(t3.LEFT | t3.RIGHT);
+		t3.setBorder(t3.LEFT | t3.RIGHT|t3.BOTTOM);
 		t3.setFixedHeight(25f);
 		t3.setBorderColor(new BaseColor(130, 130, 130));
 		t3.setBackgroundColor(backcellcoltable1);
@@ -701,7 +701,7 @@ public class Singlepororeport {
 		PdfPCell t4 = new PdfPCell(new Paragraph("" + d.data.get("duration")
 				+ " min", sampleinfoa));
 		t4.setBorder(1);
-		t4.setBorder(t4.RIGHT);
+		t4.setBorder(t4.LEFT | t4.RIGHT|t4.BOTTOM);
 		t4.setBorderColor(new BaseColor(130, 130, 130));
 		t4.setPaddingLeft(10);
 		t4.setFixedHeight(25f);
@@ -778,11 +778,11 @@ public class Singlepororeport {
 		tablem.addCell(t4);
 		
 		
-		tablem.addCell(f11);
-		tablem.addCell(f22);
+	//	tablem.addCell(f11);
+		//tablem.addCell(f22);
 		
-		tablem.addCell(t33);
-		tablem.addCell(t44);
+		//tablem.addCell(t33);
+		//tablem.addCell(t44);
 
 		try {
 			document.add(tablem);
@@ -823,7 +823,7 @@ public class Singlepororeport {
 		BaseColor resultborder = new BaseColor(255, 255, 255);
 		float border = 3f;
 
-		PdfPCell r1 = new PdfPCell(new Paragraph("Hydrostatic Pressure",
+		PdfPCell r1 = new PdfPCell(new Paragraph("Pressure",
 				sampleinfola));
 		// r1 = new PdfPCell(new Phrase("jj"+d.starttime));
 		r1.setBorder(1);
@@ -848,7 +848,7 @@ public class Singlepororeport {
 		{
 			
 		}
-		PdfPCell r1r = new PdfPCell(new Paragraph(data,
+		PdfPCell r1r = new PdfPCell(new Paragraph(d.data.get("lastpressure").toString(),
 				sampleinfoans));
 		r1r.setBorder(1);
 		r1r.setBorder(r1r.RIGHT);
@@ -893,7 +893,9 @@ public class Singlepororeport {
 		u1.setHorizontalAlignment(Element.ALIGN_CENTER);
 		u1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell u2 = new PdfPCell(new Paragraph("AAMI PB TO LEVEL2", unitlab));
+		PdfPCell u2 = new PdfPCell(new Paragraph("", unitlab));
+		//PdfPCell u2 = new PdfPCell(new Paragraph("AAMI PB TO LEVEL2", unitlab));
+		
 		u2.setBorder(1);
 		u2.setBorder(u2.RIGHT);
 		u2.setBorderColor(resultborder);
@@ -1101,8 +1103,9 @@ public class Singlepororeport {
 			e1.printStackTrace();
 		}
 
-		PdfPCell d1 = new PdfPCell(new Paragraph(
-				"* ISO : 17025 Acceredited Laboratories *", sampleinfoq));
+		PdfPCell d1 = new PdfPCell(new Paragraph("", sampleinfoq));
+		//PdfPCell d1 = new PdfPCell(new Paragraph("* ISO : 17025 Acceredited Laboratories *", sampleinfoq));
+		
 		d1.setPaddingLeft(10);
 		d1.setPaddingTop(1);
 		d1.setBorder(1);
