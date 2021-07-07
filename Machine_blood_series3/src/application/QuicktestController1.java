@@ -52,7 +52,7 @@ public class QuicktestController1 implements Initializable {
 	private RadioButton rdautometed;
 
 	@FXML
-	private Label lblnote, lblerror;
+	private Label lblnote, lblerror,std;
 
 	@FXML
 	private JFXSlider stepsizeslider;
@@ -157,6 +157,7 @@ public class QuicktestController1 implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+		setStd();
 		chamer1.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -322,6 +323,17 @@ public class QuicktestController1 implements Initializable {
 		rdmanual.setUserData("1");
 		rdautometed.setToggleGroup(tgb1);
 		rdautometed.setUserData("2");
+
+	}
+	
+	void setStd() {
+		String st = Myconstant.getStd();
+		if (st.equals("1")) {
+			std.setText(" Test - ASTM F1670 ");
+
+		} else {
+			std.setText(" Test - ISO 16603 ");
+		}
 
 	}
 

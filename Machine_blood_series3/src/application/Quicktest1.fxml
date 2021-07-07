@@ -18,7 +18,7 @@
             <Image url="@quickh.png" />
          </image>
       </ImageView>
-      <Label layoutX="24.0" layoutY="12.0" styleClass="font-montserrat-semiBold" text="Test - ISO 16603" textFill="WHITE">
+      <Label fx:id="std" layoutX="24.0" layoutY="12.0" styleClass="font-montserrat-semiBold" text="" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

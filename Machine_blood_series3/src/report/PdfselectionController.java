@@ -341,19 +341,12 @@ catch (Exception e) {
 			}
 		} else {
 			System.out.println("Selected images : "+imgs);
-			if(Myapp.pdftestname.equals("hydro"))
-			{				
-			Multiplepororeport mp = new Multiplepororeport();
-			mp.Report(path, ReportController.list_d, txtnotes.getText(), txtcomname.getText(),
-					graphs, bchkrowdata,bchkcoverpage, imgpath1,bolchsampleinfo,imgs);
-			}
-			else
-			{
+			
 				Multiplepororeportblood mp = new Multiplepororeportblood();
 				mp.Report(path, ReportController.list_d, txtnotes.getText(), txtcomname.getText(),
 						graphs, bchkrowdata,bchkcoverpage, imgpath1,bolchsampleinfo,imgs);	
 				
-			}
+			
 			
 		}
 	}
