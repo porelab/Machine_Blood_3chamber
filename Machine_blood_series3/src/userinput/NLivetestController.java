@@ -267,11 +267,11 @@ public class NLivetestController implements Initializable {
 		bresults.clear();
 		btime.clear();
 
-		pressureCounts.add(1415);
-		pressureCounts.add(1819);
-		pressureCounts.add(2748);
-		pressureCounts.add(4495);
-		pressureCounts.add(5963);
+		pressureCounts.add(1146);
+		pressureCounts.add(1565);
+		pressureCounts.add(2439);
+		pressureCounts.add(4114);
+		pressureCounts.add(5606);
 
 		bpoints.add("1.75");
 		bpoints.add("3.5");
@@ -675,7 +675,7 @@ public class NLivetestController implements Initializable {
 
 	void bubbleClicknew() {
 		btnfail.setDisable(false);
-		status.setText("Test in progress..");
+		status.setText("Hydrostatic test is running..");
 		lblcurranttest.setText("Pressure vs Time");
 		isCompletetest=false;
 		flowserireswet.getData().clear();
@@ -707,7 +707,7 @@ public class NLivetestController implements Initializable {
 		// conditionpressure));
 		changetime = System.currentTimeMillis();
 
-		Toast.makeText(Main.mainstage, "Test initializing!", 2400, 200, 200);
+		Toast.makeText(Main.mainstage, "Test is being started!", 2400, 200, 200);
 		new Thread(new Runnable() {
 
 			@Override
@@ -1572,7 +1572,6 @@ public class NLivetestController implements Initializable {
 				cs.newLine("btime", btime);
 				cs.newLine("bpoints", bpoints);
 				cs.newLine("bresult", bresults);
-				cs.newLine("lastpressure",""+curpress);
 
 				savefile = new File(cs.filename);
 				cs.closefile();
