@@ -807,8 +807,9 @@ public class Multiplepororeportblood {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					img.scaleAbsolute(130, 70);
+					img.scaleAbsolute(70, 70);
 					height=100;
+					
 					
 						String dd = "-";
 						try 
