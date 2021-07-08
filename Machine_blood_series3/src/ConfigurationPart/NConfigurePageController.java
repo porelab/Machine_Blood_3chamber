@@ -297,6 +297,10 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						DataStore.thmoderat=txtthmoderate.getText();
 						DataStore.thcontinous=txtthcontinous.getText();
 						
+						
+						
+						
+						
 						 
 						
 						String sql = "update configdata set chambertype='"+Myapp.chambertype+"',curvefittgb='"+curvefit+"' where type='"+"pro"+"'"; 
