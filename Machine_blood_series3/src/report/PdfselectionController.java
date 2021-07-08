@@ -125,7 +125,7 @@ public class PdfselectionController implements Initializable {
 			showBrowsebtn();
 		}
 
-		txtnotes.setText("The following test Procedure is based on AATCC 127 Hydrostatic Pressure Level 3.");
+		txtnotes.setText("The following Test Procesure is based on ISO 16603 -Standard Test Method of fabrics resistance to blood penetration.");
 
 		/*Close Popup*/
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {

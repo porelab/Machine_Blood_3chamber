@@ -360,7 +360,7 @@ public class Multiplepororeportblood {
 		Font date = FontFactory.getFont(testtype, 10);// Main Report Title name
 		date.setColor(BaseColor.BLACK);
 
-		PdfPCell r3 = new PdfPCell(new Paragraph("BLOOD PENETRATION ANALYSER", testt));
+		PdfPCell r3 = new PdfPCell(new Paragraph("SYNTHETIC BLOOD PENETRATION REPORT", testt));
 		r3.setBorder(0);
 		r3.setBackgroundColor(getColorOld(14));
 		r3.setFixedHeight(25f);
@@ -1049,7 +1049,7 @@ public class Multiplepororeportblood {
 
 			Paragraph p;
 
-				if(d.data.get("result").toString().equals("pass"))
+				if(d.data.get("result").toString().equals("Pass"))
 				{
 					p=new Paragraph("Pass",passfont);
 				}
