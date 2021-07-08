@@ -260,7 +260,6 @@ public class NLivetestController implements Initializable {
 		
 		
 		
-		
 	System.out.println("Set predefined data");
 		
 		pressureCounts.clear();
