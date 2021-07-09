@@ -324,21 +324,13 @@ catch (Exception e) {
 		
 		if (ReportController.list_d.size() == 1) {
 
-			if(Myapp.pdftestname.equals("hydro"))
-			{
-				
-				System.out.println("Hydro");
-			Singlepororeport sp = new Singlepororeport();
-			sp.Report(path, ReportController.list_d.get(0), txtnotes.getText(),
-					txtcomname.getText(), imgpath, graphs, bchkrowdata, bchkcoverpage, imgpath1);
-			}
-			else {
+			
 				System.out.println("Blood");
 				Singlepororeportblood sp2 = new Singlepororeportblood();
 				sp2.Report(path, ReportController.list_d.get(0), txtnotes.getText(),
 						txtcomname.getText(), imgpath, graphs, bchkrowdata, bchkcoverpage, imgpath1);
 
-			}
+			
 		} else {
 			System.out.println("Selected images : "+imgs);
 			

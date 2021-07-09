@@ -1536,7 +1536,9 @@ void rowData(List<DatareadN> d) {
 
 			DatareadN dr1 = d.get(k2);
 			// first column
-			String st = "" + dr1.data.get("sample");
+			//String st = "" + dr1.data.get("sample");
+			String st = "" +dr1.filename;
+			
 			System.out.println("File name"+st);
 
 			document.newPage();

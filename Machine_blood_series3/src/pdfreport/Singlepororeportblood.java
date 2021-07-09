@@ -391,7 +391,7 @@ public class Singlepororeportblood {
 		date.setColor(BaseColor.BLACK);
 
 		PdfPCell r3 = new PdfPCell(
-				new Paragraph("BLOOD PENETRATION REPORT", testt));
+				new Paragraph("SYNTHETIC BLOOD PENETRATION REPORT", testt));
 		r3.setBorder(0);
 		r3.setBackgroundColor(getColor(14));
 		r3.setFixedHeight(25f);
@@ -691,7 +691,7 @@ public class Singlepororeportblood {
 		t3.setPaddingLeft(10);
 		t3.setPaddingTop(1);
 		t3.setBorder(1);
-		t3.setBorder(t3.LEFT | t3.RIGHT);
+		t3.setBorder(t3.LEFT | t3.RIGHT|t3.BOTTOM);
 		t3.setFixedHeight(25f);
 		t3.setBorderColor(new BaseColor(130, 130, 130));
 		t3.setBackgroundColor(backcellcoltable1);
@@ -701,7 +701,8 @@ public class Singlepororeportblood {
 		PdfPCell t4 = new PdfPCell(new Paragraph("" + d.data.get("duration")
 				+ " min", sampleinfoa));
 		t4.setBorder(1);
-		t4.setBorder(t4.RIGHT);
+
+		t4.setBorder(t4.RIGHT|t4.BOTTOM);
 		t4.setBorderColor(new BaseColor(130, 130, 130));
 		t4.setPaddingLeft(10);
 		t4.setFixedHeight(25f);
@@ -755,8 +756,8 @@ public class Singlepororeportblood {
 		tablem.addCell(t4);
 		
 		
-		tablem.addCell(f11);
-		tablem.addCell(f22);
+		//tablem.addCell(f11);
+		//tablem.addCell(f22);
 
 		try {
 			document.add(tablem);
