@@ -369,7 +369,7 @@ public class QuicktestController1 implements Initializable {
 		rdch2roll.setToggleGroup(tgbch2);
 		rdch2roll.setUserData("1");
 		rdch2garment.setToggleGroup(tgbch2);
-		rdch2roll.setUserData("2");
+		rdch2garment.setUserData("2");
 
 		ch2selectedrad = "1";
 
@@ -405,7 +405,7 @@ public class QuicktestController1 implements Initializable {
 		rdch3roll.setToggleGroup(tgbch3);
 		rdch3roll.setUserData("1");
 		rdch3garment.setToggleGroup(tgbch3);
-		rdch3roll.setUserData("2");
+		rdch3garment.setUserData("2");
 
 		ch3selectedrad = "1";
 

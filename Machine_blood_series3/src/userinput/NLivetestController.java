@@ -1396,7 +1396,9 @@ System.out.println("chamber"+Myconstant.chambers);
 		readpre = pr;
 		readtime = getTime();
 
-		bans.add("" + pr);
+		//bans.add("" + pr);
+		bans.add(""+DataStore.ConvertPressure(pr));
+		
 		tlist.add("" + readtime);
 
 		

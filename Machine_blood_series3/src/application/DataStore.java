@@ -146,7 +146,7 @@ public class DataStore
 	    
 		
 	//configure Page 
-	public static String pg,fm,pr,fc,thfirtbp,thmoderat,thcontinous;
+	public static String pg,fm,pr,fc,thfirtbp,thmoderat,thcontinous,isop1,isop2,isop3,isop4,isop5,astm1,astm2,maintime,fdrop;
 	
 	public static SimpleStringProperty sysinfolab=new SimpleStringProperty("");
 	//for reminder
@@ -452,6 +452,42 @@ public class DataStore
 		data.add(fc);
 		
 		return data;
+	}
+	
+	
+	public static List<String> gettestpres()
+	{
+	
+		List<String> testdata=new ArrayList<String>();
+		Database db=new Database();		
+		List<List<String>> ll=db.getData("select * from testpres");
+		
+		String p1 =(ll.get(0).get(0));
+		String p2 =(ll.get(0).get(1));
+		String p3 =(ll.get(0).get(2));
+		String p4 =(ll.get(0).get(3));
+		String p5 =(ll.get(0).get(4));
+		String p1astm =(ll.get(0).get(5));
+		String p2astm =(ll.get(0).get(6));
+		String maintime =(ll.get(0).get(7));
+		String fdrop =(ll.get(0).get(8));
+		
+		
+		
+		testdata.add(p1);
+		testdata.add(p2);
+		testdata.add(p3);
+		testdata.add(p4);
+		testdata.add(p5);
+		testdata.add(p1astm);
+		testdata.add(p2astm);
+		
+		testdata.add(maintime);
+		testdata.add(fdrop);
+		
+		
+		
+		return testdata;
 	}
 
 	public static String getchambertype()

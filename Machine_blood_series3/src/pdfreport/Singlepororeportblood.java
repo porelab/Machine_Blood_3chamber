@@ -987,7 +987,7 @@ public class Singlepororeportblood {
 			resulttable.addCell(r3r);
 		
 			if(j == 0) {
-				 r4r = new PdfPCell(new Paragraph("Pass",sampleinfoans));
+				 r4r = new PdfPCell(new Paragraph("" + d.data.get("result"),sampleinfoans));
 				r4r.setBackgroundColor(backcellcoltable1);
 				r4r.setBorder(1);
 				r4r.setBorder(r4r.RIGHT | r4r.BOTTOM);
