@@ -52,7 +52,7 @@ public class QuicktestController1 implements Initializable {
 	private RadioButton rdautometed;
 
 	@FXML
-	private Label lblnote, lblerror,std;
+	private Label lblnote, lblerror;
 
 	@FXML
 	private JFXSlider stepsizeslider;
@@ -157,7 +157,6 @@ public class QuicktestController1 implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-		setStd();
 		chamer1.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -325,17 +324,6 @@ public class QuicktestController1 implements Initializable {
 		rdautometed.setUserData("2");
 
 	}
-	
-	void setStd() {
-		String st = Myconstant.getStd();
-		if (st.equals("1")) {
-			std.setText(" Test - ASTM F1670 ");
-
-		} else {
-			std.setText(" Test - ISO 16603 ");
-		}
-
-	}
 
 	void setRdch1garment() {
 
@@ -381,7 +369,7 @@ public class QuicktestController1 implements Initializable {
 		rdch2roll.setToggleGroup(tgbch2);
 		rdch2roll.setUserData("1");
 		rdch2garment.setToggleGroup(tgbch2);
-		rdch2garment.setUserData("2");
+		rdch2roll.setUserData("2");
 
 		ch2selectedrad = "1";
 
@@ -417,7 +405,7 @@ public class QuicktestController1 implements Initializable {
 		rdch3roll.setToggleGroup(tgbch3);
 		rdch3roll.setUserData("1");
 		rdch3garment.setToggleGroup(tgbch3);
-		rdch3garment.setUserData("2");
+		rdch3roll.setUserData("2");
 
 		ch3selectedrad = "1";
 
@@ -429,12 +417,10 @@ public class QuicktestController1 implements Initializable {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
 				if (arg2 == null)
-					
 					arg1.setSelected(true);
 				ch3selectedrad = arg2.getUserData().toString();
 
 				if (ch3selectedrad.equals("1")) {
-					
 
 					txtarea3.setVisible(false);
 					recloc3.setVisible(false);
@@ -493,7 +479,8 @@ public class QuicktestController1 implements Initializable {
 	}
 
 	void teststart() {
-
+Myconstant.map.clear();
+Myconstant.chambers.clear();
 //		Myconstant.sampleid = "" + cmbsampleid.getValue();
 //		Myconstant.lotno= ""+txtlotno.getText();
 //		MyDialoug.closeDialoug();
@@ -586,6 +573,7 @@ public class QuicktestController1 implements Initializable {
 		
 
 		if (flag1 && flag2 && flag3) {
+			
 			Myconstant.setDummyData();
 			Openscreen.open("/userinput/Nlivetest.fxml");
 			MyDialoug.closeDialoug();

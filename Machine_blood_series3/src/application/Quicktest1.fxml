@@ -18,7 +18,7 @@
             <Image url="@quickh.png" />
          </image>
       </ImageView>
-      <Label fx:id="std" layoutX="24.0" layoutY="12.0" styleClass="font-montserrat-semiBold" text="" textFill="WHITE">
+      <Label layoutX="24.0" layoutY="12.0" styleClass="font-montserrat-semiBold" text="Test - ISO 16603" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -58,7 +58,7 @@
             <Font name="Calibri" size="20.0" />
          </font>
       </RadioButton>
-      <Label layoutX="33.0" layoutY="201.0" prefHeight="27.0" prefWidth="133.0" text="Sample Type" textFill="#707070bf">
+      <Label layoutX="33.0" layoutY="201.0" prefHeight="27.0" prefWidth="133.0" text="Garment Type" textFill="#707070bf">
          <font>
             <Font size="18.0" />
          </font>
@@ -76,7 +76,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <Label layoutX="146.0" layoutY="508.0" prefHeight="27.0" prefWidth="324.0" text="Step-Size " textFill="#707070bf">
+      <Label layoutX="146.0" layoutY="508.0" prefHeight="27.0" prefWidth="324.0" text="Step-Size ( delay in second)" textFill="#707070bf">
          <font>
             <Font size="18.0" />
          </font>

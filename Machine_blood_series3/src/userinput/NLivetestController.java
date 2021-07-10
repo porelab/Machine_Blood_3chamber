@@ -508,7 +508,8 @@ public class NLivetestController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+System.out.println("Test Data"+Myconstant.map);
+System.out.println("chamber"+Myconstant.chambers);
 		setTestStd();
 		setOnce();
 		// Myapp.PrintAll();

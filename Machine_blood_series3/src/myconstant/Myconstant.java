@@ -34,6 +34,7 @@ public class Myconstant {
 	}
 
 	public static void setDummyData() {
+		
 //		map.clear();
 //		Map<String, Object> ch1data = new HashMap<>();
 //		ch1data.put("sampleid", "sample1");
