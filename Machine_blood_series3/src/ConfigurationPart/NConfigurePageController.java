@@ -299,6 +299,19 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						
 						
 						
+						DataStore.isop1=isop1.getText();
+						DataStore.isop2=isop2.getText();
+						DataStore.isop3=isop3.getText();
+						DataStore.isop4=isop4.getText();
+						DataStore.isop5=isop5.getText();
+						DataStore.astm1=astmp1.getText();
+						DataStore.astm2=astmp2.getText();
+						DataStore.maintime=txttime.getText();
+						DataStore.fdrop=txtfaildrop.getText();
+						
+						
+						
+						
 						
 						
 						 
@@ -307,10 +320,13 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						String sql1 = "update admin_screen1 set pc='"+crospres+"',fc='"+crosflov+"'"; 
 						String sqlthresold = "update configdata set thfirst='"+DataStore.thfirtbp+"',thmoderate='"+DataStore.thmoderat+"',thcontinous='"+DataStore.thcontinous+"'"; 
 						
+						String testpres = "update testpres set p1='"+DataStore.isop1+"',p2='"+DataStore.isop2+"',p3='"+DataStore.isop3+"',p4='"+DataStore.isop4+"',p5='"+DataStore.isop5+"',p1astm='"+DataStore.astm1+"',p2astm='"+DataStore.astm2+"',maintime='"+DataStore.maintime+"',fdrop='"+DataStore.fdrop+"'"; 
 						
-						if(db.Insert(sql) && db.Insert(sql1) && db.Insert(sqlthresold))
+						
+						if(db.Insert(sql) && db.Insert(sql1) && db.Insert(sqlthresold) && db.Insert(testpres))
 						{
 							 Toast.makeText(Main.mainstage, "Successfully Save Configuration Data..", 1000, 200, 200);
+							 System.out.println("TEst PRessure Data save"+testpres);
 
 						}
 						else {
@@ -803,13 +819,29 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						valvecflow.setSelected(true);
 					}
 					
+					
+					
+					
 				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
 				}
+			List<String> testdata=DataStore.gettestpres();
 			
+			isop1.setText(testdata.get(0));
+			isop2.setText(testdata.get(1));
+			isop3.setText(testdata.get(2));
+			isop4.setText(testdata.get(3));
+			isop5.setText(testdata.get(4));
+			astmp1.setText(testdata.get(5));
+			astmp2.setText(testdata.get(6));
+			txttime.setText(testdata.get(7));
+			txtfaildrop.setText(testdata.get(8));
 			}	
+		
+		
+		
 		void setkeyboardmode() {
 			
 			Database db=new Database();
