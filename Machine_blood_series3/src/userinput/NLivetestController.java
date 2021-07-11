@@ -254,8 +254,8 @@ public class NLivetestController implements Initializable {
 			ch3name.setText(sampleid);
 			ch3status.setText("in process");
 		}
-		Delaytime=20;
-		dropper=20;
+		Delaytime=120;
+		dropper=50;
 		setMode();
 		
 		
