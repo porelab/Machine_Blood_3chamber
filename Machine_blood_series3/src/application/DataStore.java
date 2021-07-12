@@ -785,7 +785,7 @@ public class DataStore
 		} else if (DataStore.getUnitepressure().equals("torr")) {
 			ans = DataStore.toTorr(pressure);
 		}
-		else if(DataStore.getUnitepressure().equals("kilopascal"))
+		else if(DataStore.getUnitepressure().equals("kpa"))
 		{
 			ans=toKiloPascal(pressure);
 		}
@@ -818,7 +818,7 @@ public class DataStore
 				data.add(toTorr(pressure.get(i))+"");
 			}
 		}
-		else if (DataStore.getUnitepressure().equals("kilopascal")) {
+		else if (DataStore.getUnitepressure().equals("kpa")) {
 			for(int i=0;i<pressure.size();i++)
 			{
 				data.add(toKiloPascal(pressure.get(i))+"");
@@ -848,7 +848,7 @@ public class DataStore
 		} else if (DataStore.getUnitepressure().equals("torr")) {
 			pressure = DataStore.toTorr(pressure);
 		}
-		else if(DataStore.getUnitepressure().equals("kilopascal"))
+		else if(DataStore.getUnitepressure().equals("kpa"))
 		{
 			pressure=toKiloPascal(pressure);
 		}

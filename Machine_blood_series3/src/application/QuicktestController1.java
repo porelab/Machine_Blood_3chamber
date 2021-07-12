@@ -575,8 +575,9 @@ Myconstant.chambers.clear();
 		if (flag1 && flag2 && flag3) {
 			
 			Myconstant.setDummyData();
-			Openscreen.open("/userinput/Nlivetest.fxml");
 			MyDialoug.closeDialoug();
+			Openscreen.open("/userinput/Nlivetest.fxml");
+			
 		}
 		/*
 		 * if (flag == true) { lblerror.setText("");

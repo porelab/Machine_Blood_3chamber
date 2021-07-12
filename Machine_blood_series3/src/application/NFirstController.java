@@ -397,7 +397,7 @@ public class NFirstController implements Initializable {
 			@Override
 			public void handle(ActionEvent event) {
 
-				mydia = new MyDialoug(Main.mainstage, "/application/info.fxml");
+				mydia = new MyDialoug(Main.mainstage, "/application/Info.fxml");
 				mydia.showDialoug();
 
 			}

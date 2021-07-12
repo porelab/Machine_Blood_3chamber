@@ -294,22 +294,40 @@ public class NLivetestController implements Initializable {
 	}
 
 	void setOnce() {
+
+System.out.println("Sample id-------------->"+sampleid);		
 		if (!Myconstant.map.containsKey("ch1")) {
 			ch1name.setText("--");
 			ch1status.setText("--");
 
+		}
+		else {
+			Map<String, Object> data =  Myconstant.map.get("ch1");
+			ch1name.setText(data.get("sampleid").toString());
+				
 		}
 		if (!Myconstant.map.containsKey("ch2")) {
 			ch2name.setText("--");
 			ch2status.setText("--");
 
 		}
+		else {
+			Map<String, Object> data =  Myconstant.map.get("ch2");
+			ch2name.setText(data.get("sampleid").toString());
+			
+		}
 		if (!Myconstant.map.containsKey("ch3")) {
 			ch3name.setText("--");
 			ch3status.setText("--");
 
 		}
-
+		else {
+			Map<String, Object> data =  Myconstant.map.get("ch3");
+			ch3name.setText(data.get("sampleid").toString());
+			
+		}
+		
+		
 	}
 
 	void setMode() {
@@ -1396,8 +1414,7 @@ System.out.println("chamber"+Myconstant.chambers);
 		readpre = pr;
 		readtime = getTime();
 
-		//bans.add("" + pr);
-		bans.add(""+DataStore.ConvertPressure(pr));
+		bans.add("" + pr);
 		
 		tlist.add("" + readtime);
 
@@ -1426,11 +1443,13 @@ System.out.println("chamber"+Myconstant.chambers);
 			@Override
 			public void run() {
 
-				series2.getData().add(new XYChart.Data(readtime, pr));
+				series2.getData().add(new XYChart.Data(readtime, ""+DataStore.ConvertPressure(pr)));
 			
 			}
 		});
 
+
+		
 
 		double diff = (double) curpress * dropper / 100;
 
