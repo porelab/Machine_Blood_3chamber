@@ -254,7 +254,7 @@ public class NLivetestController implements Initializable {
 			ch3name.setText(sampleid);
 			ch3status.setText("in process");
 		}
-		Delaytime=120;
+		Delaytime=300;
 		dropper=50;
 		setMode();
 		
@@ -389,8 +389,15 @@ System.out.println("Sample id-------------->"+sampleid);
 
 				for(int i=pressureindex-1!=0?pressureindex-1:0;i<bresults.size();i++)
 				{
-				bresults.remove(i);
-				bresults.add(i, "Fail");
+				try {
+					bresults.remove(i);
+					bresults.add(i, "Fail");
+				} catch (Exception e) {
+					// TODO: handle exception
+					bresults.remove(0);
+					bresults.add(0, "Fail");
+				}
+					
 				}
 				
 				completeTest();
@@ -1443,7 +1450,8 @@ System.out.println("chamber"+Myconstant.chambers);
 			@Override
 			public void run() {
 
-				series2.getData().add(new XYChart.Data(readtime, ""+DataStore.ConvertPressure(pr)));
+				series2.getData().add(new XYChart.Data(readtime, DataStore.ConvertPressure(pr)));
+				//series2.getData().add(new XYChart.Data(readtime,pr));
 			
 			}
 		});
