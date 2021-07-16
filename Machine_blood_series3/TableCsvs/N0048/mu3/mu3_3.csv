@@ -1,0 +1,17 @@
+blood
+testname,blood
+result,Fail
+bpressure,0.686808575570306
+sample,mu3
+recordy,0.686808575570306
+recordx,67.0
+duration,1 min:16 sec
+durationsecond,76
+testtime,14:13:51
+testdate,06/07/2021
+ans,0.0,0.0,0.0,0.4089417868314641,0.40947585259784847,0.4101625085831998,0.686655985351339,0.686808575570306
+t,8.0,17.0,25.0,33.0,42.0,50.0,58.0,67.0
+btime,5,20,20,20,20,20
+bpoints,0,1.75,3.5,7,14,20
+bresult,Pass,Pass,Fail,Fail,Fail,Fail
+lastpressure,0.686808575570306

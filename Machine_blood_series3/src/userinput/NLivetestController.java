@@ -228,15 +228,22 @@ public class NLivetestController implements Initializable {
 	
 	int Delaytime;
 	int dropper;
+	
+	List<Integer> astmDelay=new ArrayList<>();
 
+	List<String> allsettingData=DataStore.gettestpres();
 	void setTestStd() {
 
+		
 		ArrayList<String> keys = new ArrayList<>(Myconstant.map.keySet());
 		System.out.println("Keys : " + keys);
 
 		teststd = Myconstant.getStd();
 		testdata = Myconstant.getCurrentChamberMap();
 		// 1 = astm , 2 = iso
+		
+	
+		
 		System.out.println("Test data :" + testdata);
 		chamber = Integer.parseInt(testdata.get("chamber").toString());
 		sampleid = testdata.get("sampleid").toString();
@@ -254,8 +261,8 @@ public class NLivetestController implements Initializable {
 			ch3name.setText(sampleid);
 			ch3status.setText("in process");
 		}
-		Delaytime=300;
-		dropper=50;
+		Delaytime=Integer.parseInt(allsettingData.get(7));
+		dropper=Integer.parseInt(allsettingData.get(8));
 		setMode();
 		
 		
@@ -267,29 +274,152 @@ public class NLivetestController implements Initializable {
 		bresults.clear();
 		btime.clear();
 
-		pressureCounts.add(1146);
-		pressureCounts.add(1565);
-		pressureCounts.add(2439);
-		pressureCounts.add(4114);
-		pressureCounts.add(5606);
+		
 
-		bpoints.add("1.75");
-		bpoints.add("3.5");
-		bpoints.add("7");
-		bpoints.add("14");
-		bpoints.add("20");
+		if(teststd.equals("1"))
+		{
+			lbltesttype.setText("ASTM-F1670");
+			System.out.println("ASTM");
+			pressureCounts.add(Integer.parseInt(allsettingData.get(5)));
+			pressureCounts.add(Integer.parseInt(allsettingData.get(6)));
+			pressureCounts.add(0);
+			
+			bpoints.add("0");
+			bpoints.add("2.03");
+			bpoints.add("0");
 
-		bresults.add("Pass");
-		bresults.add("Pass");
-		bresults.add("Pass");
-		bresults.add("Pass");
-		bresults.add("Pass");
+			bresults.add("Pass");
+			bresults.add("Pass");
+			bresults.add("Pass");
 
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
-		btime.add(""+Delaytime);
+			btime.add("300");
+			btime.add("60");
+			btime.add("3480");
+			
+			
+			astmDelay.add(20); //time in second
+			astmDelay.add(20);  //time in second
+			astmDelay.add(20);  //time in second
+			
+		}
+		else
+		{
+			lbltesttype.setText("ISO-16603");
+			System.out.println("ISO");
+//			pressureCounts.add(1146);
+//			pressureCounts.add(1565);
+//			pressureCounts.add(2439);
+//			pressureCounts.add(4114);
+//			pressureCounts.add(5606);
+			pressureCounts.add(Integer.parseInt(allsettingData.get(0)));
+			pressureCounts.add(Integer.parseInt(allsettingData.get(1)));
+			pressureCounts.add(Integer.parseInt(allsettingData.get(2)));
+			pressureCounts.add(Integer.parseInt(allsettingData.get(3)));
+			pressureCounts.add(Integer.parseInt(allsettingData.get(4)));
+			
+			
+			bpoints.add("1.75");
+			bpoints.add("3.5");
+			bpoints.add("7");
+			bpoints.add("14");
+			bpoints.add("20");
+
+			bresults.add("Pass");
+			bresults.add("Pass");
+			bresults.add("Pass");
+			bresults.add("Pass");
+			bresults.add("Pass");
+
+			btime.add(""+Delaytime);
+			btime.add(""+Delaytime);
+			btime.add(""+Delaytime);
+			btime.add(""+Delaytime);
+			btime.add(""+Delaytime);
+		}
+		
+	}
+	void bubbleClicknew() {
+		btnfail.setDisable(false);
+		status.setText("Pressue step 1 in progress");
+		lblcurranttest.setText("Pressure vs Time");
+		isCompletetest=false;
+		flowserireswet.getData().clear();
+		recorddata.clear();
+		starttestdry.setDisable(true);
+		pressureindex = 0;
+		bans.clear();
+		tlist.clear();
+		recordtime.clear();;
+
+		skip = 0;
+		yAxis.setLabel("Pressure (" + DataStore.getUnitepressure() + ")");
+		xAxis.setLabel("Time (Seconds)");
+
+		tempt1 = System.currentTimeMillis();
+
+		starttest.setDisable(true);
+
+		testtype = 0;
+		countbp = 0;
+		// starttest.setVisible(false);
+
+		t2test = System.currentTimeMillis();
+		// series1.getData().clear();
+		series2.getData().clear();
+
+		// series1.getData().add(new XYChart.Data(0, conditionpressure));
+		// series1.getData().add(new XYChart.Data(conditionpressure,
+		// conditionpressure));
+		changetime = System.currentTimeMillis();
+
+		Toast.makeText(Main.mainstage, "Test is being initialize!", 2400, 200, 200);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+
+				int minde = 540;
+				// Mycommand.setDACValue('1', 0, 0);
+				// try {
+				//
+				// Thread.sleep(minde);
+				// } catch (Exception e) {
+				//
+				// }
+
+				Mycommand.setDelay(waittime, 0);
+				try {
+
+					Thread.sleep(minde);
+				} catch (Exception e) {
+
+				}
+				Mycommand.sendAdcEnableBits("001", 0);
+				try {
+
+					Thread.sleep(minde);
+				} catch (Exception e) {
+
+				}
+
+				startCondition();
+				try {
+
+					Thread.sleep(minde);
+				} catch (Exception e) {
+
+				}
+				Mycommand.startADC(0);
+				try {
+
+					Thread.sleep(minde);
+				} catch (Exception e) {
+
+				}
+
+			}
+		}).start();
 
 	}
 
@@ -341,19 +471,6 @@ System.out.println("Sample id-------------->"+sampleid);
 
 	}
 
-	void stopTest2() {
-
-		sendStopCmd();
-		recorddata.clear();
-		recordtime.clear();
-		starttest.setDisable(false);
-		status.setText("Test hase been Stop");
-		autotest.setDisable(false);
-
-		bans.clear();
-		isCompletetest = false;
-
-	}
 
 	// set all shortcut
 	void addShortCut() {
@@ -559,8 +676,7 @@ System.out.println("chamber"+Myconstant.chambers);
 		isDryStart = new SimpleBooleanProperty(false);
 	
 		setMode();
-		lbltesttype.setText("SYNTHETIC BLOOD PENETRATION TEST");
-		lbltesttype.setText("ISO-16603");
+	
 
 		connectHardware();
 		setButtons();
@@ -699,91 +815,7 @@ System.out.println("chamber"+Myconstant.chambers);
 		});
 	}
 
-	void bubbleClicknew() {
-		btnfail.setDisable(false);
-		status.setText("Test in Progress..");
-		lblcurranttest.setText("Pressure vs Time");
-		isCompletetest=false;
-		flowserireswet.getData().clear();
-		recorddata.clear();
-		starttestdry.setDisable(true);
-		pressureindex = 0;
-		bans.clear();
-		tlist.clear();
-		recordtime.clear();;
-
-		skip = 0;
-		yAxis.setLabel("Pressure (" + DataStore.getUnitepressure() + ")");
-		xAxis.setLabel("Time (Seconds)");
-
-		tempt1 = System.currentTimeMillis();
-
-		starttest.setDisable(true);
-
-		testtype = 0;
-		countbp = 0;
-		// starttest.setVisible(false);
-
-		t2test = System.currentTimeMillis();
-		// series1.getData().clear();
-		series2.getData().clear();
-
-		// series1.getData().add(new XYChart.Data(0, conditionpressure));
-		// series1.getData().add(new XYChart.Data(conditionpressure,
-		// conditionpressure));
-		changetime = System.currentTimeMillis();
-
-		Toast.makeText(Main.mainstage, "Test is being initialize!", 2400, 200, 200);
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-
-				int minde = 540;
-				// Mycommand.setDACValue('1', 0, 0);
-				// try {
-				//
-				// Thread.sleep(minde);
-				// } catch (Exception e) {
-				//
-				// }
-
-				Mycommand.setDelay(waittime, 0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-				Mycommand.sendAdcEnableBits("001", 0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-
-				startCondition();
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-				Mycommand.startADC(0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-
-			}
-		}).start();
-
-	}
-
+	
 	// get differencial time
 
 	void startCondition() {
@@ -1384,7 +1416,14 @@ System.out.println("chamber"+Myconstant.chambers);
 						DataStore.livepressure.set(pr);
 						if (testtype != 5) {
 							// setBubblePoints(pr);
-							showBubble(pr);
+							if(teststd.equals("1"))
+							{
+								showBubbleASTM(pr);
+							}
+							else
+							{
+								showBubbleISO(pr);
+							}
 						}
 
 					}
@@ -1414,13 +1453,19 @@ System.out.println("chamber"+Myconstant.chambers);
 
 	}
 
-	void showBubble(double pr) {
+	void showBubbleISO(double pr) {
 
 		// System.out.println("Mode 2");
 		// System.out.println("pressue  : "+pr);
+		if(bans.isEmpty())
+		{
+			changetime=System.currentTimeMillis();
+			tempt1=System.currentTimeMillis();
+		}
 		readpre = pr;
 		readtime = getTime();
 
+		
 		bans.add("" + pr);
 		
 		tlist.add("" + readtime);
@@ -1440,6 +1485,14 @@ System.out.println("chamber"+Myconstant.chambers);
 				Mycommand.setDACValue('2', pressureCounts.get(pressureindex),
 						100);
 				pressureindex++;
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+
+						status.setText("Pressue step "+(pressureindex+1)+" in progress");
+					}
+				});
 				changetime = System.currentTimeMillis();
 			}
 			// openValve24();
@@ -1467,6 +1520,93 @@ System.out.println("chamber"+Myconstant.chambers);
 		 System.out.println("Diff : " + (curpress - diff));
 		if (pr < (curpress - diff) && bans.size()>3) {
 			System.out.println("Drop");
+			bans.clear();
+			isCompletetest = true;
+		}
+
+		if (isCompletetest) {
+			completeTest();
+//			Platform.runLater(new Runnable() {
+//
+//				@Override
+//				public void run() {
+//					starttest.setDisable(false);
+//				}
+//			});
+		}
+
+		curpress = pr;
+	}
+
+	void showBubbleASTM(double pr) {
+
+		// System.out.println("Mode 2");
+		// System.out.println("pressue  : "+pr);
+		if(bans.isEmpty())
+		{
+			changetime=System.currentTimeMillis();
+			tempt1=System.currentTimeMillis();
+		}
+		readpre = pr;
+		readtime = getTime();
+
+		bans.add("" + pr);
+		
+		tlist.add("" + readtime);
+
+		
+		System.out.println("Pressure index : "+pressureindex);
+		System.out.println("Record size : "+bans.size());
+		System.out.println("Delay : "+astmDelay.get(pressureindex));
+		
+		if (getTimeforwait() >= astmDelay.get(pressureindex)) {
+
+			if (pressureindex == 2) {
+				completeTest();
+			} else {
+				pressureindex++;
+				System.out.println("now switching");
+				//System.out.println("set Dac to "
+				//		+ pressureCounts.get(pressureindex));
+				Mycommand.setDACValue('2', pressureCounts.get(pressureindex),
+						100);
+				
+				Platform.runLater(new Runnable() {
+					
+					@Override
+					public void run() {
+
+						status.setText("Pressue step "+(pressureindex+1)+" in progress");
+					}
+				});
+				changetime = System.currentTimeMillis();
+			}
+			// openValve24();
+		}
+
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+
+				series2.getData().add(new XYChart.Data(readtime, DataStore.ConvertPressure(pr)));
+				//series2.getData().add(new XYChart.Data(readtime,pr));
+			
+			}
+		});
+
+
+		
+
+		double diff = (double) curpress * dropper / 100;
+
+		//System.out.println("High last : " + curpress);
+		// System.out.println("Current  : " + pr);
+
+		// System.out.println("Diff : " + (curpress - diff));
+		if (pr < (curpress - diff) && bans.size()>3 && pressureindex==1) {
+			System.out.println("Drop");
+			bans.clear();
 			isCompletetest = true;
 		}
 
@@ -1497,7 +1637,15 @@ System.out.println("chamber"+Myconstant.chambers);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				createCsvTableBubble();
+				if(teststd.equals("1"))
+				{
+					createCsvTableBubbleASTM();
+				}
+				else
+				{
+					createCsvTableBubbleISO();
+				}
+				
 			}
 		}).start();
 	
@@ -1506,7 +1654,7 @@ System.out.println("chamber"+Myconstant.chambers);
 	}
 
 	// csv create function
-	void createCsvTableBubble() {
+	void createCsvTableBubbleISO() {
 
 		if (bans.size() != 0) {
 			try {
@@ -1549,6 +1697,208 @@ System.out.println("chamber"+Myconstant.chambers);
 
 				cs.firstLine("blood");
 				cs.newLine("testname", "blood");
+
+				cs.newLine("std","ASTM F1670");
+				cs.newLine("result", result);
+				cs.newLine("bpressure", "" + curpress);
+				cs.newLine("sample", sampleid);
+				//cs.newLine("fluidname", Myapp.fluidname);
+				//cs.newLine("fluidvalue", Myapp.fluidvalue);
+				//cs.newLine("mode", "" + Myapp.thresold);
+				cs.newLineDouble("recordy", recorddata);
+				cs.newLineDouble("recordx", recordtime);
+
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+				Date date = new Date();
+				t1test = System.currentTimeMillis();
+				int s = (int) (t1test - t2test) / 1000;
+
+				int hour = (s / 3600);
+				int min = (s / 60) % 60;
+				int remsec = (s % 60);
+				String durr = "";
+				if (hour != 0) {
+					durr = hour + " hr:" + min + " min:" + remsec + " sec";
+				} else {
+					durr = min + " min:" + remsec + " sec";
+				}
+
+				cs.newLine("duration", durr);
+				cs.newLine("durationsecond", s + "");
+				cs.newLine("testtime", timeFormat.format(date));
+				cs.newLine("testdate", dateFormat.format(date));
+				//cs.newLine("customerid", Myapp.uid);
+
+				//cs.newLine("indistry", Myapp.indtype);
+				//cs.newLine("application", Myapp.materialapp);
+				//cs.newLine("splate", Myapp.splate);
+
+				cs.newLine("ans", bans);
+				cs.newLine("t", tlist);
+
+				
+				
+				
+				if(!bpoints.contains("0"))
+				{
+				btime.add(0, "5");
+				bpoints.add(0, "0");
+				bresults.add(0, "Pass");
+				}
+				
+				
+				cs.newLine("btime", btime);
+				cs.newLine("bpoints", bpoints);
+				cs.newLine("bresult", bresults);
+
+				savefile = new File(cs.filename);
+				cs.closefile();
+
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						if (chamber == 1) {
+							ch1status.setText(result);
+						} else if (chamber == 2) {
+							ch2status.setText(result);
+						} else {
+							ch3status.setText(result);
+						}
+
+						if (Myconstant.hasMoreChamber()) {
+							curpress = 0;
+							setTestStd();
+							showBubblePopup();
+						} else {
+							Toast.makeText(Main.mainstage, "Test Completed",
+									1000, 200, 200);
+							MyDialoug.closeDialoug();
+							Openscreen.open("/application/first.fxml");
+
+						}
+						// showResultPopup();
+					}
+				});
+				isCompletetest = false;
+				System.out.println("csv Created");
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						if (chamber == 1) {
+							ch1status.setText("cancel");
+						} else if (chamber == 2) {
+							ch2status.setText("cancel");
+						} else {
+							ch3status.setText("cancel");
+						}
+
+						if (Myconstant.hasMoreChamber()) {
+							curpress = 0;
+							setTestStd();
+							showBubblePopup();
+						} else {
+							Toast.makeText(Main.mainstage, "Test Completed",
+									1000, 200, 200);
+							MyDialoug.closeDialoug();
+							Openscreen.open("/application/first.fxml");
+
+						}
+						// showResultPopup();
+					}
+				});
+			}
+		} else {
+			Platform.runLater(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+
+					if (chamber == 1) {
+						ch1status.setText("cancel");
+					} else if (chamber == 2) {
+						ch2status.setText("cancel");
+					} else {
+						ch3status.setText("cancel");
+					}
+
+					if (Myconstant.hasMoreChamber()) {
+						curpress = 0;
+						setTestStd();
+						showBubblePopup();
+					} else {
+						Toast.makeText(Main.mainstage, "Test Completed",
+								1000, 200, 200);
+						MyDialoug.closeDialoug();
+						Openscreen.open("/application/first.fxml");
+
+					}
+					// showResultPopup();
+				}
+			});
+
+		}
+		// LoadAnchor.LoadCreateTestPage();
+		// LoadAnchor.LoadReportPage();
+	}
+
+	
+	void createCsvTableBubbleASTM() {
+
+		if (bans.size() != 0) {
+			try {
+
+				System.out.println("csv creating........");
+				CsvWriter cs = new CsvWriter();
+
+				Date d1 = new Date();
+				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("ddMMyy");
+				String date1 = DATE_FORMAT.format(d1);
+
+				File fff = new File("TableCsvs");
+				if (!fff.exists()) {
+					fff.mkdir();
+				}
+
+				File fffff = new File("TableCsvs/" + Myapp.uid);
+				if (!fffff.exists()) {
+					fffff.mkdir();
+				}
+
+				File f = new File(fffff.getPath() + "/" + sampleid);
+				if (!f.isDirectory()) {
+					f.mkdir();
+					System.out.println("Dir csv folder created");
+				}
+
+				String[] ff = f.list();
+
+				CalculatePorometerData c = new CalculatePorometerData();
+
+				cs.wtirefile(f.getPath() + "/" + sampleid + "_" + findInt(ff)
+						+ ".csv");
+
+				if (recorddata.size() == 0) {
+					result = "Pass";
+				} else {
+					result = "Fail";
+				}
+
+				cs.firstLine("blood");
+				cs.newLine("testname", "blood");
+				cs.newLine("std","ISO 16603");
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);

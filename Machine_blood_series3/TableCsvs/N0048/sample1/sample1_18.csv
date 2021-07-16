@@ -1,0 +1,16 @@
+blood
+testname,blood
+result,pass
+bpressure,0.4657816433966583
+sample,sample1
+recordy,
+recordx,
+duration,0 min:33 sec
+durationsecond,33
+testtime,11:26:24
+testdate,03/07/2021
+ans,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.3747615777828641,0.4657816433966583
+t,12.0,14.0,15.0,16.0,18.0,19.0,21.0,22.0,23.0
+btime,5,20,20,20,20,20
+bpoints,0,1.75,3.5,7,14,20
+bresult,Pass,Pass,Pass,Pass,Pass,Pass
