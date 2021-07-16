@@ -913,8 +913,9 @@ public class Singlepororeportblood {
 			r1r.setVerticalAlignment(Element.ALIGN_MIDDLE);
 			resulttable.addCell(r1r);
 			
-			
-			PdfPCell r2r = new PdfPCell(new Paragraph(btime.get(j) ,
+		
+				
+			PdfPCell r2r = new PdfPCell(new Paragraph(""+Integer.parseInt(btime.get(j).toString()) / 60 ,
 					sampleinfoans));
 			r2r.setBorder(1);
 			r2r.setBorder(r2r.BOTTOM| r2r.RIGHT);
@@ -965,8 +966,9 @@ public class Singlepororeportblood {
 			r1r.setVerticalAlignment(Element.ALIGN_MIDDLE);
 			resulttable.addCell(r1r);
 			
-			
-			PdfPCell r2r = new PdfPCell(new Paragraph(btime.get(j),
+			PdfPCell r2r = new PdfPCell(new Paragraph(""+Integer.parseInt(btime.get(j).toString()) / 60 ,
+					
+//			PdfPCell r2r = new PdfPCell(new Paragraph(btime.get(j),
 					sampleinfoans));
 			r2r.setBorder(1);
 			r2r.setBorder(r2r.RIGHT);
