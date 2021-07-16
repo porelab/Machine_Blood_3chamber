@@ -665,7 +665,7 @@ public class Multiplepororeportblood {
 		d1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
 		PdfPCell d2 = new PdfPCell(new Paragraph(
-				"Sample specimen are not drawn by M19 Lab. Result relates to the sample tested. The report shall not be reproduced except in full, without the written approval of the laboratory. The report is strictly confidential and technical information of client only. Not for advertisement, promotion, publicity or litigation.",
+				"Result relates to the sample tested. The report shall not be reproduced except in full, without the written approval of the laboratory. The report is strictly confidential and technical information of client only. Not for advertisement, promotion, publicity or litigation.",
 				addresslab));
 		d2.setPaddingLeft(0);
 		d2.setPaddingTop(1);
