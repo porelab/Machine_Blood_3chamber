@@ -891,6 +891,9 @@ public class Singlepororeportblood {
 				
 		List<String> bpoint = d.getValuesOf("" + d.data.get("bpoints"));
 		List<String> btime= d.getValuesOf("" + d.data.get("btime"));
+		
+
+		
 		List<String> bresult= d.getValuesOf("" + d.data.get("bresult"));
 		
 		PdfPCell r4r ;
@@ -911,7 +914,7 @@ public class Singlepororeportblood {
 			resulttable.addCell(r1r);
 			
 			
-			PdfPCell r2r = new PdfPCell(new Paragraph(btime.get(j),
+			PdfPCell r2r = new PdfPCell(new Paragraph(btime.get(j) ,
 					sampleinfoans));
 			r2r.setBorder(1);
 			r2r.setBorder(r2r.BOTTOM| r2r.RIGHT);

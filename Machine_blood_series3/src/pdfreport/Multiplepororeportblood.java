@@ -727,6 +727,7 @@ public class Multiplepororeportblood {
 
 				DatareadN d = ds.get(j);
 				if (j == ds.size() - 1) {
+
 					addRows(tablem, d, backd, true);
 				} else {
 					addRows(tablem, d, backd, false);
@@ -753,11 +754,10 @@ public class Multiplepororeportblood {
 		isbottom=true;
 		float height=25;
 		List<String> y ;
-		try {
-		 y = DataStore.ConvertPressure(d.getValuesOf("" + d.data.get("bresult")));
-		 
 	
-
+		try {
+		 y = d.getValuesOf("" + d.data.get("bresult"));
+		 
 		}
 		catch(Exception e)
 		{
@@ -1019,13 +1019,11 @@ public class Multiplepororeportblood {
 
 		{
 			String dd = "-";
-			try {
+			
 				if (y.size() > 5) {
 					dd = "" + y.get(5);
 				}
-			} catch (Exception e) {
-
-			}
+			
 
 			PdfPCell cell1 = new PdfPCell(new Paragraph(dd, f));
 			cell1.setBackgroundColor(backcolor);
@@ -1616,7 +1614,7 @@ void rowData(List<DatareadN> d) {
 				tablem.getRows().remove(tablem.getRows().size() - 1);
 
 				// add last row
-
+System.out.println("callling Add row");
 				addRowsToTable(tablem, data.get(j), 1, false, true, bordercolor, backgroundcolor, 14f, tabledata);
 
 				j = j + 1;
