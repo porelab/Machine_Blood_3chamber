@@ -1698,7 +1698,7 @@ System.out.println("chamber"+Myconstant.chambers);
 				cs.firstLine("blood");
 				cs.newLine("testname", "blood");
 
-				cs.newLine("std","ASTM F1670");
+				cs.newLine("std",teststd);
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);
