@@ -202,7 +202,7 @@ public class NLivetestController implements Initializable {
 
 	long changetime = 0;
 	int waittime = 0;
-	String sampleid = "testing",lotno = "HS123";
+	String sampleid = "testing", lotno = "HS123";
 	String teststd;
 
 	int chamber = 3;
@@ -225,32 +225,29 @@ public class NLivetestController implements Initializable {
 	@FXML
 	private Label ch3status;
 	Map<String, Object> testdata;
-	
+
 	int Delaytime;
 	int dropper;
-	
-	List<Integer> astmDelay=new ArrayList<>();
 
-	List<String> allsettingData=DataStore.gettestpres();
+	List<Integer> astmDelay = new ArrayList<>();
+
+	List<String> allsettingData = DataStore.gettestpres();
+
 	void setTestStd() {
 
-		
 		ArrayList<String> keys = new ArrayList<>(Myconstant.map.keySet());
 		System.out.println("Keys : " + keys);
 
 		teststd = Myconstant.getStd();
 		testdata = Myconstant.getCurrentChamberMap();
 		// 1 = astm , 2 = iso
-		
-	
-		
+
 		System.out.println("Test data :" + testdata);
 		chamber = Integer.parseInt(testdata.get("chamber").toString());
-		
+
 		sampleid = testdata.get("sampleid").toString();
 		lotno = testdata.get("lotno").toString();
 
-		
 		Myconstant.currentChamberMap = testdata;
 		lblfilename.setText(sampleid);
 
@@ -264,29 +261,24 @@ public class NLivetestController implements Initializable {
 			ch3name.setText(sampleid);
 			ch3status.setText("in process");
 		}
-		Delaytime=Integer.parseInt(allsettingData.get(7));
-		dropper=Integer.parseInt(allsettingData.get(8));
+		Delaytime = Integer.parseInt(allsettingData.get(7));
+		dropper = Integer.parseInt(allsettingData.get(8));
 		setMode();
-		
-		
-		
-	System.out.println("Set predefined data");
-		
+
+		System.out.println("Set predefined data");
+
 		pressureCounts.clear();
 		bpoints.clear();
 		bresults.clear();
 		btime.clear();
 
-		
-
-		if(teststd.equals("1"))
-		{
+		if (teststd.equals("1")) {
 			lbltesttype.setText("ASTM-F1670");
 			System.out.println("ASTM");
 			pressureCounts.add(Integer.parseInt(allsettingData.get(5)));
 			pressureCounts.add(Integer.parseInt(allsettingData.get(6)));
 			pressureCounts.add(0);
-			
+
 			bpoints.add("0");
 			bpoints.add("2.03");
 			bpoints.add("0");
@@ -298,29 +290,25 @@ public class NLivetestController implements Initializable {
 			btime.add("300");
 			btime.add("60");
 			btime.add("3480");
-			
-			
-			astmDelay.add(20); //time in second
-			astmDelay.add(20);  //time in second
-			astmDelay.add(20);  //time in second
-			
-		}
-		else
-		{
+
+			astmDelay.add(20); // time in second
+			astmDelay.add(20); // time in second
+			astmDelay.add(20); // time in second
+
+		} else {
 			lbltesttype.setText("ISO-16603");
 			System.out.println("ISO");
-//			pressureCounts.add(1146);
-//			pressureCounts.add(1565);
-//			pressureCounts.add(2439);
-//			pressureCounts.add(4114);
-//			pressureCounts.add(5606);
+			// pressureCounts.add(1146);
+			// pressureCounts.add(1565);
+			// pressureCounts.add(2439);
+			// pressureCounts.add(4114);
+			// pressureCounts.add(5606);
 			pressureCounts.add(Integer.parseInt(allsettingData.get(0)));
 			pressureCounts.add(Integer.parseInt(allsettingData.get(1)));
 			pressureCounts.add(Integer.parseInt(allsettingData.get(2)));
 			pressureCounts.add(Integer.parseInt(allsettingData.get(3)));
 			pressureCounts.add(Integer.parseInt(allsettingData.get(4)));
-			
-			
+
 			bpoints.add("1.75");
 			bpoints.add("3.5");
 			bpoints.add("7");
@@ -333,26 +321,28 @@ public class NLivetestController implements Initializable {
 			bresults.add("Pass");
 			bresults.add("Pass");
 
-			btime.add(""+Delaytime);
-			btime.add(""+Delaytime);
-			btime.add(""+Delaytime);
-			btime.add(""+Delaytime);
-			btime.add(""+Delaytime);
+			btime.add("" + Delaytime);
+			btime.add("" + Delaytime);
+			btime.add("" + Delaytime);
+			btime.add("" + Delaytime);
+			btime.add("" + Delaytime);
 		}
-		
+
 	}
+
 	void bubbleClicknew() {
 		btnfail.setDisable(false);
-		status.setText("Pressue step 1 in progress");
+		status.setText("Pressure step 1 in progress");
 		lblcurranttest.setText("Pressure vs Time");
-		isCompletetest=false;
+		isCompletetest = false;
 		flowserireswet.getData().clear();
 		recorddata.clear();
 		starttestdry.setDisable(true);
 		pressureindex = 0;
 		bans.clear();
 		tlist.clear();
-		recordtime.clear();;
+		recordtime.clear();
+		;
 
 		skip = 0;
 		yAxis.setLabel("Pressure (" + DataStore.getUnitepressure() + ")");
@@ -375,7 +365,8 @@ public class NLivetestController implements Initializable {
 		// conditionpressure));
 		changetime = System.currentTimeMillis();
 
-		Toast.makeText(Main.mainstage, "Test is being initialize!", 2400, 200, 200);
+		Toast.makeText(Main.mainstage, "Test is being initialize!", 2400, 200,
+				200);
 		new Thread(new Runnable() {
 
 			@Override
@@ -428,39 +419,35 @@ public class NLivetestController implements Initializable {
 
 	void setOnce() {
 
-System.out.println("Sample id-------------->"+sampleid);		
+		System.out.println("Sample id-------------->" + sampleid);
 		if (!Myconstant.map.containsKey("ch1")) {
 			ch1name.setText("--");
 			ch1status.setText("--");
 
-		}
-		else {
-			Map<String, Object> data =  Myconstant.map.get("ch1");
+		} else {
+			Map<String, Object> data = Myconstant.map.get("ch1");
 			ch1name.setText(data.get("sampleid").toString());
-				
+
 		}
 		if (!Myconstant.map.containsKey("ch2")) {
 			ch2name.setText("--");
 			ch2status.setText("--");
 
-		}
-		else {
-			Map<String, Object> data =  Myconstant.map.get("ch2");
+		} else {
+			Map<String, Object> data = Myconstant.map.get("ch2");
 			ch2name.setText(data.get("sampleid").toString());
-			
+
 		}
 		if (!Myconstant.map.containsKey("ch3")) {
 			ch3name.setText("--");
 			ch3status.setText("--");
 
-		}
-		else {
-			Map<String, Object> data =  Myconstant.map.get("ch3");
+		} else {
+			Map<String, Object> data = Myconstant.map.get("ch3");
 			ch3name.setText(data.get("sampleid").toString());
-			
+
 		}
-		
-		
+
 	}
 
 	void setMode() {
@@ -473,7 +460,6 @@ System.out.println("Sample id-------------->"+sampleid);
 		System.out.println("step time : " + waittime);
 
 	}
-
 
 	// set all shortcut
 	void addShortCut() {
@@ -500,15 +486,14 @@ System.out.println("Sample id-------------->"+sampleid);
 	}
 
 	void recordPressure() {
-	
 
-				Toast.makeText(Main.mainstage, "Record Successfully", 500, 100,
-						100);
-				recorddata.add(readpre);
-				recordtime.add(readtime);
+		Toast.makeText(Main.mainstage, "Record Successfully", 500, 100, 100);
+		recorddata.add(readpre);
+		recordtime.add(readtime);
 
-				for(int i=pressureindex-1!=0?pressureindex-1:0;i<bresults.size();i++)
-				{
+		if (!teststd.equals("1")) {
+			for (int i = pressureindex - 1 != 0 ? pressureindex - 1 : 0; i < bresults
+					.size(); i++) {
 				try {
 					bresults.remove(i);
 					bresults.add(i, "Fail");
@@ -517,14 +502,25 @@ System.out.println("Sample id-------------->"+sampleid);
 					bresults.remove(0);
 					bresults.add(0, "Fail");
 				}
-					
+
+			}
+		} else {
+			for (int i = pressureindex; i < bresults
+					.size(); i++) {
+				try {
+					bresults.remove(i);
+					bresults.add(i, "Fail");
+				} catch (Exception e) {
+					// TODO: handle exception
+					bresults.remove(0);
+					bresults.add(0, "Fail");
 				}
-				
-				completeTest();
 
-				//generateList();
+			}
+		}
+		completeTest();
 
-		
+		// generateList();
 
 	}
 
@@ -649,12 +645,11 @@ System.out.println("Sample id-------------->"+sampleid);
 
 	// setting all functionality and sequence.
 
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-System.out.println("Test Data"+Myconstant.map);
-System.out.println("chamber"+Myconstant.chambers);
+		System.out.println("Test Data" + Myconstant.map);
+		System.out.println("chamber" + Myconstant.chambers);
 		setTestStd();
 		setOnce();
 		// Myapp.PrintAll();
@@ -677,9 +672,8 @@ System.out.println("chamber"+Myconstant.chambers);
 		recordtime = new ArrayList<Double>();
 		isBubbleStart = new SimpleBooleanProperty(false);
 		isDryStart = new SimpleBooleanProperty(false);
-	
+
 		setMode();
-	
 
 		connectHardware();
 		setButtons();
@@ -818,7 +812,6 @@ System.out.println("chamber"+Myconstant.chambers);
 		});
 	}
 
-	
 	// get differencial time
 
 	void startCondition() {
@@ -1419,12 +1412,9 @@ System.out.println("chamber"+Myconstant.chambers);
 						DataStore.livepressure.set(pr);
 						if (testtype != 5) {
 							// setBubblePoints(pr);
-							if(teststd.equals("1"))
-							{
+							if (teststd.equals("1")) {
 								showBubbleASTM(pr);
-							}
-							else
-							{
+							} else {
 								showBubbleISO(pr);
 							}
 						}
@@ -1460,40 +1450,38 @@ System.out.println("chamber"+Myconstant.chambers);
 
 		// System.out.println("Mode 2");
 		// System.out.println("pressue  : "+pr);
-		if(bans.isEmpty())
-		{
-			changetime=System.currentTimeMillis();
-			tempt1=System.currentTimeMillis();
+		if (bans.isEmpty()) {
+			changetime = System.currentTimeMillis();
+			tempt1 = System.currentTimeMillis();
 		}
 		readpre = pr;
 		readtime = getTime();
 
-		
 		bans.add("" + pr);
-		
+
 		tlist.add("" + readtime);
 
-		
-		System.out.println("Pressure index : "+pressureindex);
-		
-		System.out.println("Record size : "+bans.size());
+		System.out.println("Pressure index : " + pressureindex);
+
+		System.out.println("Record size : " + bans.size());
 		if (getTimeforwait() >= Delaytime) {
 
 			if (pressureindex == 5) {
 				completeTest();
 			} else {
 				System.out.println("now switching");
-				//System.out.println("set Dac to "
-				//		+ pressureCounts.get(pressureindex));
+				// System.out.println("set Dac to "
+				// + pressureCounts.get(pressureindex));
 				Mycommand.setDACValue('2', pressureCounts.get(pressureindex),
 						100);
 				pressureindex++;
 				Platform.runLater(new Runnable() {
-					
+
 					@Override
 					public void run() {
 
-						status.setText("Pressue step "+(pressureindex+1)+" in progress");
+						status.setText("Pressure step " + (pressureindex + 1)
+								+ " in progress");
 					}
 				});
 				changetime = System.currentTimeMillis();
@@ -1506,22 +1494,21 @@ System.out.println("chamber"+Myconstant.chambers);
 			@Override
 			public void run() {
 
-				series2.getData().add(new XYChart.Data(readtime, DataStore.ConvertPressure(pr)));
-				//series2.getData().add(new XYChart.Data(readtime,pr));
-			
+				series2.getData().add(
+						new XYChart.Data(readtime, DataStore
+								.ConvertPressure(pr)));
+				// series2.getData().add(new XYChart.Data(readtime,pr));
+
 			}
 		});
-
-
-		
 
 		double diff = (double) curpress * dropper / 100;
 
 		System.out.println("High last : " + curpress);
-		 System.out.println("Current  : " + pr);
+		System.out.println("Current  : " + pr);
 
-		 System.out.println("Diff : " + (curpress - diff));
-		if (pr < (curpress - diff) && bans.size()>3) {
+		System.out.println("Diff : " + (curpress - diff));
+		if (pr < (curpress - diff) && bans.size() > 3) {
 			System.out.println("Drop");
 			bans.clear();
 			isCompletetest = true;
@@ -1529,13 +1516,13 @@ System.out.println("chamber"+Myconstant.chambers);
 
 		if (isCompletetest) {
 			completeTest();
-//			Platform.runLater(new Runnable() {
-//
-//				@Override
-//				public void run() {
-//					starttest.setDisable(false);
-//				}
-//			});
+			// Platform.runLater(new Runnable() {
+			//
+			// @Override
+			// public void run() {
+			// starttest.setDisable(false);
+			// }
+			// });
 		}
 
 		curpress = pr;
@@ -1545,23 +1532,21 @@ System.out.println("chamber"+Myconstant.chambers);
 
 		// System.out.println("Mode 2");
 		// System.out.println("pressue  : "+pr);
-		if(bans.isEmpty())
-		{
-			changetime=System.currentTimeMillis();
-			tempt1=System.currentTimeMillis();
+		if (bans.isEmpty()) {
+			changetime = System.currentTimeMillis();
+			tempt1 = System.currentTimeMillis();
 		}
 		readpre = pr;
 		readtime = getTime();
 
 		bans.add("" + pr);
-		
+
 		tlist.add("" + readtime);
 
-		
-		System.out.println("Pressure index : "+pressureindex);
-		System.out.println("Record size : "+bans.size());
-		System.out.println("Delay : "+astmDelay.get(pressureindex));
-		
+		System.out.println("Pressure index : " + pressureindex);
+		System.out.println("Record size : " + bans.size());
+		System.out.println("Delay : " + astmDelay.get(pressureindex));
+
 		if (getTimeforwait() >= astmDelay.get(pressureindex)) {
 
 			if (pressureindex == 2) {
@@ -1569,17 +1554,18 @@ System.out.println("chamber"+Myconstant.chambers);
 			} else {
 				pressureindex++;
 				System.out.println("now switching");
-				//System.out.println("set Dac to "
-				//		+ pressureCounts.get(pressureindex));
+				// System.out.println("set Dac to "
+				// + pressureCounts.get(pressureindex));
 				Mycommand.setDACValue('2', pressureCounts.get(pressureindex),
 						100);
-				
+
 				Platform.runLater(new Runnable() {
-					
+
 					@Override
 					public void run() {
 
-						status.setText("Pressue step "+(pressureindex+1)+" in progress");
+						status.setText("Pressure step " + (pressureindex + 1)
+								+ " in progress");
 					}
 				});
 				changetime = System.currentTimeMillis();
@@ -1592,22 +1578,21 @@ System.out.println("chamber"+Myconstant.chambers);
 			@Override
 			public void run() {
 
-				series2.getData().add(new XYChart.Data(readtime, DataStore.ConvertPressure(pr)));
-				//series2.getData().add(new XYChart.Data(readtime,pr));
-			
+				series2.getData().add(
+						new XYChart.Data(readtime, DataStore
+								.ConvertPressure(pr)));
+				// series2.getData().add(new XYChart.Data(readtime,pr));
+
 			}
 		});
 
-
-		
-
 		double diff = (double) curpress * dropper / 100;
 
-		//System.out.println("High last : " + curpress);
+		// System.out.println("High last : " + curpress);
 		// System.out.println("Current  : " + pr);
 
 		// System.out.println("Diff : " + (curpress - diff));
-		if (pr < (curpress - diff) && bans.size()>3 && pressureindex==1) {
+		if (pr < (curpress - diff) && bans.size() > 3 && pressureindex == 1) {
 			System.out.println("Drop");
 			bans.clear();
 			isCompletetest = true;
@@ -1615,13 +1600,13 @@ System.out.println("chamber"+Myconstant.chambers);
 
 		if (isCompletetest) {
 			completeTest();
-//			Platform.runLater(new Runnable() {
-//
-//				@Override
-//				public void run() {
-//					starttest.setDisable(false);
-//				}
-//			});
+			// Platform.runLater(new Runnable() {
+			//
+			// @Override
+			// public void run() {
+			// starttest.setDisable(false);
+			// }
+			// });
 		}
 
 		curpress = pr;
@@ -1629,9 +1614,9 @@ System.out.println("chamber"+Myconstant.chambers);
 
 	void completeTest() {
 		testtype = 5;
-		
+
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				sendStopCmd();
@@ -1640,19 +1625,14 @@ System.out.println("chamber"+Myconstant.chambers);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if(teststd.equals("1"))
-				{
+				if (teststd.equals("1")) {
 					createCsvTableBubbleASTM();
-				}
-				else
-				{
+				} else {
 					createCsvTableBubbleISO();
 				}
-				
+
 			}
 		}).start();
-	
-	
 
 	}
 
@@ -1701,23 +1681,21 @@ System.out.println("chamber"+Myconstant.chambers);
 				cs.firstLine("blood");
 				cs.newLine("testname", "blood");
 
-				if(teststd.equals("1"))
+				if (teststd.equals("1")) {
+					cs.newLine("std", "ASTM-F1670");
+				} else
+
 				{
-					cs.newLine("std","ASTM-F1670");					
-				}
-				else
-					
-				{
-					cs.newLine("std","ISO-16603");					
-						
+					cs.newLine("std", "ISO-16603");
+
 				}
 				cs.newLine("lotno", lotno);
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);
-				//cs.newLine("fluidname", Myapp.fluidname);
-				//cs.newLine("fluidvalue", Myapp.fluidvalue);
-				//cs.newLine("mode", "" + Myapp.thresold);
+				// cs.newLine("fluidname", Myapp.fluidname);
+				// cs.newLine("fluidvalue", Myapp.fluidvalue);
+				// cs.newLine("mode", "" + Myapp.thresold);
 				cs.newLineDouble("recordy", recorddata);
 				cs.newLineDouble("recordx", recordtime);
 
@@ -1742,26 +1720,21 @@ System.out.println("chamber"+Myconstant.chambers);
 				cs.newLine("durationsecond", s + "");
 				cs.newLine("testtime", timeFormat.format(date));
 				cs.newLine("testdate", dateFormat.format(date));
-				//cs.newLine("customerid", Myapp.uid);
+				// cs.newLine("customerid", Myapp.uid);
 
-				//cs.newLine("indistry", Myapp.indtype);
-				//cs.newLine("application", Myapp.materialapp);
-				//cs.newLine("splate", Myapp.splate);
+				// cs.newLine("indistry", Myapp.indtype);
+				// cs.newLine("application", Myapp.materialapp);
+				// cs.newLine("splate", Myapp.splate);
 
 				cs.newLine("ans", bans);
 				cs.newLine("t", tlist);
 
-				
-				
-				
-				if(!bpoints.contains("0"))
-				{
-				btime.add(0, "5");
-				bpoints.add(0, "0");
-				bresults.add(0, "Pass");
+				if (!bpoints.contains("0")) {
+					btime.add(0, "5");
+					bpoints.add(0, "0");
+					bresults.add(0, "Pass");
 				}
-				
-				
+
 				cs.newLine("btime", btime);
 				cs.newLine("bpoints", bpoints);
 				cs.newLine("bresult", bresults);
@@ -1852,8 +1825,8 @@ System.out.println("chamber"+Myconstant.chambers);
 						setTestStd();
 						showBubblePopup();
 					} else {
-						Toast.makeText(Main.mainstage, "Test Completed",
-								1000, 200, 200);
+						Toast.makeText(Main.mainstage, "Test Completed", 1000,
+								200, 200);
 						MyDialoug.closeDialoug();
 						Openscreen.open("/application/first.fxml");
 
@@ -1867,7 +1840,6 @@ System.out.println("chamber"+Myconstant.chambers);
 		// LoadAnchor.LoadReportPage();
 	}
 
-	
 	void createCsvTableBubbleASTM() {
 
 		if (bans.size() != 0) {
@@ -1910,23 +1882,22 @@ System.out.println("chamber"+Myconstant.chambers);
 				}
 
 				cs.firstLine("blood");
-				cs.newLine("testname", "blood");if(teststd.equals("1"))
+				cs.newLine("testname", "blood");
+				if (teststd.equals("1")) {
+					cs.newLine("std", "ASTM-F1670");
+				} else
+
 				{
-					cs.newLine("std","ASTM-F1670");					
-				}
-				else
-					
-				{
-					cs.newLine("std","ISO-16603");					
-						
+					cs.newLine("std", "ISO-16603");
+
 				}
 				cs.newLine("result", result);
 				cs.newLine("lotno", lotno);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);
-				//cs.newLine("fluidname", Myapp.fluidname);
-				//cs.newLine("fluidvalue", Myapp.fluidvalue);
-				//cs.newLine("mode", "" + Myapp.thresold);
+				// cs.newLine("fluidname", Myapp.fluidname);
+				// cs.newLine("fluidvalue", Myapp.fluidvalue);
+				// cs.newLine("mode", "" + Myapp.thresold);
 				cs.newLineDouble("recordy", recorddata);
 				cs.newLineDouble("recordx", recordtime);
 
@@ -1951,26 +1922,21 @@ System.out.println("chamber"+Myconstant.chambers);
 				cs.newLine("durationsecond", s + "");
 				cs.newLine("testtime", timeFormat.format(date));
 				cs.newLine("testdate", dateFormat.format(date));
-				//cs.newLine("customerid", Myapp.uid);
+				// cs.newLine("customerid", Myapp.uid);
 
-				//cs.newLine("indistry", Myapp.indtype);
-				//cs.newLine("application", Myapp.materialapp);
-				//cs.newLine("splate", Myapp.splate);
+				// cs.newLine("indistry", Myapp.indtype);
+				// cs.newLine("application", Myapp.materialapp);
+				// cs.newLine("splate", Myapp.splate);
 
 				cs.newLine("ans", bans);
 				cs.newLine("t", tlist);
 
-				
-				
-				
-				if(!bpoints.contains("0"))
-				{
-				btime.add(0, "5");
-				bpoints.add(0, "0");
-				bresults.add(0, "Pass");
+				if (!bpoints.contains("0")) {
+					btime.add(0, "5");
+					bpoints.add(0, "0");
+					bresults.add(0, "Pass");
 				}
-				
-				
+
 				cs.newLine("btime", btime);
 				cs.newLine("bpoints", bpoints);
 				cs.newLine("bresult", bresults);
@@ -2061,8 +2027,8 @@ System.out.println("chamber"+Myconstant.chambers);
 						setTestStd();
 						showBubblePopup();
 					} else {
-						Toast.makeText(Main.mainstage, "Test Completed",
-								1000, 200, 200);
+						Toast.makeText(Main.mainstage, "Test Completed", 1000,
+								200, 200);
 						MyDialoug.closeDialoug();
 						Openscreen.open("/application/first.fxml");
 
@@ -2096,7 +2062,7 @@ System.out.println("chamber"+Myconstant.chambers);
 	// send stop protocol to MCU
 	void sendStopCmd() {
 		testtype = 5;
-		
+
 		Mycommand.setDACValue('2', 0, 0);
 		Mycommand.stopADC(1000);
 		endCondition();
