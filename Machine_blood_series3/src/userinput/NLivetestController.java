@@ -202,7 +202,7 @@ public class NLivetestController implements Initializable {
 
 	long changetime = 0;
 	int waittime = 0;
-	String sampleid = "testing";
+	String sampleid = "testing",lotno = "HS123";
 	String teststd;
 
 	int chamber = 3;
@@ -246,8 +246,11 @@ public class NLivetestController implements Initializable {
 		
 		System.out.println("Test data :" + testdata);
 		chamber = Integer.parseInt(testdata.get("chamber").toString());
+		
 		sampleid = testdata.get("sampleid").toString();
+		lotno = testdata.get("lotno").toString();
 
+		
 		Myconstant.currentChamberMap = testdata;
 		lblfilename.setText(sampleid);
 
@@ -1708,7 +1711,7 @@ System.out.println("chamber"+Myconstant.chambers);
 					cs.newLine("std","ISO-16603");					
 						
 				}
-
+				cs.newLine("lotno", lotno);
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);
@@ -1918,6 +1921,7 @@ System.out.println("chamber"+Myconstant.chambers);
 						
 				}
 				cs.newLine("result", result);
+				cs.newLine("lotno", lotno);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);
 				//cs.newLine("fluidname", Myapp.fluidname);
