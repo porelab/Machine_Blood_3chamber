@@ -674,7 +674,7 @@ public class Singlepororeportblood {
 		c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		c1.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-		PdfPCell c2 = new PdfPCell(new Paragraph("B545411", sampleinfoa));
+		PdfPCell c2 = new PdfPCell(new Paragraph("" + d.data.get("lotno"), sampleinfoa));
 		c2.setBorder(1);
 		c2.setBorder(c2.RIGHT);
 		c2.setBorderColor(new BaseColor(130, 130, 130));

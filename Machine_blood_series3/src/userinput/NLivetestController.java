@@ -1698,7 +1698,17 @@ System.out.println("chamber"+Myconstant.chambers);
 				cs.firstLine("blood");
 				cs.newLine("testname", "blood");
 
-				cs.newLine("std",teststd);
+				if(teststd.equals("1"))
+				{
+					cs.newLine("std","ASTM-F1670");					
+				}
+				else
+					
+				{
+					cs.newLine("std","ISO-16603");					
+						
+				}
+
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);
@@ -1897,8 +1907,16 @@ System.out.println("chamber"+Myconstant.chambers);
 				}
 
 				cs.firstLine("blood");
-				cs.newLine("testname", "blood");
-				cs.newLine("std","ISO 16603");
+				cs.newLine("testname", "blood");if(teststd.equals("1"))
+				{
+					cs.newLine("std","ASTM-F1670");					
+				}
+				else
+					
+				{
+					cs.newLine("std","ISO-16603");					
+						
+				}
 				cs.newLine("result", result);
 				cs.newLine("bpressure", "" + curpress);
 				cs.newLine("sample", sampleid);

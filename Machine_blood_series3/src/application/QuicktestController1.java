@@ -498,7 +498,7 @@ Myconstant.chambers.clear();
 		}
 
 		String sampleid = cmbsampleid.getValue();
-		String lotno = txtlotno.getText();
+		//String lotno = txtlotno.getText();
 		String sampletype = tgb2.getSelectedToggle().getUserData().toString();
 //		String testmode = tgb1.getSelectedToggle().getUserData().toString();
 		
