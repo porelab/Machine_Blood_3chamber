@@ -1809,8 +1809,10 @@ System.out.println("callling Add row");
 						BaseFont.EMBEDDED, 15);
 				headertestname.setColor(getColorOld(14));
 
+
+				
 				PdfPCell cell;
-				cell = new PdfPCell(new Phrase("" + d.data.get("std"), headertestname));
+				cell = new PdfPCell(new Phrase("" + allfiles.get(0).data.get("std"), headertestname));
 				cell.setBorder(1);
 				cell.setBorder(cell.BOTTOM);
 				cell.setHorizontalAlignment(Element.ALIGN_CENTER);
