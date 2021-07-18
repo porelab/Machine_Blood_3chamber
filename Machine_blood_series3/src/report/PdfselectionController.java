@@ -35,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import myconstant.Myconstant;
 import pdfreport.ExcelReport;
 import pdfreport.Multiplepororeport;
 import pdfreport.Multiplepororeportblood;
@@ -51,6 +52,7 @@ public class PdfselectionController implements Initializable {
 	@FXML
 	TextField txtcomname;
 
+	String teststd;
 	@FXML
 	ScrollPane scrollbrows;
 
@@ -86,6 +88,7 @@ public class PdfselectionController implements Initializable {
 		scrollbrows.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		
 		setpdftesttype();
+		teststd = Myconstant.getStd();
 		
 		bchkcoverpage = true;
 		chkcoverpage.selectedProperty().addListener(
@@ -124,9 +127,19 @@ public class PdfselectionController implements Initializable {
 			chsampleinfo.setVisible(true);
 			showBrowsebtn();
 		}
-
-		txtnotes.setText("The following Test Provrdure is based on ISO 16603 -Standard Test Method of fabrics resistance to blood penetration.");
-
+		if (teststd.equals("1")) {
+			
+			
+		txtnotes.setText("The following Test Prorcedure is based on ASTM-F1670 -Standard Test Method of fabrics resistance to blood penetration.");
+		}
+		else
+		{
+			txtnotes.setText("The following Test Prorcedure is based on ISO 16603 -Standard Test Method of fabrics resistance to blood penetration.");
+		
+		}
+		
+		
+		 
 		/*Close Popup*/
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
