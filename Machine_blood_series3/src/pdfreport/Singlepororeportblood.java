@@ -687,7 +687,7 @@ public class Singlepororeportblood {
 
 		PdfPCell f11 = new PdfPCell(new Paragraph("Location Area", sampleinfoq));
 		f11.setPaddingLeft(10);
-		// f11.setBackgroundColor(backcellcoltable1);
+		f11.setBackgroundColor(backcellcoltable1);
 		f11.setPaddingTop(1);
 		f11.setBorder(1);
 		f11.setFixedHeight(25f);
@@ -702,7 +702,7 @@ public class Singlepororeportblood {
 		f22.setBorder(f22.RIGHT);
 		f22.setBorderColor(new BaseColor(130, 130, 130));
 		f22.setPaddingLeft(10);
-		// f22.setBackgroundColor(backcellcoltable1);
+		f22.setBackgroundColor(backcellcoltable1);
 		f22.setPaddingTop(1);
 		f22.setFixedHeight(25f);
 		f22.setHorizontalAlignment(Element.ALIGN_LEFT);
@@ -716,7 +716,7 @@ public class Singlepororeportblood {
 		t3.setBorder(t3.LEFT | t3.RIGHT|t3.BOTTOM);
 		t3.setFixedHeight(25f);
 		t3.setBorderColor(new BaseColor(130, 130, 130));
-		t3.setBackgroundColor(backcellcoltable1);
+		
 		t3.setHorizontalAlignment(Element.ALIGN_LEFT);
 		t3.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
@@ -728,7 +728,7 @@ public class Singlepororeportblood {
 		t4.setBorderColor(new BaseColor(130, 130, 130));
 		t4.setPaddingLeft(10);
 		t4.setFixedHeight(25f);
-		t4.setBackgroundColor(backcellcoltable1);
+		
 		t4.setPaddingTop(1);
 		t4.setHorizontalAlignment(Element.ALIGN_LEFT);
 		t4.setVerticalAlignment(Element.ALIGN_MIDDLE);
