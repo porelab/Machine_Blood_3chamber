@@ -685,6 +685,28 @@ public class Singlepororeportblood {
 		c2.setHorizontalAlignment(Element.ALIGN_LEFT);
 		c2.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
+		PdfPCell f11 = new PdfPCell(new Paragraph("Location Area", sampleinfoq));
+		f11.setPaddingLeft(10);
+		// f11.setBackgroundColor(backcellcoltable1);
+		f11.setPaddingTop(1);
+		f11.setBorder(1);
+		f11.setFixedHeight(25f);
+		f11.setBorder(f11.LEFT | f11.RIGHT);
+		f11.setBorderColor(new BaseColor(130, 130, 130));
+		f11.setHorizontalAlignment(Element.ALIGN_LEFT);
+		f11.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+		PdfPCell f22 = new PdfPCell(new Paragraph("" + d.data.get("larea"),
+				sampleinfoa));
+		f22.setBorder(1);
+		f22.setBorder(f22.RIGHT);
+		f22.setBorderColor(new BaseColor(130, 130, 130));
+		f22.setPaddingLeft(10);
+		// f22.setBackgroundColor(backcellcoltable1);
+		f22.setPaddingTop(1);
+		f22.setFixedHeight(25f);
+		f22.setHorizontalAlignment(Element.ALIGN_LEFT);
+		f22.setVerticalAlignment(Element.ALIGN_MIDDLE);
 	
 
 		PdfPCell t3 = new PdfPCell(new Paragraph("Test Duration", sampleinfoq));
@@ -714,28 +736,7 @@ public class Singlepororeportblood {
 	
 		
 
-		PdfPCell f11 = new PdfPCell(new Paragraph("Test Fluid", sampleinfoq));
-		f11.setPaddingLeft(10);
-		// f11.setBackgroundColor(backcellcoltable1);
-		f11.setPaddingTop(1);
-		f11.setBorder(1);
-		f11.setFixedHeight(25f);
-		f11.setBorder(f11.LEFT | f11.RIGHT|f11.BOTTOM);
-		f11.setBorderColor(new BaseColor(130, 130, 130));
-		f11.setHorizontalAlignment(Element.ALIGN_LEFT);
-		f11.setVerticalAlignment(Element.ALIGN_MIDDLE);
-
-		PdfPCell f22 = new PdfPCell(new Paragraph("" + d.data.get("fluidname"),
-				sampleinfoa));
-		f22.setBorder(1);
-		f22.setBorder(f22.RIGHT|f22.BOTTOM);
-		f22.setBorderColor(new BaseColor(130, 130, 130));
-		f22.setPaddingLeft(10);
-		// f22.setBackgroundColor(backcellcoltable1);
-		f22.setPaddingTop(1);
-		f22.setFixedHeight(25f);
-		f22.setHorizontalAlignment(Element.ALIGN_LEFT);
-		f22.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		
 
 		
 
@@ -752,12 +753,14 @@ public class Singlepororeportblood {
 		tablem.addCell(c1);
 		tablem.addCell(c2);
 		
+		tablem.addCell(f11);
+		tablem.addCell(f22);
+		
 		tablem.addCell(t3);
 		tablem.addCell(t4);
 		
 		
-		//tablem.addCell(f11);
-		//tablem.addCell(f22);
+		
 
 		try {
 			document.add(tablem);
