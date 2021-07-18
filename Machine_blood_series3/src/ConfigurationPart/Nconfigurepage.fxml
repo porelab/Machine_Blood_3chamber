@@ -474,7 +474,7 @@
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="909.0" layoutY="36.0" text="ASTM 1617" textFill="#0e3c87">
+                        <Label layoutX="909.0" layoutY="36.0" text="ASTM 1670" textFill="#0e3c87">
                            <font>
                               <Font size="25.0" />
                            </font>

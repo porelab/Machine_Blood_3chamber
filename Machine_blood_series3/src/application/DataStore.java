@@ -479,7 +479,7 @@ public class DataStore
 		testdata.add(p3);
 		testdata.add(p4);
 		testdata.add(p5);
-		testdata.add(p1astm);
+		testdata.add(p1astm); 
 		testdata.add(p2astm);
 		
 		testdata.add(maintime);

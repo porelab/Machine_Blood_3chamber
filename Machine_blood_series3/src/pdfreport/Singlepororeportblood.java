@@ -1203,7 +1203,7 @@ public class Singlepororeportblood {
 
 		PdfPCell d2 = new PdfPCell(
 				new Paragraph(
-						"Result relates to the sample tested. The report shall not be reproduced except in full, without the written approval of the laboratory. The report is strically confidential and technical inforamtion of client only. Not for advertisement, promotion, publicity or litigation.",
+						"Result relates to the sample tested. The report shall not be reproduced except in full, without the written approval of the laboratory. The report is strictly confidential and technical information of client only. Not for advertisement, promotion, publicity or litigation.",
 						addresslab));
 		d2.setPaddingLeft(0);
 		d2.setPaddingTop(1);
